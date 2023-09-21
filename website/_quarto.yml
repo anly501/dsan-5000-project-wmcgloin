@@ -1,0 +1,47 @@
+project:
+  type: website
+
+website:
+  title: "Billy McGloin"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: about.qmd
+        text: About Me
+      - href: https://github.com/anly501/dsan-5000-project-wmcgloin
+        target: _blank
+        text: Code
+      - href: data.qmd
+        text: Data
+      - href: introduction.qmd
+        text: Introduction
+      - href: data-gathering.qmd
+        text: Data Gathering
+      - href: data-cleaning.qmd
+        text: Data Cleaning
+      - href: data-exploration.qmd
+        text: Data Exploration
+      - href: clustering.qmd
+        text: Clustering
+      - href: dimensionality-reduction.qmd
+        text: Dimensionality Reduction
+      - href: decision-trees.qmd
+        text: Decision Trees
+      - href: classification.qmd
+        text: Classification
+      - href: regression.qmd
+        text: Regression
+      - href: arm.qmd
+        text: ARM
+      - href: conclusions.qmd
+        text: Conclusions 
+
+format:
+  html:
+    theme: minty
+    css: styles.css
+    toc: true
+
+
+

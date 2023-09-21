@@ -1,0 +1,100 @@
+[
+  {
+    "objectID": "data.html",
+    "href": "data.html",
+    "title": "Data",
+    "section": "",
+    "text": "I will replace this later with my actual data"
+  },
+  {
+    "objectID": "conclusions.html",
+    "href": "conclusions.html",
+    "title": "Conclusions",
+    "section": "",
+    "text": "Why did the conclusion take a break? Because it needed some time to ‘sum up’ its thoughts!"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About me",
+    "section": "",
+    "text": "I am a graduate student at Georgetown University studying Data Science and Analytics. I graduated from Villanova University in 2021 with an Honors Degree Double Major in Economics and Business Analytics with a PPE (Politics, Philosophy, & Economics) Concentration and a Minor in Political Science. While a student at Villanova, I studied abroad at the University of Cambridge. During my senior year at Villanova, I had the opportunity to start my own business along with my sisters - we are triplets! Our business, Top Shelf Designs LLC, is a retail business that designs, builds, and sells college dorm shelving units to help students maximize their space. I am extremely excited to continue my education and pursue a masters degree in data science."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "DSAN_website",
+    "section": "",
+    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites."
+  },
+  {
+    "objectID": "data-cleaning.html",
+    "href": "data-cleaning.html",
+    "title": "Data Cleaning",
+    "section": "",
+    "text": "What did the broom say to the vacuum?\n“I’m so tired of people pushing us around.”"
+  },
+  {
+    "objectID": "classification.html",
+    "href": "classification.html",
+    "title": "Classification",
+    "section": "",
+    "text": "three more to go!"
+  },
+  {
+    "objectID": "clustering.html",
+    "href": "clustering.html",
+    "title": "Clustering",
+    "section": "",
+    "text": "ipsum lorem"
+  },
+  {
+    "objectID": "data-exploration.html",
+    "href": "data-exploration.html",
+    "title": "Data Exploration",
+    "section": "",
+    "text": "yoda data master!"
+  },
+  {
+    "objectID": "data-gathering.html",
+    "href": "data-gathering.html",
+    "title": "Data Gathering",
+    "section": "",
+    "text": "How much data can be stored in a glacier? A frostbite"
+  },
+  {
+    "objectID": "dimensionality-reduction.html",
+    "href": "dimensionality-reduction.html",
+    "title": "Dimensionality Reduction",
+    "section": "",
+    "text": "more files!"
+  },
+  {
+    "objectID": "arm.html",
+    "href": "arm.html",
+    "title": "ARM",
+    "section": "",
+    "text": "Why did the arm apply for a job? Because it wanted to lend a helping hand!"
+  },
+  {
+    "objectID": "decision-trees.html",
+    "href": "decision-trees.html",
+    "title": "Decision Trees",
+    "section": "",
+    "text": "What did the tree do when the bank closed?\nIt started its own branch."
+  },
+  {
+    "objectID": "regression.html",
+    "href": "regression.html",
+    "title": "Regression",
+    "section": "",
+    "text": "Why did the linear regression model break up with the logistic regression model? Because it wanted a more ‘linear’ relationship!"
+  },
+  {
+    "objectID": "introduction.html",
+    "href": "introduction.html",
+    "title": "Introduction",
+    "section": "",
+    "text": "introduction goes here:"
+  }
+]

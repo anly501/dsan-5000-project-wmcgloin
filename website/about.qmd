@@ -1,0 +1,7 @@
+---
+title: "About me"
+format: html
+toc: true
+---
+
+I am a graduate student at Georgetown University studying Data Science and Analytics. I graduated from Villanova University in 2021 with an Honors Degree Double Major in Economics and Business Analytics with a PPE (Politics, Philosophy, & Economics) Concentration and a Minor in Political Science. While a student at Villanova, I studied abroad at the University of Cambridge. During my senior year at Villanova, I had the opportunity to start my own business along with my sisters - we are triplets! Our business, Top Shelf Designs LLC, is a retail business that designs, builds, and sells college dorm shelving units to help students maximize their space. I am extremely excited to continue my education and pursue a masters degree in data science.

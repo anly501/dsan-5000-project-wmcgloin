@@ -1,0 +1,8 @@
+---
+title: "Decision Trees"
+format: html
+---
+
+What did the tree do when the bank closed?
+
+It started its own branch.

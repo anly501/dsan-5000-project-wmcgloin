@@ -1,0 +1,7 @@
+---
+title: "Data Gathering"
+format: html
+toc: true
+---
+
+How much data can be stored in a glacier? A frostbite
