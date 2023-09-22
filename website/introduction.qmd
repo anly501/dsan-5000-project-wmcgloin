@@ -2,4 +2,31 @@
 title: "Introduction"
 ---
 
-introduction goes here: 
+*Disclaimer - this section is a work in progress
+
+# Introduction to the Hot Hand
+
+## Prior Research
+
+## The Debate
+
+## what I am exploring
+
+## 10 Questions
+
+1. What data is available for my topic? 
+2. What does current literature on the topic argue?
+3. How can I build off of the current research and approach the topic in a novel way?
+4. Should I limit the scope of my topic to sports or can I expand past that? 
+5. How should I define success? (the concept of the hot hand is that success breeds success)
+6. What is the best way to visualize the data? 
+7. Do athletes and/or the public believe in this phenomenon? 
+8. Is there any evidence that the hot hand exists? (prior research states that "demonstrations of hot hands per se are rare and often weak due to various reasons"[^1])
+9. Does the hot hand impact strategy of a game? Should it impact strategy? 
+10. If the hot hand does exist, in what sport (or area outside of sports) is there the most evidence in support of the phenomenon? 
+    
+[^1]: @bar2006twenty
+
+## Goals and Hypothesis
+
+1. I would love to find some evidence that the hot hand exists. 

@@ -18,14 +18,14 @@
     "href": "about.html",
     "title": "About me",
     "section": "",
-    "text": "I am a graduate student at Georgetown University studying Data Science and Analytics. I graduated from Villanova University in 2021 with an Honors Degree Double Major in Economics and Business Analytics with a PPE (Politics, Philosophy, & Economics) Concentration and a Minor in Political Science. While a student at Villanova, I studied abroad at the University of Cambridge. During my senior year at Villanova, I had the opportunity to start my own business along with my sisters - we are triplets! Our business, Top Shelf Designs LLC, is a retail business that designs, builds, and sells college dorm shelving units to help students maximize their space. I am extremely excited to continue my education and pursue a masters degree in data science."
+    "text": "Hello!\nHello and welcome to my website! My name is Billy and I am a graduate student at Georgetown University. I am currently pursuing a Master’s in Data Science and Analytics and will use this website as a place to display my work. I hope you find my work insightful and enjoy your time on my website!\n\n\nGrowing Up\nI grew up in Scotch Plains, New Jersey along with my two sisters, Melissa and Jessica. We are triplets! Below is a picture of me with my family and another of our dog Roxie.\n\n \n\n\n\nEducation\nI graduated from Villanova University in 2021 with an Honors Degree Double Major in Economics and Business Analytics along with a PPE (Politics, Philosophy, & Economics) Concentration and Political Science minor. I absolutely loved my time at Villanova between the academics, friendships, the school winning the NCAA Championship and more!. As an undergrad, I was involved in a number of student organizations, including the Blue Key Society, where I served as a tour guide for undergraduate admissions. I also organized accepted students days for the university.\nOne of the best experiences I had during college was studying abroad. In 2019, I participated in the Institute of Politics and Economics Program at the University of Cambridge where I took a number of economic classes and study international relations and history. Seeing how these subject matters interact with analytics truly fascinated me, which is one reason why I am pursuing an advanced degree in data science. I am extremely excited to continue my education and pursue a masters degree in data science!\n\n\nTop Shelf Designs, LLC\nDuring my senior year at Villanova, I had the opportunity to start my own business with my sisters! Our business, Top Shelf Designs, LLC, is a retail business that designs, builds, and sells college dorm shelving units to help students maximize their space. Being an entrepreneur has been an incredibly rewarding journey thus far, and I am eager to see where it takes us. Here is a link to our website!\n\n\nHobbies\nI’m an avid sports fan, and love watching the New York Yankees, Villanova basketball, and NY Giants. Unfortunately, none of my teams have been doing too well lately, but I’m hoping the Giants can turn it around this season! I’m fascinated by how analytics is being used to transform the sports landscape - even across college sports! While at Villanova, I researched the Houston Astros Cheating Scandal. I would love to go back and take an even deeper dive into the subject one day!\nI love music - you can often find me with headphones or earbuds in while doing work or exploring the DC area! Additionally, I find playing instruments to be a great creative outlet after a long day of work. I grew up taking piano lessons and during COVID started to teach myself how to play the guitar!\nWhenever I have the chance, I try to travel. Wile abroad, I was lucky enough to travel to a few places in Europe. My favorite spot has to be Italy - from the history and culture to the food, wine, and sports, I am counting down the days until I can go back.\nFinally, I thoroughly enjoy books, movies, video games in addition to fun, in-person experiences. Lately, I’ve been exploring the DC area which I am loving so far! If you have any recommendations - please let me know! I’m alwyas willing to try something new!\n\n\nGeneral Info\n\n\n\nname\nBilly McGloin\n\n\nGU netID\nwtm30\n\n\nLinkedIn\nlink\n\n\n\n\n\nJokes\nI always like to have a laugh so below are some jokes I hope you’ll enjoy!\n\nWebsite Jokes\n\nWhat do you call a doctor who fixes websites? A URL-ologist.\nWebsites use cookies to improve performance. I do the same.\nWhat website has the information on all DJs? The wiki wiki\n\n\n\nAssorted Jokes\n\nWhat do you call it when a caveman farts? A blast from the past.\nWhy didn’t the bell work at the gym? It was a dumb bell!\n\n\n\n\nHoya Saxa!\n\n\n\nme and a bunch of rocks!"
   },
   {
     "objectID": "index.html",
     "href": "index.html",
     "title": "DSAN_website",
     "section": "",
-    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites."
+    "text": "This will be updated with some cool stuff in a bit! Stay tuned!\nThis is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites."
   },
   {
     "objectID": "data-cleaning.html",
@@ -95,6 +95,104 @@
     "href": "introduction.html",
     "title": "Introduction",
     "section": "",
-    "text": "introduction goes here:"
+    "text": "*Disclaimer - this section is a work in progress"
+  },
+  {
+    "objectID": "about.html#my-story",
+    "href": "about.html#my-story",
+    "title": "About me",
+    "section": "",
+    "text": "I am a graduate student at Georgetown University studying Data Science and Analytics. I graduated from Villanova University in 2021 with an Honors Degree Double Major in Economics and Business Analytics with a PPE (Politics, Philosophy, & Economics) Concentration and a Minor in Political Science. While a student at Villanova, I studied abroad at the University of Cambridge. During my senior year at Villanova, I had the opportunity to start my own business along with my sisters - we are triplets! Our business, Top Shelf Designs LLC, is a retail business that designs, builds, and sells college dorm shelving units to help students maximize their space. I am extremely excited to continue my education and pursue a masters degree in data science."
+  },
+  {
+    "objectID": "about.html#website-jokes",
+    "href": "about.html#website-jokes",
+    "title": "About me",
+    "section": "Website Jokes",
+    "text": "Website Jokes\n\nWhat do you call a doctor who fixes websites? A URL-ologist.\nWebsites use cookies to improve performance. I do the same.\nWhat website has the information on all DJs? The wiki wiki"
+  },
+  {
+    "objectID": "about.html#assorted-jokes",
+    "href": "about.html#assorted-jokes",
+    "title": "About me",
+    "section": "Assorted Jokes",
+    "text": "Assorted Jokes\n\nWhat do you call it when a caveman farts? A blast from the past.\nWhy didn’t the bell work at the gym? It was a dumb bell!"
+  },
+  {
+    "objectID": "introduction.html#summary",
+    "href": "introduction.html#summary",
+    "title": "Introduction",
+    "section": "Summary",
+    "text": "Summary"
+  },
+  {
+    "objectID": "introduction.html#why-this-is-important",
+    "href": "introduction.html#why-this-is-important",
+    "title": "Introduction",
+    "section": "Why this is important",
+    "text": "Why this is important"
+  },
+  {
+    "objectID": "introduction.html#why-the-reader-should-continue",
+    "href": "introduction.html#why-the-reader-should-continue",
+    "title": "Introduction",
+    "section": "Why the reader should continue",
+    "text": "Why the reader should continue"
+  },
+  {
+    "objectID": "introduction.html#what-work-has-been-done-in-the-past",
+    "href": "introduction.html#what-work-has-been-done-in-the-past",
+    "title": "Introduction",
+    "section": "what work has been done in the past",
+    "text": "what work has been done in the past"
+  },
+  {
+    "objectID": "introduction.html#what-are-the-different-points-of-viewsinterpretations-in-the-literature",
+    "href": "introduction.html#what-are-the-different-points-of-viewsinterpretations-in-the-literature",
+    "title": "Introduction",
+    "section": "what are the different points of views/interpretations in the literature",
+    "text": "what are the different points of views/interpretations in the literature"
+  },
+  {
+    "objectID": "introduction.html#what-i-am-exploring",
+    "href": "introduction.html#what-i-am-exploring",
+    "title": "Introduction",
+    "section": "what I am exploring",
+    "text": "what I am exploring"
+  },
+  {
+    "objectID": "introduction.html#questions",
+    "href": "introduction.html#questions",
+    "title": "Introduction",
+    "section": "10 Questions",
+    "text": "10 Questions\n\nWhat data is available for my topic?\nWhat does current literature on the topic argue?\nHow can I build off of the current research and approach the topic in a novel way?\nShould I limit the scope of my topic to sports or can I expand past that?\nHow should I define success? (the concept of the hot hand is that success breeds success)\nWhat is the best way to visualize the data?\nDo athletes and/or the public believe in this phenomenon?\nIs there any evidence that the hot hand exists? (prior research states that “demonstrations of hot hands per se are rare and often weak due to various reasons”1)\nDoes the hot hand impact strategy of a game? Should it impact strategy?\nIf the hot hand does exist, in what sport (or area outside of sports) is there the most evidence in support of the phenomenon?"
+  },
+  {
+    "objectID": "introduction.html#goals-and-hypothesis",
+    "href": "introduction.html#goals-and-hypothesis",
+    "title": "Introduction",
+    "section": "Goals and Hypothesis",
+    "text": "Goals and Hypothesis\n\nI would love to find some evidence that the hot hand exists."
+  },
+  {
+    "objectID": "introduction.html#prior-research",
+    "href": "introduction.html#prior-research",
+    "title": "Introduction",
+    "section": "Prior Research",
+    "text": "Prior Research"
+  },
+  {
+    "objectID": "introduction.html#the-debate",
+    "href": "introduction.html#the-debate",
+    "title": "Introduction",
+    "section": "The Debate",
+    "text": "The Debate"
+  },
+  {
+    "objectID": "introduction.html#footnotes",
+    "href": "introduction.html#footnotes",
+    "title": "Introduction",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\n@bar2006twenty↩︎"
   }
 ]
