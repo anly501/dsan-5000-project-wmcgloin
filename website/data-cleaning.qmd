@@ -1,9 +1,0 @@
----
-title: "Data Cleaning"
-format: html
-toc: true
----
-
-What did the broom say to the vacuum?
-
-“I’m so tired of people pushing us around.”

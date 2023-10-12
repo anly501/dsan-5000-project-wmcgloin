@@ -18,7 +18,7 @@ website:
           text: Data
         - href: introduction.qmd
           text: Introduction
-        - href: data-gathering.qmd
+        - href: data-gathering.ipynb
           text: Data Gathering
         - href: data-cleaning.qmd
           text: Data Cleaning
