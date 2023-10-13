@@ -20,7 +20,7 @@ website:
           text: Introduction
         - href: data-gathering.ipynb
           text: Data Gathering
-        - href: data-cleaning.qmd
+        - href: data-cleaning.ipynb
           text: Data Cleaning
         - href: data-exploration.qmd
           text: Data Exploration

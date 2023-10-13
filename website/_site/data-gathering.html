@@ -148,7 +148,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="dropdown-text">Data Gathering</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./data-cleaning.qmd" rel="" target="">
+    <a class="dropdown-item" href="./data-cleaning.html" rel="" target="">
  <span class="dropdown-text">Data Cleaning</span></a>
   </li>  
         <li>
@@ -204,6 +204,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#baseballr" id="toc-baseballr" class="nav-link active" data-scroll-target="#baseballr">Baseballr</a>
   <ul class="collapse">
   <li><a href="#source-code" id="toc-source-code" class="nav-link" data-scroll-target="#source-code">Source Code</a></li>
+  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a></li>
   <li><a href="#acquiring-data" id="toc-acquiring-data" class="nav-link" data-scroll-target="#acquiring-data">Acquiring Data</a></li>
   </ul></li>
   <li><a href="#ncaahoopr" id="toc-ncaahoopr" class="nav-link" data-scroll-target="#ncaahoopr">ncaahoopR</a></li>
@@ -240,7 +241,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>“Baseballr” is a package in R that focuses on baseball analytics, also known as sabremetrics. It includes various functions that can be used for scraping data from websites like FanGraphs.com, Baseball-Reference.com, and BaseballSavant.mlb.com. It also includes functions for calculating specific baseball metrics such as wOBA (weighted on-base average) and FIP (fielding independent pitching). I will mainly use this package to gather data (which uses an API as can be seen below).</p>
 <section id="source-code" class="level3">
 <h3 class="anchored" data-anchor-id="source-code">Source Code</h3>
-<p>The below source code was pulled from the baseballr github repisotry. This specific code uses a mlb api to acquire play-by-play data for a specific game. I will use these functions later on through the baseballr package.</p>
+<p>The below source code was pulled from the baseballr github repository. This specific code uses a mlb api to acquire play-by-play data for a specific game. I will use these functions later on through the baseballr package.</p>
 <div class="cell" data-execution_count="2">
 <details open="">
 <summary>Code</summary>
@@ -395,7 +396,7 @@ i Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all
 </div>
 <p>“output” is a very messy list that is extremely long. Instead of printing “output”, below are three images of part of the list.</p>
 <p><img src="./images/baseballr_example1.png" class="img-fluid" alt="Figure 1"> <img src="./images/baseballr_example2.png" class="img-fluid" alt="Figure 2"> <img src="./images/baseballr_example3.png" class="img-fluid" alt="Figure 3"></p>
-<p>The below code builds on the previous code, returning a tibble that includes over 100 columns of data provided by the MLB Stats API at a pitch level. As you can see, the output is much cleaner and easier to work with.</p>
+<p>The below code builds on the previous code, returning a tibble that includes over 100 columns of data provided by the MLB Stats API at a pitch level. As you will see, the output is much cleaner and easier to work with.</p>
 <div class="cell" data-execution_count="16">
 <details>
 <summary>Code</summary>
@@ -715,6 +716,9 @@ i Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all
 <span id="cb5-314"><a href="#cb5-314" aria-hidden="true" tabindex="-1"></a><span class="co"># get_pbp_mlb &lt;- mlb_pbp</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
+</section>
+<section id="example" class="level3">
+<h3 class="anchored" data-anchor-id="example">Example</h3>
 <p>Here is an example using the mlb_pbp function.</p>
 <div class="cell" data-execution_count="17">
 <details open="">
@@ -923,7 +927,7 @@ i Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all
 </section>
 <section id="acquiring-data" class="level3">
 <h3 class="anchored" data-anchor-id="acquiring-data">Acquiring Data</h3>
-<p>I will pull more data eventually, but for now I am taking two series of games from the 2023 season.</p>
+<p>I will pull more data eventually, but for now I am scraping two series of games from the 2023 season.</p>
 <div class="cell" data-execution_count="38">
 <details open="">
 <summary>Code</summary>
@@ -931,413 +935,13 @@ i Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all
 </details>
 </div>
 <p>The below code allows me to find the correct game_pk values that I can then use to pull play-by-play data.</p>
-<div class="cell" data-execution_count="33">
+<div class="cell" data-execution_count="17">
 <details open="">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>mlb_game_pks(<span class="st">"2023-06-25"</span>)</span>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#mlb_game_pks("2023-06-25")</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># mlb_game_pks("2023-06-24")</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># mlb_game_pks("2023-06-23")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display">
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true">
-<caption>A baseballr_data: 15 x 56</caption>
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th" scope="col">game_pk</th>
-<th data-quarto-table-cell-role="th" scope="col">gameGuid</th>
-<th data-quarto-table-cell-role="th" scope="col">link</th>
-<th data-quarto-table-cell-role="th" scope="col">gameType</th>
-<th data-quarto-table-cell-role="th" scope="col">season</th>
-<th data-quarto-table-cell-role="th" scope="col">gameDate</th>
-<th data-quarto-table-cell-role="th" scope="col">officialDate</th>
-<th data-quarto-table-cell-role="th" scope="col">isTie</th>
-<th data-quarto-table-cell-role="th" scope="col">gameNumber</th>
-<th data-quarto-table-cell-role="th" scope="col">publicFacing</th>
-<th data-quarto-table-cell-role="th" scope="col">...</th>
-<th data-quarto-table-cell-role="th" scope="col">teams.home.leagueRecord.wins</th>
-<th data-quarto-table-cell-role="th" scope="col">teams.home.leagueRecord.losses</th>
-<th data-quarto-table-cell-role="th" scope="col">teams.home.leagueRecord.pct</th>
-<th data-quarto-table-cell-role="th" scope="col">teams.home.team.id</th>
-<th data-quarto-table-cell-role="th" scope="col">teams.home.team.name</th>
-<th data-quarto-table-cell-role="th" scope="col">teams.home.team.link</th>
-<th data-quarto-table-cell-role="th" scope="col">venue.id</th>
-<th data-quarto-table-cell-role="th" scope="col">venue.name</th>
-<th data-quarto-table-cell-role="th" scope="col">venue.link</th>
-<th data-quarto-table-cell-role="th" scope="col">content.link</th>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th" scope="col">&lt;int&gt;</th>
-<th data-quarto-table-cell-role="th" scope="col">&lt;chr&gt;</th>
-<th data-quarto-table-cell-role="th" scope="col">&lt;chr&gt;</th>
-<th data-quarto-table-cell-role="th" scope="col">&lt;chr&gt;</th>
-<th data-quarto-table-cell-role="th" scope="col">&lt;chr&gt;</th>
-<th data-quarto-table-cell-role="th" scope="col">&lt;chr&gt;</th>
-<th data-quarto-table-cell-role="th" scope="col">&lt;chr&gt;</th>
-<th data-quarto-table-cell-role="th" scope="col">&lt;lgl&gt;</th>
-<th data-quarto-table-cell-role="th" scope="col">&lt;int&gt;</th>
-<th data-quarto-table-cell-role="th" scope="col">&lt;lgl&gt;</th>
-<th data-quarto-table-cell-role="th" scope="col">...</th>
-<th data-quarto-table-cell-role="th" scope="col">&lt;int&gt;</th>
-<th data-quarto-table-cell-role="th" scope="col">&lt;int&gt;</th>
-<th data-quarto-table-cell-role="th" scope="col">&lt;chr&gt;</th>
-<th data-quarto-table-cell-role="th" scope="col">&lt;int&gt;</th>
-<th data-quarto-table-cell-role="th" scope="col">&lt;chr&gt;</th>
-<th data-quarto-table-cell-role="th" scope="col">&lt;chr&gt;</th>
-<th data-quarto-table-cell-role="th" scope="col">&lt;int&gt;</th>
-<th data-quarto-table-cell-role="th" scope="col">&lt;chr&gt;</th>
-<th data-quarto-table-cell-role="th" scope="col">&lt;chr&gt;</th>
-<th data-quarto-table-cell-role="th" scope="col">&lt;chr&gt;</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>717623</td>
-<td>e33c1a00-85cd-46cd-9444-a8f79a5e3846</td>
-<td>/api/v1.1/game/717623/feed/live</td>
-<td>R</td>
-<td>2023</td>
-<td>2023-06-25T14:10:00Z</td>
-<td>2023-06-25</td>
-<td>FALSE</td>
-<td>1</td>
-<td>TRUE</td>
-<td>...</td>
-<td>32</td>
-<td>45</td>
-<td>.416</td>
-<td>138</td>
-<td>St. Louis Cardinals</td>
-<td>/api/v1/teams/138</td>
-<td>5381</td>
-<td>London Stadium</td>
-<td>/api/v1/venues/5381</td>
-<td>/api/v1/game/717623/content</td>
-</tr>
-<tr class="even">
-<td>717621</td>
-<td>ac54164c-0dcc-4575-8425-9ec93a0bf1ad</td>
-<td>/api/v1.1/game/717621/feed/live</td>
-<td>R</td>
-<td>2023</td>
-<td>2023-06-25T16:10:00Z</td>
-<td>2023-06-25</td>
-<td>FALSE</td>
-<td>1</td>
-<td>TRUE</td>
-<td>...</td>
-<td>33</td>
-<td>43</td>
-<td>.434</td>
-<td>116</td>
-<td>Detroit Tigers</td>
-<td>/api/v1/teams/116</td>
-<td>2394</td>
-<td>Comerica Park</td>
-<td>/api/v1/venues/2394</td>
-<td>/api/v1/game/717621/content</td>
-</tr>
-<tr class="odd">
-<td>717627</td>
-<td>919ec743-ee10-4515-a193-cac2085ad0dc</td>
-<td>/api/v1.1/game/717627/feed/live</td>
-<td>R</td>
-<td>2023</td>
-<td>2023-06-25T17:35:00Z</td>
-<td>2023-06-25</td>
-<td>FALSE</td>
-<td>1</td>
-<td>TRUE</td>
-<td>...</td>
-<td>47</td>
-<td>29</td>
-<td>.618</td>
-<td>110</td>
-<td>Baltimore Orioles</td>
-<td>/api/v1/teams/110</td>
-<td>2</td>
-<td>Oriole Park at Camden Yards</td>
-<td>/api/v1/venues/2</td>
-<td>/api/v1/game/717627/content</td>
-</tr>
-<tr class="even">
-<td>717624</td>
-<td>b1cfe254-fa22-475c-8edc-e8e16b35e912</td>
-<td>/api/v1.1/game/717624/feed/live</td>
-<td>R</td>
-<td>2023</td>
-<td>2023-06-25T17:35:00Z</td>
-<td>2023-06-25</td>
-<td>FALSE</td>
-<td>1</td>
-<td>TRUE</td>
-<td>...</td>
-<td>40</td>
-<td>37</td>
-<td>.519</td>
-<td>143</td>
-<td>Philadelphia Phillies</td>
-<td>/api/v1/teams/143</td>
-<td>2681</td>
-<td>Citizens Bank Park</td>
-<td>/api/v1/venues/2681</td>
-<td>/api/v1/game/717624/content</td>
-</tr>
-<tr class="odd">
-<td>717622</td>
-<td>be439c03-189a-461c-99b5-456993e5a967</td>
-<td>/api/v1.1/game/717622/feed/live</td>
-<td>R</td>
-<td>2023</td>
-<td>2023-06-25T17:35:00Z</td>
-<td>2023-06-25</td>
-<td>FALSE</td>
-<td>1</td>
-<td>TRUE</td>
-<td>...</td>
-<td>43</td>
-<td>35</td>
-<td>.551</td>
-<td>147</td>
-<td>New York Yankees</td>
-<td>/api/v1/teams/147</td>
-<td>3313</td>
-<td>Yankee Stadium</td>
-<td>/api/v1/venues/3313</td>
-<td>/api/v1/game/717622/content</td>
-</tr>
-<tr class="even">
-<td>717617</td>
-<td>0d6be3aa-5772-48ad-a201-61a50debb989</td>
-<td>/api/v1.1/game/717617/feed/live</td>
-<td>R</td>
-<td>2023</td>
-<td>2023-06-25T17:37:00Z</td>
-<td>2023-06-25</td>
-<td>FALSE</td>
-<td>1</td>
-<td>TRUE</td>
-<td>...</td>
-<td>43</td>
-<td>36</td>
-<td>.544</td>
-<td>141</td>
-<td>Toronto Blue Jays</td>
-<td>/api/v1/teams/141</td>
-<td>14</td>
-<td>Rogers Centre</td>
-<td>/api/v1/venues/14</td>
-<td>/api/v1/game/717617/content</td>
-</tr>
-<tr class="odd">
-<td>717619</td>
-<td>513d829b-39b8-4167-87b1-49d8805147fc</td>
-<td>/api/v1.1/game/717619/feed/live</td>
-<td>R</td>
-<td>2023</td>
-<td>2023-06-25T17:40:00Z</td>
-<td>2023-06-25</td>
-<td>FALSE</td>
-<td>1</td>
-<td>TRUE</td>
-<td>...</td>
-<td>54</td>
-<td>27</td>
-<td>.667</td>
-<td>139</td>
-<td>Tampa Bay Rays</td>
-<td>/api/v1/teams/139</td>
-<td>12</td>
-<td>Tropicana Field</td>
-<td>/api/v1/venues/12</td>
-<td>/api/v1/game/717619/content</td>
-</tr>
-<tr class="even">
-<td>717618</td>
-<td>eb75479b-3b52-4944-9d9f-6503ebda4935</td>
-<td>/api/v1.1/game/717618/feed/live</td>
-<td>R</td>
-<td>2023</td>
-<td>2023-06-25T17:40:00Z</td>
-<td>2023-06-25</td>
-<td>FALSE</td>
-<td>1</td>
-<td>TRUE</td>
-<td>...</td>
-<td>41</td>
-<td>37</td>
-<td>.526</td>
-<td>113</td>
-<td>Cincinnati Reds</td>
-<td>/api/v1/teams/113</td>
-<td>2602</td>
-<td>Great American Ball Park</td>
-<td>/api/v1/venues/2602</td>
-<td>/api/v1/game/717618/content</td>
-</tr>
-<tr class="odd">
-<td>717620</td>
-<td>cffb040e-7b40-488f-b0e2-5f7bc735ef3e</td>
-<td>/api/v1.1/game/717620/feed/live</td>
-<td>R</td>
-<td>2023</td>
-<td>2023-06-25T17:40:00Z</td>
-<td>2023-06-25</td>
-<td>FALSE</td>
-<td>1</td>
-<td>TRUE</td>
-<td>...</td>
-<td>45</td>
-<td>34</td>
-<td>.570</td>
-<td>146</td>
-<td>Miami Marlins</td>
-<td>/api/v1/teams/146</td>
-<td>4169</td>
-<td>loanDepot park</td>
-<td>/api/v1/venues/4169</td>
-<td>/api/v1/game/717620/content</td>
-</tr>
-<tr class="even">
-<td>717613</td>
-<td>f2df18cb-1bf3-4490-8b3e-a3edeaeff769</td>
-<td>/api/v1.1/game/717613/feed/live</td>
-<td>R</td>
-<td>2023</td>
-<td>2023-06-25T17:40:00Z</td>
-<td>2023-06-25</td>
-<td>FALSE</td>
-<td>1</td>
-<td>TRUE</td>
-<td>...</td>
-<td>37</td>
-<td>40</td>
-<td>.481</td>
-<td>114</td>
-<td>Cleveland Guardians</td>
-<td>/api/v1/teams/114</td>
-<td>5</td>
-<td>Progressive Field</td>
-<td>/api/v1/venues/5</td>
-<td>/api/v1/game/717613/content</td>
-</tr>
-<tr class="odd">
-<td>717614</td>
-<td>991de6d4-340e-44a4-8c6f-4cbc4e59ee26</td>
-<td>/api/v1.1/game/717614/feed/live</td>
-<td>R</td>
-<td>2023</td>
-<td>2023-06-25T18:10:00Z</td>
-<td>2023-06-25</td>
-<td>FALSE</td>
-<td>1</td>
-<td>TRUE</td>
-<td>...</td>
-<td>34</td>
-<td>45</td>
-<td>.430</td>
-<td>145</td>
-<td>Chicago White Sox</td>
-<td>/api/v1/teams/145</td>
-<td>4</td>
-<td>Guaranteed Rate Field</td>
-<td>/api/v1/venues/4</td>
-<td>/api/v1/game/717614/content</td>
-</tr>
-<tr class="even">
-<td>717616</td>
-<td>5b230c8a-b61e-4698-b8f8-9ad3d6a0b8d2</td>
-<td>/api/v1.1/game/717616/feed/live</td>
-<td>R</td>
-<td>2023</td>
-<td>2023-06-25T19:10:00Z</td>
-<td>2023-06-25</td>
-<td>FALSE</td>
-<td>1</td>
-<td>TRUE</td>
-<td>...</td>
-<td>31</td>
-<td>49</td>
-<td>.388</td>
-<td>115</td>
-<td>Colorado Rockies</td>
-<td>/api/v1/teams/115</td>
-<td>19</td>
-<td>Coors Field</td>
-<td>/api/v1/venues/19</td>
-<td>/api/v1/game/717616/content</td>
-</tr>
-<tr class="odd">
-<td>717612</td>
-<td>82e11ebd-c1b4-459c-87f8-86cf5fe842f1</td>
-<td>/api/v1.1/game/717612/feed/live</td>
-<td>R</td>
-<td>2023</td>
-<td>2023-06-25T20:05:00Z</td>
-<td>2023-06-25</td>
-<td>FALSE</td>
-<td>1</td>
-<td>TRUE</td>
-<td>...</td>
-<td>44</td>
-<td>34</td>
-<td>.564</td>
-<td>137</td>
-<td>San Francisco Giants</td>
-<td>/api/v1/teams/137</td>
-<td>2395</td>
-<td>Oracle Park</td>
-<td>/api/v1/venues/2395</td>
-<td>/api/v1/game/717612/content</td>
-</tr>
-<tr class="even">
-<td>717610</td>
-<td>48fde9c2-1c7f-4db6-8ffb-79e525a0a30a</td>
-<td>/api/v1.1/game/717610/feed/live</td>
-<td>R</td>
-<td>2023</td>
-<td>2023-06-25T20:10:00Z</td>
-<td>2023-06-25</td>
-<td>FALSE</td>
-<td>1</td>
-<td>TRUE</td>
-<td>...</td>
-<td>37</td>
-<td>41</td>
-<td>.474</td>
-<td>135</td>
-<td>San Diego Padres</td>
-<td>/api/v1/teams/135</td>
-<td>2680</td>
-<td>Petco Park</td>
-<td>/api/v1/venues/2680</td>
-<td>/api/v1/game/717610/content</td>
-</tr>
-<tr class="odd">
-<td>717615</td>
-<td>eb905fad-368d-4f9c-b596-a1fbe1b666e5</td>
-<td>/api/v1.1/game/717615/feed/live</td>
-<td>R</td>
-<td>2023</td>
-<td>2023-06-25T23:10:00Z</td>
-<td>2023-06-25</td>
-<td>FALSE</td>
-<td>1</td>
-<td>TRUE</td>
-<td>...</td>
-<td>43</td>
-<td>34</td>
-<td>.558</td>
-<td>119</td>
-<td>Los Angeles Dodgers</td>
-<td>/api/v1/teams/119</td>
-<td>22</td>
-<td>Dodger Stadium</td>
-<td>/api/v1/venues/22</td>
-<td>/api/v1/game/717615/content</td>
-</tr>
-</tbody>
-</table>
-</div>
 </div>
 <div class="cell">
 <details open="">
@@ -1948,11 +1552,11 @@ The downloaded binary packages are in
 </section>
 <section id="individual-player-data" class="level1">
 <h1>Individual Player Data</h1>
-<p>I also want to scrape specific data from fangraphs but was having some trouble. For now, I was able to download a few tables that had game data for Aaron Judge and merge them together. Below are screen shots of the intiial csv file. <br><br> <img src="./images/judge1.png" class="img-fluid" alt="Figure 6"> <img src="./images/judge2.png" class="img-fluid" alt="Figure 7"></p>
+<p>I also want to eventually scrape specific data from fangraphs. For now, I was able to download a few tables that had game data for Aaron Judge and then merge them together. Below are screen shots of the initial csv file. <br><br> <img src="./images/judge1.png" class="img-fluid" alt="Figure 6"> <img src="./images/judge2.png" class="img-fluid" alt="Figure 7"></p>
 </section>
 <section id="extra-joke" class="level1">
 <h1>Extra Joke</h1>
-<p>How much data can be stored in a glacier? A frostbite <br><br> <img src="./images/SnowMiser.png" class="img-fluid" alt="Figure 8"></p>
+<p>How much data can be stored in a glacier? A frostbite! <br><br> <img src="./images/SnowMiser.png" class="img-fluid" alt="Figure 8"></p>
 
 
 </section>
