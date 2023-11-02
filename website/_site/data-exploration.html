@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -59,6 +93,9 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
 <link rel="stylesheet" href="styles.css">
@@ -119,6 +156,10 @@ ul.task-list li input[type="checkbox"] {
  <span class="dropdown-text">Data Exploration</span></a>
   </li>  
         <li>
+    <a class="dropdown-item" href="./naive_bayes.html" rel="" target="">
+ <span class="dropdown-text">Naïve Bayes</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="./clustering.html" rel="" target="">
  <span class="dropdown-text">Clustering</span></a>
   </li>  
@@ -160,7 +201,21 @@ ul.task-list li input[type="checkbox"] {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#note-to-self" id="toc-note-to-self" class="nav-link active" data-scroll-target="#note-to-self">note to self</a></li>
+  <li><a href="#ncaahoopr" id="toc-ncaahoopr" class="nav-link" data-scroll-target="#ncaahoopr">ncaahoopR</a>
+  <ul class="collapse">
+  <li><a href="#season" id="toc-season" class="nav-link" data-scroll-target="#season">2021-22 season</a></li>
+  <li><a href="#season-1" id="toc-season-1" class="nav-link" data-scroll-target="#season-1">2019-20 season</a></li>
+  </ul></li>
+  <li><a href="#text-data---reddit-or-news-apt" id="toc-text-data---reddit-or-news-apt" class="nav-link" data-scroll-target="#text-data---reddit-or-news-apt">Text Data - Reddit or News APT</a></li>
+  <li><a href="#individual-player-data" id="toc-individual-player-data" class="nav-link" data-scroll-target="#individual-player-data">Individual Player Data</a></li>
+  <li><a href="#hypothesis-refinement" id="toc-hypothesis-refinement" class="nav-link" data-scroll-target="#hypothesis-refinement">Hypothesis Refinement</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -182,9 +237,741 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
+<p><b>*Disclaimer - this section is a work in progress</b> <br><br></p>
+<section id="note-to-self" class="level1">
+<h1>note to self</h1>
+<p>data types descriptive statistics - mean, mode, median, std dev, -&gt; categorical data uses frequency distributions and bar charts make graphs! histograms, box plots, scatter plots, heatmaps correlation analysis - correlation matrices, heat maps, scatterplots hypothesis generation - refine hypotheses and research questions identify outliers report and discuss findings!!!!</p>
+</section>
+<section id="ncaahoopr" class="level1">
+<h1>ncaahoopR</h1>
+<section id="season" class="level3">
+<h3 class="anchored" data-anchor-id="season">2021-22 season</h3>
+<div class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>nova2122 <span class="op">&lt;-</span> read.csv(<span class="st">'./data/modified_data/nova2122.csv'</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>library(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a ggplot for shot outcome distribution by villanova players</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>nova_players <span class="op">&lt;-</span> nova2122 <span class="op">%&gt;%</span> <span class="bu">filter</span>(shooter_team <span class="op">==</span> <span class="st">"Villanova"</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>ggplot(nova_players, aes(x <span class="op">=</span> shooter, fill <span class="op">=</span> shot_outcome)) <span class="op">+</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  geom_bar(position <span class="op">=</span> <span class="st">"dodge"</span>) <span class="op">+</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  labs(title <span class="op">=</span> <span class="st">"Shot Outcome Distribution by Player"</span>, x <span class="op">=</span> <span class="st">"Player"</span>, y <span class="op">=</span> <span class="st">"Count"</span>) <span class="op">+</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  theme(axis.text.x <span class="op">=</span> element_text(angle <span class="op">=</span> <span class="dv">45</span>, hjust <span class="op">=</span> <span class="dv">1</span>)) <span class="op">+</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  scale_fill_manual(values <span class="op">=</span> c(<span class="st">"missed"</span> <span class="op">=</span> <span class="st">"#3464e9"</span>, <span class="st">"made"</span> <span class="op">=</span> <span class="st">"#4de9e6"</span>)) <span class="op">+</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  guides(fill <span class="op">=</span> guide_legend(title <span class="op">=</span> <span class="st">"Shot Outcome"</span>))</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the mean of shot_outcome for each player</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>mean_and_count_data <span class="op">&lt;-</span> nova_players <span class="op">%&gt;%</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  group_by(shooter) <span class="op">%&gt;%</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>   summarize(</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    shots <span class="op">=</span> n(),</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    field_goal_percentage <span class="op">=</span> mean(ifelse(shot_outcome_numeric <span class="op">==</span> <span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span>, shot_outcome_numeric), na.rm <span class="op">=</span> TRUE)</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  ) <span class="op">%&gt;%</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  arrange(<span class="op">-</span>shots) </span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>mean_and_count_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true">
+<caption>A tibble: 12 x 3</caption>
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th" scope="col">shooter</th>
+<th data-quarto-table-cell-role="th" scope="col">shots</th>
+<th data-quarto-table-cell-role="th" scope="col">field_goal_percentage</th>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th" scope="col">&lt;chr&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;int&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Justin Moore</td>
+<td>574</td>
+<td>0.4721254</td>
+</tr>
+<tr class="even">
+<td>Collin Gillespie</td>
+<td>549</td>
+<td>0.5336976</td>
+</tr>
+<tr class="odd">
+<td>Jermaine Samuels</td>
+<td>439</td>
+<td>0.5535308</td>
+</tr>
+<tr class="even">
+<td>Caleb Daniels</td>
+<td>356</td>
+<td>0.5056180</td>
+</tr>
+<tr class="odd">
+<td>Eric Dixon</td>
+<td>340</td>
+<td>0.5794118</td>
+</tr>
+<tr class="even">
+<td>Brandon Slater</td>
+<td>308</td>
+<td>0.5876623</td>
+</tr>
+<tr class="odd">
+<td>Chris Arcidiacono</td>
+<td>69</td>
+<td>0.4927536</td>
+</tr>
+<tr class="even">
+<td>Jordan Longino</td>
+<td>57</td>
+<td>0.4210526</td>
+</tr>
+<tr class="odd">
+<td>Bryan Antoine</td>
+<td>46</td>
+<td>0.3043478</td>
+</tr>
+<tr class="even">
+<td>Trey Patterson</td>
+<td>12</td>
+<td>0.3333333</td>
+</tr>
+<tr class="odd">
+<td>Dhamir Cosby-Roundtree</td>
+<td>8</td>
+<td>0.5000000</td>
+</tr>
+<tr class="even">
+<td>Nnanna Njoku</td>
+<td>6</td>
+<td>0.5000000</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="data-exploration_files/figure-html/cell-3-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create lag variables within each shooter and game_id group</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>nova2122 <span class="op">&lt;-</span> nova2122 <span class="op">%&gt;%</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  arrange(shooter, game_id, play_id) <span class="op">%&gt;%</span>  <span class="co"># Arrange the data by shooter, game_id, and play_id</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  group_by(shooter, game_id) <span class="op">%&gt;%</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  mutate(</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    lag1 <span class="op">=</span> lag(shot_outcome_numeric, order_by <span class="op">=</span> play_id),</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    lag2 <span class="op">=</span> lag(shot_outcome_numeric, order_by <span class="op">=</span> play_id, n <span class="op">=</span> <span class="dv">2</span>),</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    lag3 <span class="op">=</span> lag(shot_outcome_numeric, order_by <span class="op">=</span> play_id, n <span class="op">=</span> <span class="dv">3</span>),</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    lag4 <span class="op">=</span> lag(shot_outcome_numeric, order_by <span class="op">=</span> play_id, n <span class="op">=</span> <span class="dv">4</span>),</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    lag5 <span class="op">=</span> lag(shot_outcome_numeric, order_by <span class="op">=</span> play_id, n <span class="op">=</span> <span class="dv">5</span>),</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    lag6 <span class="op">=</span> lag(shot_outcome_numeric, order_by <span class="op">=</span> play_id, n <span class="op">=</span> <span class="dv">6</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    ungroup() <span class="op">%&gt;%</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    arrange(game_id, play_id)</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="co"># View the updated data with lag variables</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>head(nova2122)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true">
+<caption>A tibble: 6 x 15</caption>
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th" scope="col">game_id</th>
+<th data-quarto-table-cell-role="th" scope="col">play_id</th>
+<th data-quarto-table-cell-role="th" scope="col">half</th>
+<th data-quarto-table-cell-role="th" scope="col">shooter</th>
+<th data-quarto-table-cell-role="th" scope="col">shot_outcome</th>
+<th data-quarto-table-cell-role="th" scope="col">shooter_team</th>
+<th data-quarto-table-cell-role="th" scope="col">shot_outcome_numeric</th>
+<th data-quarto-table-cell-role="th" scope="col">shot_sequence</th>
+<th data-quarto-table-cell-role="th" scope="col">previous_shots</th>
+<th data-quarto-table-cell-role="th" scope="col">lag1</th>
+<th data-quarto-table-cell-role="th" scope="col">lag2</th>
+<th data-quarto-table-cell-role="th" scope="col">lag3</th>
+<th data-quarto-table-cell-role="th" scope="col">lag4</th>
+<th data-quarto-table-cell-role="th" scope="col">lag5</th>
+<th data-quarto-table-cell-role="th" scope="col">lag6</th>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th" scope="col">&lt;int&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;int&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;int&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;chr&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;chr&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;chr&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;int&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;int&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;int&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;int&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;int&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;int&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;int&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;int&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;int&gt;</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>401365747</td>
+<td>4</td>
+<td>1</td>
+<td>Justin Moore</td>
+<td>missed</td>
+<td>Villanova</td>
+<td>-1</td>
+<td>-1</td>
+<td>0</td>
+<td>NA</td>
+<td>NA</td>
+<td>NA</td>
+<td>NA</td>
+<td>NA</td>
+<td>NA</td>
+</tr>
+<tr class="even">
+<td>401365747</td>
+<td>7</td>
+<td>1</td>
+<td>Clifton Moore</td>
+<td>missed</td>
+<td>La Salle</td>
+<td>-1</td>
+<td>-1</td>
+<td>0</td>
+<td>NA</td>
+<td>NA</td>
+<td>NA</td>
+<td>NA</td>
+<td>NA</td>
+<td>NA</td>
+</tr>
+<tr class="odd">
+<td>401365747</td>
+<td>11</td>
+<td>1</td>
+<td>Clifton Moore</td>
+<td>missed</td>
+<td>La Salle</td>
+<td>-1</td>
+<td>-2</td>
+<td>-1</td>
+<td>-1</td>
+<td>NA</td>
+<td>NA</td>
+<td>NA</td>
+<td>NA</td>
+<td>NA</td>
+</tr>
+<tr class="even">
+<td>401365747</td>
+<td>13</td>
+<td>1</td>
+<td>Eric Dixon</td>
+<td>missed</td>
+<td>Villanova</td>
+<td>-1</td>
+<td>-1</td>
+<td>0</td>
+<td>NA</td>
+<td>NA</td>
+<td>NA</td>
+<td>NA</td>
+<td>NA</td>
+<td>NA</td>
+</tr>
+<tr class="odd">
+<td>401365747</td>
+<td>16</td>
+<td>1</td>
+<td>Collin Gillespie</td>
+<td>made</td>
+<td>Villanova</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>NA</td>
+<td>NA</td>
+<td>NA</td>
+<td>NA</td>
+<td>NA</td>
+<td>NA</td>
+</tr>
+<tr class="even">
+<td>401365747</td>
+<td>18</td>
+<td>1</td>
+<td>Eric Dixon</td>
+<td>made</td>
+<td>Villanova</td>
+<td>1</td>
+<td>1</td>
+<td>-1</td>
+<td>-1</td>
+<td>NA</td>
+<td>NA</td>
+<td>NA</td>
+<td>NA</td>
+<td>NA</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the correlation matrix</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>cor_matrix <span class="op">&lt;-</span> cor(nova2122[, c(<span class="st">"shot_outcome_numeric"</span>, <span class="st">"lag1"</span>, <span class="st">"lag2"</span>, <span class="st">"lag3"</span>, <span class="st">"lag4"</span>, <span class="st">"lag5"</span>, <span class="st">"lag6"</span>)], use <span class="op">=</span> <span class="st">"pairwise.complete.obs"</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>library(reshape2)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>cor_data <span class="op">&lt;-</span> melt(cor_matrix)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>ggplot(cor_data, aes(Var1, Var2, fill <span class="op">=</span> value)) <span class="op">+</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  geom_tile() <span class="op">+</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  scale_fill_gradient2(low <span class="op">=</span> <span class="st">"#f69696"</span>, high <span class="op">=</span> <span class="st">"#9a1717"</span>, midpoint <span class="op">=</span> <span class="dv">0</span>) <span class="op">+</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  labs(title <span class="op">=</span> <span class="st">"Correlation Heatmap"</span>, x <span class="op">=</span> <span class="st">""</span>, y <span class="op">=</span> <span class="st">""</span>) <span class="op">+</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  theme_minimal() <span class="op">+</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  theme(axis.text.x <span class="op">=</span> element_text(angle <span class="op">=</span> <span class="dv">45</span>, hjust <span class="op">=</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="data-exploration_files/figure-html/cell-5-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+</section>
+<section id="season-1" class="level3">
+<h3 class="anchored" data-anchor-id="season-1">2019-20 season</h3>
+<div class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>nova1920 <span class="op">&lt;-</span> read.csv(<span class="st">'./data/modified_data/nova1920.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a ggplot for shot outcome distribution by villanova players</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>nova_players <span class="op">&lt;-</span> nova1920 <span class="op">%&gt;%</span> <span class="bu">filter</span>(shooter_team <span class="op">==</span> <span class="st">"Villanova"</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>ggplot(nova_players, aes(x <span class="op">=</span> shooter, fill <span class="op">=</span> shot_outcome)) <span class="op">+</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  geom_bar(position <span class="op">=</span> <span class="st">"dodge"</span>) <span class="op">+</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  labs(title <span class="op">=</span> <span class="st">"Shot Outcome Distribution by Player"</span>, x <span class="op">=</span> <span class="st">"Player"</span>, y <span class="op">=</span> <span class="st">"Count"</span>) <span class="op">+</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  theme(axis.text.x <span class="op">=</span> element_text(angle <span class="op">=</span> <span class="dv">45</span>, hjust <span class="op">=</span> <span class="dv">1</span>)) <span class="op">+</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  scale_fill_manual(values <span class="op">=</span> c(<span class="st">"missed"</span> <span class="op">=</span> <span class="st">"#3464e9"</span>, <span class="st">"made"</span> <span class="op">=</span> <span class="st">"#4de9e6"</span>)) <span class="op">+</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  guides(fill <span class="op">=</span> guide_legend(title <span class="op">=</span> <span class="st">"Shot Outcome"</span>))</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the mean of shot_outcome for each player</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>mean_and_count_data <span class="op">&lt;-</span> nova_players <span class="op">%&gt;%</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  group_by(shooter) <span class="op">%&gt;%</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>   summarize(</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    shots <span class="op">=</span> n(),</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    field_goal_percentage <span class="op">=</span> mean(ifelse(shot_outcome_numeric <span class="op">==</span> <span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span>, shot_outcome_numeric), na.rm <span class="op">=</span> TRUE)</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>  ) <span class="op">%&gt;%</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>  arrange(<span class="op">-</span>shots) </span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>mean_and_count_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true">
+<caption>A tibble: 10 x 3</caption>
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th" scope="col">shooter</th>
+<th data-quarto-table-cell-role="th" scope="col">shots</th>
+<th data-quarto-table-cell-role="th" scope="col">field_goal_percentage</th>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th" scope="col">&lt;chr&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;int&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Collin Gillespie</td>
+<td>491</td>
+<td>0.4969450</td>
+</tr>
+<tr class="even">
+<td>Saddiq Bey</td>
+<td>458</td>
+<td>0.5349345</td>
+</tr>
+<tr class="odd">
+<td>Justin Moore</td>
+<td>355</td>
+<td>0.4647887</td>
+</tr>
+<tr class="even">
+<td>Jeremiah Robinson-Earl</td>
+<td>347</td>
+<td>0.5533141</td>
+</tr>
+<tr class="odd">
+<td>Jermaine Samuels</td>
+<td>334</td>
+<td>0.5419162</td>
+</tr>
+<tr class="even">
+<td>Cole Swider</td>
+<td>171</td>
+<td>0.4561404</td>
+</tr>
+<tr class="odd">
+<td>Brandon Slater</td>
+<td>68</td>
+<td>0.3823529</td>
+</tr>
+<tr class="even">
+<td>Dhamir Cosby-Roundtree</td>
+<td>36</td>
+<td>0.6666667</td>
+</tr>
+<tr class="odd">
+<td>Bryan Antoine</td>
+<td>25</td>
+<td>0.3600000</td>
+</tr>
+<tr class="even">
+<td>Chris Arcidiacono</td>
+<td>6</td>
+<td>0.1666667</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="data-exploration_files/figure-html/cell-7-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create lag variables within each shooter and game_id group</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>nova1920 <span class="op">&lt;-</span> nova1920 <span class="op">%&gt;%</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  arrange(shooter, game_id, play_id) <span class="op">%&gt;%</span>  <span class="co"># Arrange the data by shooter, game_id, and play_id</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  group_by(shooter, game_id) <span class="op">%&gt;%</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  mutate(</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    lag1 <span class="op">=</span> lag(shot_outcome_numeric, order_by <span class="op">=</span> play_id),</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    lag2 <span class="op">=</span> lag(shot_outcome_numeric, order_by <span class="op">=</span> play_id, n <span class="op">=</span> <span class="dv">2</span>),</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    lag3 <span class="op">=</span> lag(shot_outcome_numeric, order_by <span class="op">=</span> play_id, n <span class="op">=</span> <span class="dv">3</span>),</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    lag4 <span class="op">=</span> lag(shot_outcome_numeric, order_by <span class="op">=</span> play_id, n <span class="op">=</span> <span class="dv">4</span>),</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    lag5 <span class="op">=</span> lag(shot_outcome_numeric, order_by <span class="op">=</span> play_id, n <span class="op">=</span> <span class="dv">5</span>),</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    lag6 <span class="op">=</span> lag(shot_outcome_numeric, order_by <span class="op">=</span> play_id, n <span class="op">=</span> <span class="dv">6</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    ungroup() <span class="op">%&gt;%</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    arrange(game_id, play_id)</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="co"># View the updated data with lag variables</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>head(nova1920)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true">
+<caption>A tibble: 6 x 15</caption>
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th" scope="col">game_id</th>
+<th data-quarto-table-cell-role="th" scope="col">play_id</th>
+<th data-quarto-table-cell-role="th" scope="col">half</th>
+<th data-quarto-table-cell-role="th" scope="col">shooter</th>
+<th data-quarto-table-cell-role="th" scope="col">shot_outcome</th>
+<th data-quarto-table-cell-role="th" scope="col">shooter_team</th>
+<th data-quarto-table-cell-role="th" scope="col">shot_outcome_numeric</th>
+<th data-quarto-table-cell-role="th" scope="col">shot_sequence</th>
+<th data-quarto-table-cell-role="th" scope="col">previous_shots</th>
+<th data-quarto-table-cell-role="th" scope="col">lag1</th>
+<th data-quarto-table-cell-role="th" scope="col">lag2</th>
+<th data-quarto-table-cell-role="th" scope="col">lag3</th>
+<th data-quarto-table-cell-role="th" scope="col">lag4</th>
+<th data-quarto-table-cell-role="th" scope="col">lag5</th>
+<th data-quarto-table-cell-role="th" scope="col">lag6</th>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th" scope="col">&lt;int&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;int&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;int&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;chr&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;chr&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;chr&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;int&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;int&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;int&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;int&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;int&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;int&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;int&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;int&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;int&gt;</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>401166061</td>
+<td>2</td>
+<td>1</td>
+<td>Duane Washington Jr.</td>
+<td>made</td>
+<td>Ohio State</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>NA</td>
+<td>NA</td>
+<td>NA</td>
+<td>NA</td>
+<td>NA</td>
+<td>NA</td>
+</tr>
+<tr class="even">
+<td>401166061</td>
+<td>4</td>
+<td>1</td>
+<td>Saddiq Bey</td>
+<td>missed</td>
+<td>Villanova</td>
+<td>-1</td>
+<td>-1</td>
+<td>0</td>
+<td>NA</td>
+<td>NA</td>
+<td>NA</td>
+<td>NA</td>
+<td>NA</td>
+<td>NA</td>
+</tr>
+<tr class="odd">
+<td>401166061</td>
+<td>6</td>
+<td>1</td>
+<td>Saddiq Bey</td>
+<td>missed</td>
+<td>Villanova</td>
+<td>-1</td>
+<td>-2</td>
+<td>-1</td>
+<td>-1</td>
+<td>NA</td>
+<td>NA</td>
+<td>NA</td>
+<td>NA</td>
+<td>NA</td>
+</tr>
+<tr class="even">
+<td>401166061</td>
+<td>8</td>
+<td>1</td>
+<td>Duane Washington Jr.</td>
+<td>made</td>
+<td>Ohio State</td>
+<td>1</td>
+<td>2</td>
+<td>1</td>
+<td>1</td>
+<td>NA</td>
+<td>NA</td>
+<td>NA</td>
+<td>NA</td>
+<td>NA</td>
+</tr>
+<tr class="odd">
+<td>401166061</td>
+<td>9</td>
+<td>1</td>
+<td>Collin Gillespie</td>
+<td>missed</td>
+<td>Villanova</td>
+<td>-1</td>
+<td>-1</td>
+<td>0</td>
+<td>NA</td>
+<td>NA</td>
+<td>NA</td>
+<td>NA</td>
+<td>NA</td>
+<td>NA</td>
+</tr>
+<tr class="even">
+<td>401166061</td>
+<td>11</td>
+<td>1</td>
+<td>CJ Walker</td>
+<td>made</td>
+<td>Ohio State</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>NA</td>
+<td>NA</td>
+<td>NA</td>
+<td>NA</td>
+<td>NA</td>
+<td>NA</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the correlation matrix</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>cor_matrix <span class="op">&lt;-</span> cor(nova1920[, c(<span class="st">"shot_outcome_numeric"</span>, <span class="st">"lag1"</span>, <span class="st">"lag2"</span>, <span class="st">"lag3"</span>, <span class="st">"lag4"</span>, <span class="st">"lag5"</span>, <span class="st">"lag6"</span>)], use <span class="op">=</span> <span class="st">"pairwise.complete.obs"</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>library(reshape2)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>cor_data <span class="op">&lt;-</span> melt(cor_matrix)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>ggplot(cor_data, aes(Var1, Var2, fill <span class="op">=</span> value)) <span class="op">+</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  geom_tile() <span class="op">+</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  scale_fill_gradient2(low <span class="op">=</span> <span class="st">"#f69696"</span>, high <span class="op">=</span> <span class="st">"#9a1717"</span>, midpoint <span class="op">=</span> <span class="dv">0</span>) <span class="op">+</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  labs(title <span class="op">=</span> <span class="st">"Correlation Heatmap"</span>, x <span class="op">=</span> <span class="st">""</span>, y <span class="op">=</span> <span class="st">""</span>) <span class="op">+</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  theme_minimal() <span class="op">+</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  theme(axis.text.x <span class="op">=</span> element_text(angle <span class="op">=</span> <span class="dv">45</span>, hjust <span class="op">=</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'reshape2'
+
+
+The following object is masked from 'package:tidyr':
+
+    smiths
+
+</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="data-exploration_files/figure-html/cell-9-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># i want to create a histogram of games per season with shots for each player and made shots for each player</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># i want to do something with my lag variable</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="text-data---reddit-or-news-apt" class="level1">
+<h1>Text Data - Reddit or News APT</h1>
+</section>
+<section id="individual-player-data" class="level1">
+<h1>Individual Player Data</h1>
+<div class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#let's import some libraries </span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>aaronjudge <span class="op">=</span> pd.read_csv(<span class="st">'./data/modified_data/aaronjudge.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>aaronjudge.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
+RangeIndex: 100 entries, 0 to 99
+Data columns (total 36 columns):
+ #   Column            Non-Null Count  Dtype  
+---  ------            --------------  -----  
+ 0   Date              100 non-null    object 
+ 1   Team              100 non-null    object 
+ 2   Opp               100 non-null    object 
+ 3   BO                100 non-null    int64  
+ 4   Pos               100 non-null    object 
+ 5   PA                100 non-null    float64
+ 6   H                 100 non-null    int64  
+ 7   2B                100 non-null    int64  
+ 8   3B                100 non-null    int64  
+ 9   HR                100 non-null    int64  
+ 10  R                 100 non-null    int64  
+ 11  RBI               100 non-null    int64  
+ 12  SB                100 non-null    int64  
+ 13  CS                100 non-null    int64  
+ 14  BB%               100 non-null    float64
+ 15  K%                100 non-null    object 
+ 16  ISO               100 non-null    float64
+ 17  BABIP             100 non-null    float64
+ 18  EV                100 non-null    float64
+ 19  AVG               100 non-null    float64
+ 20  OBP               100 non-null    float64
+ 21  SLG               100 non-null    float64
+ 22  wOBA              100 non-null    float64
+ 23  wRC+              100 non-null    int64  
+ 24  Events            100 non-null    float64
+ 25  EV.1              100 non-null    float64
+ 26  maxEV             100 non-null    float64
+ 27  LA                100 non-null    float64
+ 28  Barrels           100 non-null    int64  
+ 29  Barrel%           100 non-null    object 
+ 30  HardHit           100 non-null    int64  
+ 31  HardHit%          100 non-null    float64
+ 32  location          100 non-null    object 
+ 33  at_bats           100 non-null    float64
+ 34  hard_hits         100 non-null    float64
+ 35  correct_hardhit%  100 non-null    float64
+dtypes: float64(17), int64(12), object(7)
+memory usage: 28.2+ KB</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Assuming aaronjudge is your DataFrame</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a pivot table to count the observations</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>pivot_table <span class="op">=</span> aaronjudge.pivot_table(index<span class="op">=</span><span class="st">'hard_hits'</span>, columns<span class="op">=</span><span class="st">'H'</span>, aggfunc<span class="op">=</span><span class="st">'size'</span>, fill_value<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the heatmap</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> sns.heatmap(pivot_table, cmap<span class="op">=</span><span class="st">"Blues"</span>, annot<span class="op">=</span><span class="va">True</span>, fmt<span class="op">=</span><span class="st">"d"</span>)</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Customize the y-axis to start at 0 and increase as you go up</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>ax.set_yticklabels(ax.get_yticklabels(), rotation<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>ax.invert_yaxis()</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Customize the plot if needed</span></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Heat Map Showing Hits v. Hard Hits"</span>)</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Hits"</span>)</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"hard_hits"</span>)</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="data-exploration_files/figure-html/cell-15-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sort the DataFrame by Date in ascending order</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>aaronjudge <span class="op">=</span> aaronjudge.sort_values(by<span class="op">=</span><span class="st">'Date'</span>)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create subplots with 2 rows and 1 column</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">8</span>))</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co"># First subplot - correct_hardhit%</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>sns.barplot(data<span class="op">=</span>aaronjudge, y<span class="op">=</span><span class="st">'correct_hardhit%'</span>, x<span class="op">=</span><span class="st">'Date'</span>, ax<span class="op">=</span>axes[<span class="dv">0</span>])</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].set_title(<span class="st">"correct_hardhit%"</span>)</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].set_xlabel(<span class="st">"Date"</span>)</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].set_ylabel(<span class="st">"correct_hardhit%"</span>)</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the x-axis tick positions</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>x_ticks <span class="op">=</span> axes[<span class="dv">0</span>].get_xticks()</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Show every 10th label</span></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>visible_ticks <span class="op">=</span> x_ticks[::<span class="dv">10</span>]</span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the x-axis labels</span></span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].set_xticks(visible_ticks)</span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Second subplot - H</span></span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>sns.barplot(data<span class="op">=</span>aaronjudge, y<span class="op">=</span><span class="st">'H'</span>, x<span class="op">=</span><span class="st">'Date'</span>, ax<span class="op">=</span>axes[<span class="dv">1</span>])</span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_title(<span class="st">"H"</span>)</span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_xlabel(<span class="st">"Date"</span>)</span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_ylabel(<span class="st">"H"</span>)</span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the x-axis tick positions</span></span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>x_ticks <span class="op">=</span> axes[<span class="dv">1</span>].get_xticks()</span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Show every 10th label</span></span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a>visible_ticks <span class="op">=</span> x_ticks[::<span class="dv">10</span>]</span>
+<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the x-axis labels</span></span>
+<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_xticks(visible_ticks)</span>
+<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Adjust the layout to avoid overlap</span></span>
+<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the combined figure</span></span>
+<span id="cb16-39"><a href="#cb16-39" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="data-exploration_files/figure-html/cell-16-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+</section>
+<section id="hypothesis-refinement" class="level1">
+<h1>Hypothesis Refinement</h1>
 <p>yoda data master!</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

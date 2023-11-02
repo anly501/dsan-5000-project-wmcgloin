@@ -1,6 +1,0 @@
----
-title: "Data Exploration"
-format: html
----
-
-yoda data master!
