@@ -93,6 +93,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -208,12 +211,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#data-preparation" id="toc-data-preparation" class="nav-link" data-scroll-target="#data-preparation">Data Preparation</a>
   <ul class="collapse">
   <li><a href="#ncaa-data" id="toc-ncaa-data" class="nav-link" data-scroll-target="#ncaa-data">NCAA Data</a></li>
-  <li><a href="#text-data" id="toc-text-data" class="nav-link" data-scroll-target="#text-data">Text Data</a></li>
+  <li><a href="#news-data" id="toc-news-data" class="nav-link" data-scroll-target="#news-data">News Data</a></li>
   </ul></li>
-  <li><a href="#feature-selection" id="toc-feature-selection" class="nav-link" data-scroll-target="#feature-selection">Feature Selection</a></li>
+  <li><a href="#feature-selection" id="toc-feature-selection" class="nav-link" data-scroll-target="#feature-selection">Feature Selection</a>
+  <ul class="collapse">
+  <li><a href="#ncaa-data-1" id="toc-ncaa-data-1" class="nav-link" data-scroll-target="#ncaa-data-1">NCAA Data</a></li>
+  <li><a href="#news-data-1" id="toc-news-data-1" class="nav-link" data-scroll-target="#news-data-1">News Data</a></li>
+  </ul></li>
   <li><a href="#naive-bayes-with-labeled-record-data" id="toc-naive-bayes-with-labeled-record-data" class="nav-link" data-scroll-target="#naive-bayes-with-labeled-record-data">Naive Bayes with Labeled Record Data</a></li>
   <li><a href="#naive-bayes-with-labeled-text-data" id="toc-naive-bayes-with-labeled-text-data" class="nav-link" data-scroll-target="#naive-bayes-with-labeled-text-data">Naive Bayes with Labeled Text Data</a></li>
-  <li><a href="#extra-joke" id="toc-extra-joke" class="nav-link" data-scroll-target="#extra-joke">Extra Joke</a></li>
+  <li><a href="#extra-joke-x2" id="toc-extra-joke-x2" class="nav-link" data-scroll-target="#extra-joke-x2">Extra Joke (x2)</a></li>
   </ul>
 </nav>
     </div>
@@ -247,16 +254,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Data must initially be prepared to utilize a Naive Bayes model. Although a substantial part of this process has been covered in the data cleaning and exploratory data analysis (EDA) phases, we must still convert all categorical and label columns into factor types. Additionally, data must be split into training and test subsets. In the following code, we will complete the preparation of the 2021-22 NCAA data and text data for modeling.</p>
 <section id="ncaa-data" class="level3">
 <h3 class="anchored" data-anchor-id="ncaa-data">NCAA Data</h3>
-<div class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>nova2122 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">'./data/modified_data/nova2122_updated.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>nova2122 <span class="op">&lt;-</span> read.csv(<span class="st">'./data/modified_data/nova2122_updated.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load relevant libraries</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(caret)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load relevant libraries</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>library(tidyverse)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>library(caret)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="11">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(nova2122)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">str</span>(nova2122)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>'data.frame':   5399 obs. of  15 variables:
  $ game_id             : int  401365747 401365747 401365747 401365747 401365747 401365747 401365747 401365747 401365747 401365747 ...
@@ -276,17 +283,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  $ lag6                : int  NA NA NA NA NA NA NA NA NA NA ...</code></pre>
 </div>
 </div>
-<div class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>nova2122<span class="sc">$</span>lag1 <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(nova2122<span class="sc">$</span>lag1)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>nova2122<span class="sc">$</span>lag2 <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(nova2122<span class="sc">$</span>lag2)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>nova2122<span class="sc">$</span>lag3 <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(nova2122<span class="sc">$</span>lag3)</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>nova2122<span class="sc">$</span>lag4 <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(nova2122<span class="sc">$</span>lag4)</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>nova2122<span class="sc">$</span>lag5 <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(nova2122<span class="sc">$</span>lag5)</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>nova2122<span class="sc">$</span>lag6 <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(nova2122<span class="sc">$</span>lag6)</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>nova2122<span class="sc">$</span>shot_outcome_numeric <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(nova2122<span class="sc">$</span>shot_outcome_numeric)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>nova2122$lag1 <span class="op">&lt;-</span> <span class="im">as</span>.factor(nova2122$lag1)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>nova2122$lag2 <span class="op">&lt;-</span> <span class="im">as</span>.factor(nova2122$lag2)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>nova2122$lag3 <span class="op">&lt;-</span> <span class="im">as</span>.factor(nova2122$lag3)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>nova2122$lag4 <span class="op">&lt;-</span> <span class="im">as</span>.factor(nova2122$lag4)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>nova2122$lag5 <span class="op">&lt;-</span> <span class="im">as</span>.factor(nova2122$lag5)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>nova2122$lag6 <span class="op">&lt;-</span> <span class="im">as</span>.factor(nova2122$lag6)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>nova2122$shot_outcome_numeric <span class="op">&lt;-</span> <span class="im">as</span>.factor(nova2122$shot_outcome_numeric)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="13">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(nova2122)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">str</span>(nova2122)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>'data.frame':   5399 obs. of  15 variables:
  $ game_id             : int  401365747 401365747 401365747 401365747 401365747 401365747 401365747 401365747 401365747 401365747 ...
@@ -306,91 +313,219 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  $ lag6                : Factor w/ 2 levels "-1","1": NA NA NA NA NA NA NA NA NA NA ...</code></pre>
 </div>
 </div>
-<div class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="14">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set a seed for reproducibility</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">137</span>)</span>
+<div class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set a seed for reproducibility</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="bu">set</span>.seed(<span class="dv">137</span>)</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create an index for splitting the data (70% for training, 30% for validation)</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>index <span class="ot">&lt;-</span> <span class="fu">createDataPartition</span>(<span class="at">y =</span> nova2122<span class="sc">$</span>shot_outcome_numeric, <span class="at">p =</span> <span class="fl">0.7</span>, <span class="at">list =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>index <span class="op">&lt;-</span> createDataPartition(y <span class="op">=</span> nova2122$shot_outcome_numeric, p <span class="op">=</span> <span class="fl">0.7</span>, <span class="bu">list</span> <span class="op">=</span> FALSE)</span>
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the training and validation subsets</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>training_data <span class="ot">&lt;-</span> nova2122[index, ]</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>validation_data <span class="ot">&lt;-</span> nova2122[<span class="sc">-</span>index, ]</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>training_data <span class="op">&lt;-</span> nova2122[index, ]</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>validation_data <span class="op">&lt;-</span> nova2122[<span class="op">-</span>index, ]</span>
 <span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(training_data, <span class="at">file =</span> <span class="st">"./data/modified_data/nova2122_training.csv"</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(validation_data, <span class="at">file =</span> <span class="st">"./data/modified_data/nova2122_validation.csv"</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>write.csv(training_data, <span class="bu">file</span> <span class="op">=</span> <span class="st">"./data/modified_data/nova2122_training.csv"</span>, row.names <span class="op">=</span> FALSE)</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>write.csv(validation_data, <span class="bu">file</span> <span class="op">=</span> <span class="st">"./data/modified_data/nova2122_validation.csv"</span>, row.names <span class="op">=</span> FALSE)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="text-data" class="level3">
-<h3 class="anchored" data-anchor-id="text-data">Text Data</h3>
+<section id="news-data" class="level3">
+<h3 class="anchored" data-anchor-id="news-data">News Data</h3>
+<div class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>newsapi <span class="op">=</span> pd.read_csv(<span class="st">'./data/modified_data/news_api_naive.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>newsapi.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="8">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Title</th>
+<th data-quarto-table-cell-role="th">Description</th>
+<th data-quarto-table-cell-role="th">Sentiment Label</th>
+<th data-quarto-table-cell-role="th">cleaned_text</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>how to watch jack catterall vs jorge linares l...</td>
+<td>jack catterall hopes to add a win to his resum...</td>
+<td>positive</td>
+<td>jack catterall hope add win resume redeem loss...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>jaguars vs steelers livestream: how to watch n...</td>
+<td>jacksonville look to make it five wins in a ro...</td>
+<td>positive</td>
+<td>jacksonville look make five win row head pitts...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>vikings vs packers livestream: how to watch nf...</td>
+<td>want to watch the minnesota vikings play the g...</td>
+<td>positive</td>
+<td>want watch minnesota viking play green bay pac...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>dolphins' chase claypool says there was 'frust...</td>
+<td>after being traded from the 1-4 chicago bears ...</td>
+<td>negative</td>
+<td>traded chicago bear miami dolphin last friday ...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>seahawks vs bengals livestream: how to watch n...</td>
+<td>two of the nfl's most potent offenses clash in...</td>
+<td>negative</td>
+<td>two nfl potent offense clash cincinnati</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make "Sentiment Label" a categorical variable</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>newsapi[<span class="st">'Sentiment Label'</span>] <span class="op">=</span> newsapi[<span class="st">'Sentiment Label'</span>].astype(<span class="st">'category'</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove rows with missing data</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>newsapi.dropna(inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove unnecessary columns</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>newsapi <span class="op">=</span> newsapi[[<span class="st">'Sentiment Label'</span>, <span class="st">'cleaned_text'</span>]]</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Split the data into training, test, and validation subsets</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>train_data, test_data <span class="op">=</span> train_test_split(newsapi, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>train_data, val_data <span class="op">=</span> train_test_split(train_data, test_size<span class="op">=</span><span class="fl">0.1</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>train_data.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="16">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Sentiment Label</th>
+<th data-quarto-table-cell-role="th">cleaned_text</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">69</td>
+<td>neutral</td>
+<td>cbs sport network weekly coverage season keep ...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">85</td>
+<td>negative</td>
+<td>minnesota twin lost straight postseason game t...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">97</td>
+<td>negative</td>
+<td>penn state spread season surprise many two les...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">38</td>
+<td>positive</td>
+<td>round scottish woman premier league celtic ran...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>positive</td>
+<td>want watch minnesota viking play green bay pac...</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
 </section>
 </section>
 <section id="feature-selection" class="level1">
 <h1>Feature Selection</h1>
-<div class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>import numpy as np </span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>import seaborn as sns</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>import pandas as pd</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>import matplotlib.pyplot as plt</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>import scipy</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>import sklearn </span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>import itertools</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>from scipy.stats import spearmanr</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np </span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sklearn </span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> itertools</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> spearmanr</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="18">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>training <span class="ot">=</span> <span class="fu">pd.read_csv</span>(<span class="st">'./data/modified_data/nova2122_training.csv'</span>)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>validation <span class="ot">=</span> <span class="fu">pd.read_csv</span>(<span class="st">'./data/modified_data/nova2122_validation.csv'</span>)</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert DataFrames to numpy arrays</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> training[[<span class="st">'lag1'</span>, <span class="st">'lag2'</span>, <span class="st">'lag3'</span>]].values</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="fu">np.nan_to_num</span>(x, <span class="at">nan=</span><span class="dv">0</span>)</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>y <span class="ot">=</span> training[[<span class="st">'shot_outcome_numeric'</span>]].values</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>def <span class="fu">merit</span>(x, y, <span class="at">correlation=</span><span class="st">'pearson'</span>)<span class="sc">:</span></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    k <span class="ot">=</span> x.shape[<span class="dv">1</span>]</span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> correlation <span class="sc">==</span> <span class="st">'pearson'</span><span class="sc">:</span></span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>        rho_xx <span class="ot">=</span> <span class="fu">np.mean</span>(<span class="fu">np.corrcoef</span>(x, x, <span class="at">rowvar =</span> False))</span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>        rho_xy <span class="ot">=</span> <span class="fu">np.mean</span>(<span class="fu">np.corrcoef</span>(x, y, <span class="at">rowvar =</span> False))</span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>    elif correlation <span class="sc">==</span> <span class="st">'spearman'</span><span class="sc">:</span></span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>        rho_xx <span class="ot">=</span> <span class="fu">np.mean</span>(<span class="fu">spearmanr</span>(x, x, <span class="at">axis =</span> <span class="dv">0</span>)[<span class="dv">0</span>])</span>
-<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>        rho_xy <span class="ot">=</span> <span class="fu">np.mean</span>(<span class="fu">spearmanr</span>(x, y, <span class="at">axis =</span> <span class="dv">0</span>)[<span class="dv">0</span>])</span>
-<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span><span class="sc">:</span></span>
-<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>        raise <span class="fu">ValueError</span>(<span class="st">"Error: Unsupported Correlation Method. Try Again."</span>)</span>
-<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>    merit_numerator <span class="ot">=</span> k <span class="sc">*</span> <span class="fu">np.absolute</span>(rho_xy)</span>
-<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>    merit_denominator <span class="ot">=</span> <span class="fu">np.sqrt</span>(k <span class="sc">+</span> k <span class="sc">*</span> (k <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> <span class="fu">np.absolute</span>(rho_xx))</span>
-<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>    merit_score <span class="ot">=</span> merit_numerator <span class="sc">/</span> merit_denominator</span>
-<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>    return merit_score</span>
-<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>def <span class="fu">maximize_CFS</span>(x, y)<span class="sc">:</span></span>
-<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>    num_features <span class="ot">=</span> x.shape[<span class="dv">1</span>]</span>
-<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>    max_merit <span class="ot">=</span> <span class="dv">0</span></span>
-<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>    optimal_subset <span class="ot">=</span> None</span>
-<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a>    list1 <span class="ot">=</span> [<span class="sc">*</span><span class="fu">range</span>(<span class="dv">0</span>, num_features)]</span>
-<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> L <span class="cf">in</span> <span class="fu">range</span>(<span class="dv">1</span>, <span class="fu">len</span>(list1) <span class="sc">+</span> <span class="dv">1</span>)<span class="sc">:</span></span>
-<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> subset <span class="cf">in</span> <span class="fu">itertools.combinations</span>(list1, L)<span class="sc">:</span></span>
-<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a>            x_subset <span class="ot">=</span> x[<span class="sc">:</span>, <span class="fu">list</span>(subset)]</span>
-<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a>            subset_merit <span class="ot">=</span> <span class="fu">merit</span>(x_subset, y)</span>
-<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> subset_merit <span class="sc">&gt;</span> max_merit<span class="sc">:</span></span>
-<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a>                max_merit <span class="ot">=</span> subset_merit</span>
-<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a>                optimal_subset <span class="ot">=</span> <span class="fu">list</span>(subset)</span>
-<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a>    return optimal_subset  <span class="co"># Return the indices of selected features</span></span>
-<span id="cb10-41"><a href="#cb10-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-42"><a href="#cb10-42" aria-hidden="true" tabindex="-1"></a>selected_indices <span class="ot">=</span> <span class="fu">maximize_CFS</span>(x, y)</span>
-<span id="cb10-43"><a href="#cb10-43" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(selected_indices)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="61">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> merit(x, y, correlation<span class="op">=</span><span class="st">'pearson'</span>):</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    k <span class="op">=</span> x.shape[<span class="dv">1</span>]</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> correlation <span class="op">==</span> <span class="st">'pearson'</span>:</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>        rho_xx <span class="op">=</span> np.mean(np.corrcoef(x, x, rowvar <span class="op">=</span> <span class="va">False</span>))</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>        rho_xy <span class="op">=</span> np.mean(np.corrcoef(x, y, rowvar <span class="op">=</span> <span class="va">False</span>))</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> correlation <span class="op">==</span> <span class="st">'spearman'</span>:</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>        rho_xx <span class="op">=</span> np.mean(spearmanr(x, x, axis <span class="op">=</span> <span class="dv">0</span>)[<span class="dv">0</span>])</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>        rho_xy <span class="op">=</span> np.mean(spearmanr(x, y, axis <span class="op">=</span> <span class="dv">0</span>)[<span class="dv">0</span>])</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"Error: Unsupported Correlation Method. Try Again."</span>)</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>    merit_numerator <span class="op">=</span> k <span class="op">*</span> np.absolute(rho_xy)</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>    merit_denominator <span class="op">=</span> np.sqrt(k <span class="op">+</span> k <span class="op">*</span> (k <span class="op">-</span> <span class="dv">1</span>) <span class="op">*</span> np.absolute(rho_xx))</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>    merit_score <span class="op">=</span> merit_numerator <span class="op">/</span> merit_denominator</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> merit_score</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> maximize_CFS(x, y):</span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>    num_features <span class="op">=</span> x.shape[<span class="dv">1</span>]</span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>    max_merit <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>    optimal_subset <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>    list1 <span class="op">=</span> [<span class="op">*</span><span class="bu">range</span>(<span class="dv">0</span>, num_features)]</span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> L <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="bu">len</span>(list1) <span class="op">+</span> <span class="dv">1</span>):</span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(L<span class="op">/</span>(<span class="bu">len</span>(list1)<span class="op">+</span><span class="dv">1</span>))</span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> subset <span class="kw">in</span> itertools.combinations(list1, L):</span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>            x_subset <span class="op">=</span> x[:, <span class="bu">list</span>(subset)]</span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>            subset_merit <span class="op">=</span> merit(x_subset, y)</span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> subset_merit <span class="op">&gt;</span> max_merit:</span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a>                max_merit <span class="op">=</span> subset_merit</span>
+<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a>                optimal_subset <span class="op">=</span> <span class="bu">list</span>(subset)</span>
+<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> optimal_subset  <span class="co"># Return the indices of selected features</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="ncaa-data-1" class="level3">
+<h3 class="anchored" data-anchor-id="ncaa-data-1">NCAA Data</h3>
+<div class="cell" data-execution_count="52">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>training <span class="op">=</span> pd.read_csv(<span class="st">'./data/modified_data/nova2122_training.csv'</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>validation <span class="op">=</span> pd.read_csv(<span class="st">'./data/modified_data/nova2122_validation.csv'</span>)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert DataFrames to numpy arrays</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> training[[<span class="st">'lag1'</span>, <span class="st">'lag2'</span>, <span class="st">'lag3'</span>]].values</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.nan_to_num(x, nan<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> training[[<span class="st">'shot_outcome_numeric'</span>]].values</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>selected_indices <span class="op">=</span> maximize_CFS(x, y)</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(selected_indices)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[0]</code></pre>
 </div>
 </div>
-<div class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="19">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>z <span class="ot">=</span> training[<span class="st">'lag1'</span>].values</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>z <span class="ot">=</span> <span class="fu">np.nan_to_num</span>(x, <span class="at">nan=</span><span class="dv">0</span>)</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="fu">merit</span>(z,y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="19">
+<div class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>z <span class="op">=</span> training[<span class="st">'lag1'</span>].values</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>z <span class="op">=</span> np.nan_to_num(x, nan<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>merit(z,y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
 <pre><code>0.3818269784940867</code></pre>
 </div>
 </div>
@@ -398,81 +533,698 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>‘lag2’ and ‘lag3’ are considered less informative for predicting ‘shot_outcome_numeric’ using this particular feature selection approach and correlation-based merit score.</p>
 <p>Additionally, a merit score of 0.3818 indicates a moderate positive correlation between the ‘lag1’ feature and ‘shot_outcome_numeric,’ suggesting that ‘lag1’ contains relevant information for predicting the target variable.</p>
 </section>
+<section id="news-data-1" class="level3">
+<h3 class="anchored" data-anchor-id="news-data-1">News Data</h3>
+<div class="cell" data-execution_count="30">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.feature_extraction.text <span class="im">import</span> CountVectorizer</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Define your features (X) and target variable (y)</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>X_train <span class="op">=</span> train_data[<span class="st">'cleaned_text'</span>].tolist()</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>y_train <span class="op">=</span> train_data[<span class="st">'Sentiment Label'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="96">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.feature_extraction.text <span class="im">import</span> CountVectorizer</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.naive_bayes <span class="im">import</span> MultinomialNB</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> accuracy_score</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize the CountVectorizer</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>vectorizer <span class="op">=</span> CountVectorizer()</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit and transform the text data</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>X_train_vectorized <span class="op">=</span> vectorizer.fit_transform(X_train)</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert text data to numerical features using CountVectorizer</span></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>vectorizer <span class="op">=</span> CountVectorizer()</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>X_train_vectorized <span class="op">=</span> vectorizer.fit_transform(X_train)</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(X_train_vectorized.toarray())</span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>df.describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="96">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">0</th>
+<th data-quarto-table-cell-role="th">1</th>
+<th data-quarto-table-cell-role="th">2</th>
+<th data-quarto-table-cell-role="th">3</th>
+<th data-quarto-table-cell-role="th">4</th>
+<th data-quarto-table-cell-role="th">5</th>
+<th data-quarto-table-cell-role="th">6</th>
+<th data-quarto-table-cell-role="th">7</th>
+<th data-quarto-table-cell-role="th">8</th>
+<th data-quarto-table-cell-role="th">9</th>
+<th data-quarto-table-cell-role="th">...</th>
+<th data-quarto-table-cell-role="th">615</th>
+<th data-quarto-table-cell-role="th">616</th>
+<th data-quarto-table-cell-role="th">617</th>
+<th data-quarto-table-cell-role="th">618</th>
+<th data-quarto-table-cell-role="th">619</th>
+<th data-quarto-table-cell-role="th">620</th>
+<th data-quarto-table-cell-role="th">621</th>
+<th data-quarto-table-cell-role="th">622</th>
+<th data-quarto-table-cell-role="th">623</th>
+<th data-quarto-table-cell-role="th">624</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">count</td>
+<td>72.000000</td>
+<td>72.000000</td>
+<td>72.000000</td>
+<td>72.000000</td>
+<td>72.000000</td>
+<td>72.000000</td>
+<td>72.000000</td>
+<td>72.000000</td>
+<td>72.000000</td>
+<td>72.000000</td>
+<td>...</td>
+<td>72.000000</td>
+<td>72.000000</td>
+<td>72.000000</td>
+<td>72.000000</td>
+<td>72.000000</td>
+<td>72.000000</td>
+<td>72.000000</td>
+<td>72.000000</td>
+<td>72.000000</td>
+<td>72.000000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">mean</td>
+<td>0.013889</td>
+<td>0.013889</td>
+<td>0.013889</td>
+<td>0.013889</td>
+<td>0.041667</td>
+<td>0.013889</td>
+<td>0.013889</td>
+<td>0.013889</td>
+<td>0.013889</td>
+<td>0.013889</td>
+<td>...</td>
+<td>0.013889</td>
+<td>0.013889</td>
+<td>0.013889</td>
+<td>0.027778</td>
+<td>0.097222</td>
+<td>0.013889</td>
+<td>0.055556</td>
+<td>0.027778</td>
+<td>0.041667</td>
+<td>0.013889</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">std</td>
+<td>0.117851</td>
+<td>0.117851</td>
+<td>0.117851</td>
+<td>0.117851</td>
+<td>0.201229</td>
+<td>0.117851</td>
+<td>0.117851</td>
+<td>0.117851</td>
+<td>0.117851</td>
+<td>0.117851</td>
+<td>...</td>
+<td>0.117851</td>
+<td>0.117851</td>
+<td>0.117851</td>
+<td>0.165489</td>
+<td>0.298339</td>
+<td>0.117851</td>
+<td>0.230669</td>
+<td>0.165489</td>
+<td>0.201229</td>
+<td>0.117851</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">min</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>...</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">25%</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>...</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">50%</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>...</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">75%</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>...</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">max</td>
+<td>1.000000</td>
+<td>1.000000</td>
+<td>1.000000</td>
+<td>1.000000</td>
+<td>1.000000</td>
+<td>1.000000</td>
+<td>1.000000</td>
+<td>1.000000</td>
+<td>1.000000</td>
+<td>1.000000</td>
+<td>...</td>
+<td>1.000000</td>
+<td>1.000000</td>
+<td>1.000000</td>
+<td>1.000000</td>
+<td>1.000000</td>
+<td>1.000000</td>
+<td>1.000000</td>
+<td>1.000000</td>
+<td>1.000000</td>
+<td>1.000000</td>
+</tr>
+</tbody>
+</table>
+
+<p>8 rows × 625 columns</p>
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="59">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define a dictionary to map labels to numeric values</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>label_mapping <span class="op">=</span> {<span class="st">'neutral'</span>: <span class="dv">0</span>, <span class="st">'negative'</span>: <span class="op">-</span><span class="dv">1</span>, <span class="st">'positive'</span>: <span class="dv">1</span>}</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Assuming you have a DataFrame 'df' and a column 'Sentiment Label' that you want to map</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>y_train <span class="op">=</span> y_train.<span class="bu">map</span>(label_mapping)</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>y_train.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="59">
+<pre><code>69    0
+85   -1
+97   -1
+38    1
+2     1
+Name: Sentiment Label, dtype: category
+Categories (3, int64): [-1, 0, 1]</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="86">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="86">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">0</th>
+<th data-quarto-table-cell-role="th">1</th>
+<th data-quarto-table-cell-role="th">2</th>
+<th data-quarto-table-cell-role="th">3</th>
+<th data-quarto-table-cell-role="th">4</th>
+<th data-quarto-table-cell-role="th">5</th>
+<th data-quarto-table-cell-role="th">6</th>
+<th data-quarto-table-cell-role="th">7</th>
+<th data-quarto-table-cell-role="th">8</th>
+<th data-quarto-table-cell-role="th">9</th>
+<th data-quarto-table-cell-role="th">...</th>
+<th data-quarto-table-cell-role="th">615</th>
+<th data-quarto-table-cell-role="th">616</th>
+<th data-quarto-table-cell-role="th">617</th>
+<th data-quarto-table-cell-role="th">618</th>
+<th data-quarto-table-cell-role="th">619</th>
+<th data-quarto-table-cell-role="th">620</th>
+<th data-quarto-table-cell-role="th">621</th>
+<th data-quarto-table-cell-role="th">622</th>
+<th data-quarto-table-cell-role="th">623</th>
+<th data-quarto-table-cell-role="th">624</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>...</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>...</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>...</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>...</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>...</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+
+<p>5 rows × 625 columns</p>
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="87">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the sum of each column</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>column_sums <span class="op">=</span> df.<span class="bu">sum</span>()</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Find columns where the sum is less than 6</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>columns_to_remove <span class="op">=</span> column_sums[column_sums <span class="op">&lt;</span> <span class="dv">6</span>].index</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove the selected columns from the DataFrame</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.drop(columns<span class="op">=</span>columns_to_remove)</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="87">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">80</th>
+<th data-quarto-table-cell-role="th">182</th>
+<th data-quarto-table-cell-role="th">201</th>
+<th data-quarto-table-cell-role="th">235</th>
+<th data-quarto-table-cell-role="th">267</th>
+<th data-quarto-table-cell-role="th">280</th>
+<th data-quarto-table-cell-role="th">302</th>
+<th data-quarto-table-cell-role="th">322</th>
+<th data-quarto-table-cell-role="th">355</th>
+<th data-quarto-table-cell-role="th">359</th>
+<th data-quarto-table-cell-role="th">474</th>
+<th data-quarto-table-cell-role="th">503</th>
+<th data-quarto-table-cell-role="th">519</th>
+<th data-quarto-table-cell-role="th">527</th>
+<th data-quarto-table-cell-role="th">542</th>
+<th data-quarto-table-cell-role="th">551</th>
+<th data-quarto-table-cell-role="th">601</th>
+<th data-quarto-table-cell-role="th">610</th>
+<th data-quarto-table-cell-role="th">619</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="88">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> df.values</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> y_train.values</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Implement feature selection using maximize_CFS</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>optimal_subset_indices <span class="op">=</span> maximize_CFS(x, y)</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Select the optimal subset of features for training and validation data</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(optimal_subset_indices)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>0.05
+0.1
+0.15
+0.2
+0.25
+0.3
+0.35
+0.4
+0.45
+0.5
+0.55
+0.6
+0.65
+0.7
+0.75
+0.8
+0.85
+0.9
+0.95
+[17]</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="95">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>x_opt <span class="op">=</span> df.iloc[:, <span class="dv">17</span>]</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>x_opt.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="95">
+<pre><code>0    0
+1    0
+2    0
+3    1
+4    0
+Name: 610, dtype: int64</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="99">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>word_index <span class="op">=</span> <span class="dv">610</span> <span class="co"># The column index I want to look up</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the vocabulary (word to column index mapping)</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>vocabulary <span class="op">=</span> vectorizer.vocabulary_</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Inverse the vocabulary mapping to find the word for the given column index</span></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>word <span class="op">=</span> <span class="bu">next</span>(word <span class="cf">for</span> word, index <span class="kw">in</span> vocabulary.items() <span class="cf">if</span> index <span class="op">==</span> word_index)</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Word at column 610:"</span>, word)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Word at column 610: win</code></pre>
+</div>
+</div>
+</section>
+</section>
 <section id="naive-bayes-with-labeled-record-data" class="level1">
 <h1>Naive Bayes with Labeled Record Data</h1>
-<div class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="15">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>nova2122_training <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"./data/modified_data/nova2122_training.csv"</span>)</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>nova2122_validation <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">'./data/modified_data/nova2122_validation.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>nova2122_training <span class="op">&lt;-</span> read.csv(<span class="st">"./data/modified_data/nova2122_training.csv"</span>)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>nova2122_validation <span class="op">&lt;-</span> read.csv(<span class="st">'./data/modified_data/nova2122_validation.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="16">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>'data.frame':   3781 obs. of  15 variables:
- $ game_id             : int  401365747 401365747 401365747 401365747 401365747 401365747 401365747 401365747 401365747 401365747 ...
- $ play_id             : int  4 7 11 16 18 19 21 23 28 35 ...
- $ half                : int  1 1 1 1 1 1 1 1 1 1 ...
- $ shooter             : chr  "Justin Moore" "Clifton Moore" "Clifton Moore" "Collin Gillespie" ...
- $ shot_outcome        : chr  "missed" "missed" "missed" "made" ...
- $ shooter_team        : chr  "Villanova" "La Salle" "La Salle" "Villanova" ...
- $ shot_outcome_numeric: int  -1 -1 -1 1 1 -1 1 -1 -1 1 ...
- $ shot_sequence       : int  -1 -1 -2 1 1 -1 1 -1 -1 1 ...
- $ previous_shots      : int  0 0 -1 0 -1 0 0 1 -1 -1 ...
- $ lag1                : int  NA NA -1 NA -1 NA NA 1 -1 -1 ...
- $ lag2                : int  NA NA NA NA NA NA NA NA 1 1 ...
- $ lag3                : int  NA NA NA NA NA NA NA NA NA NA ...
- $ lag4                : int  NA NA NA NA NA NA NA NA NA NA ...
- $ lag5                : int  NA NA NA NA NA NA NA NA NA NA ...
- $ lag6                : int  NA NA NA NA NA NA NA NA NA NA ...
-'data.frame':   1618 obs. of  15 variables:
- $ game_id             : int  401365747 401365747 401365747 401365747 401365747 401365747 401365747 401365747 401365747 401365747 ...
- $ play_id             : int  13 25 31 33 38 40 52 60 62 66 ...
- $ half                : int  1 1 1 1 1 1 1 1 1 1 ...
- $ shooter             : chr  "Eric Dixon" "Josh Nickelberry" "Collin Gillespie" "Sherif Kenney" ...
- $ shot_outcome        : chr  "missed" "missed" "missed" "missed" ...
- $ shooter_team        : chr  "Villanova" "La Salle" "Villanova" "La Salle" ...
- $ shot_outcome_numeric: int  -1 -1 -1 -1 -1 -1 -1 1 1 -1 ...
- $ shot_sequence       : int  -1 -1 -1 -2 -1 -1 -3 3 4 -2 ...
- $ previous_shots      : int  0 0 1 -1 0 0 -2 2 3 -1 ...
- $ lag1                : int  NA NA 1 -1 NA NA -1 1 1 -1 ...
- $ lag2                : int  NA NA NA NA NA NA -1 1 1 NA ...
- $ lag3                : int  NA NA NA NA NA NA NA NA 1 NA ...
- $ lag4                : int  NA NA NA NA NA NA NA NA NA NA ...
- $ lag5                : int  NA NA NA NA NA NA NA NA NA NA ...
- $ lag6                : int  NA NA NA NA NA NA NA NA NA NA ...</code></pre>
-</div>
-</div>
-<div class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="17">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the e1071 package</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(e1071)</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Load your training and validation data</span></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>nova2122_training <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"./data/modified_data/nova2122_training.csv"</span>)</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>nova2122_validation <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">'./data/modified_data/nova2122_validation.csv'</span>)</span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>nova2122_training<span class="sc">$</span>lag1 <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(nova2122_training<span class="sc">$</span>lag1)</span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>nova2122_training<span class="sc">$</span>shot_outcome_numeric <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(nova2122_training<span class="sc">$</span>shot_outcome_numeric)</span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>nova2122_validation<span class="sc">$</span>lag1 <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(nova2122_validation<span class="sc">$</span>lag1)</span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>nova2122_validation<span class="sc">$</span>shot_outcome_numeric <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(nova2122_validation<span class="sc">$</span>shot_outcome_numeric)</span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a Naive Bayes model</span></span>
-<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>nb_model <span class="ot">&lt;-</span> <span class="fu">naiveBayes</span>(shot_outcome_numeric <span class="sc">~</span> lag1, <span class="at">data =</span> nova2122_training)</span>
-<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Make predictions on the validation set</span></span>
-<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>validation_predictions <span class="ot">&lt;-</span> <span class="fu">predict</span>(nb_model, nova2122_validation, <span class="at">type =</span> <span class="st">"class"</span>)</span>
-<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Assess the accuracy of the model</span></span>
-<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>accuracy <span class="ot">&lt;-</span> <span class="fu">mean</span>(validation_predictions <span class="sc">==</span> nova2122_validation<span class="sc">$</span>shot_outcome_numeric)</span>
-<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Accuracy of the Naive Bayes model:"</span>, accuracy, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the e1071 package</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>library(e1071)</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Load your training and validation data</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>nova2122_training <span class="op">&lt;-</span> read.csv(<span class="st">"./data/modified_data/nova2122_training.csv"</span>)</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>nova2122_validation <span class="op">&lt;-</span> read.csv(<span class="st">'./data/modified_data/nova2122_validation.csv'</span>)</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>nova2122_training$lag1 <span class="op">&lt;-</span> <span class="im">as</span>.factor(nova2122_training$lag1)</span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>nova2122_training$shot_outcome_numeric <span class="op">&lt;-</span> <span class="im">as</span>.factor(nova2122_training$shot_outcome_numeric)</span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>nova2122_validation$lag1 <span class="op">&lt;-</span> <span class="im">as</span>.factor(nova2122_validation$lag1)</span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>nova2122_validation$shot_outcome_numeric <span class="op">&lt;-</span> <span class="im">as</span>.factor(nova2122_validation$shot_outcome_numeric)</span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a Naive Bayes model</span></span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>nb_model <span class="op">&lt;-</span> naiveBayes(shot_outcome_numeric <span class="op">~</span> lag1, data <span class="op">=</span> nova2122_training)</span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Make predictions on the validation set</span></span>
+<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a>validation_predictions <span class="op">&lt;-</span> predict(nb_model, nova2122_validation, <span class="bu">type</span> <span class="op">=</span> <span class="st">"class"</span>)</span>
+<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Assess the accuracy of the model</span></span>
+<span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a>accuracy <span class="op">&lt;-</span> mean(validation_predictions <span class="op">==</span> nova2122_validation$shot_outcome_numeric)</span>
+<span id="cb31-21"><a href="#cb31-21" aria-hidden="true" tabindex="-1"></a>cat(<span class="st">"Accuracy of the Naive Bayes model:"</span>, accuracy, <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Accuracy of the Naive Bayes model: 0.5463535 </code></pre>
 </div>
 </div>
-<div class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="18">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a confusion matrix</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>conf_matrix <span class="ot">&lt;-</span> <span class="fu">confusionMatrix</span>(<span class="at">data =</span> validation_predictions, <span class="at">reference =</span> nova2122_validation<span class="sc">$</span>shot_outcome_numeric)</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the confusion matrix</span></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(conf_matrix)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a confusion matrix</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>conf_matrix <span class="op">&lt;-</span> confusionMatrix(data <span class="op">=</span> validation_predictions, reference <span class="op">=</span> nova2122_validation$shot_outcome_numeric)</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the confusion matrix</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(conf_matrix)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Confusion Matrix and Statistics
 
@@ -503,44 +1255,228 @@ Prediction  -1   1
                                           </code></pre>
 </div>
 </div>
-<div class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="28">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">#using ggplot</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the confusion matrix data</span></span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>conf_matrix_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">Prediction =</span> <span class="fu">c</span>(<span class="st">"missed"</span>, <span class="st">"made"</span>, <span class="st">"missed"</span>, <span class="st">"made"</span>),</span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">Reference =</span> <span class="fu">c</span>(<span class="st">"missed"</span>, <span class="st">"missed"</span>, <span class="st">"made"</span>, <span class="st">"made"</span>),</span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">Count =</span> <span class="fu">c</span>(<span class="dv">476</span>, <span class="dv">334</span>, <span class="dv">400</span>, <span class="dv">408</span>)</span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the ggplot</span></span>
-<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>gg <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> conf_matrix_data, <span class="fu">aes</span>(<span class="at">x =</span> Prediction, <span class="at">y =</span> Reference)) <span class="sc">+</span></span>
-<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="fu">aes</span>(<span class="at">fill =</span> Count)) <span class="sc">+</span></span>
-<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> Count), <span class="at">vjust =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradient</span>(<span class="at">low =</span> <span class="st">"#7cf09b"</span>, <span class="at">high =</span> <span class="st">"#3ee882"</span>) <span class="sc">+</span></span>
-<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Prediction"</span>,</span>
-<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Reference"</span>,</span>
-<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Count"</span></span>
-<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>))</span>
-<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a>gg <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">"Confusion Matrix for 2021-22 NCAA Villanova MBB Shot Data"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="28">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co">#using ggplot</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the confusion matrix data</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>conf_matrix_data <span class="op">&lt;-</span> data.frame(</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>  Prediction <span class="op">=</span> c(<span class="st">"missed"</span>, <span class="st">"made"</span>, <span class="st">"missed"</span>, <span class="st">"made"</span>),</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>  Reference <span class="op">=</span> c(<span class="st">"missed"</span>, <span class="st">"missed"</span>, <span class="st">"made"</span>, <span class="st">"made"</span>),</span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>  Count <span class="op">=</span> c(<span class="dv">476</span>, <span class="dv">334</span>, <span class="dv">400</span>, <span class="dv">408</span>)</span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the ggplot</span></span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>gg <span class="op">&lt;-</span> ggplot(data <span class="op">=</span> conf_matrix_data, aes(x <span class="op">=</span> Prediction, y <span class="op">=</span> Reference)) <span class="op">+</span></span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a>  geom_tile(aes(fill <span class="op">=</span> Count)) <span class="op">+</span></span>
+<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a>  geom_text(aes(label <span class="op">=</span> Count), vjust <span class="op">=</span> <span class="dv">1</span>) <span class="op">+</span></span>
+<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a>  scale_fill_gradient(low <span class="op">=</span> <span class="st">"#7cf09b"</span>, high <span class="op">=</span> <span class="st">"#3ee882"</span>) <span class="op">+</span></span>
+<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a>  labs(</span>
+<span id="cb35-16"><a href="#cb35-16" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> <span class="st">"Prediction"</span>,</span>
+<span id="cb35-17"><a href="#cb35-17" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> <span class="st">"Reference"</span>,</span>
+<span id="cb35-18"><a href="#cb35-18" aria-hidden="true" tabindex="-1"></a>    fill <span class="op">=</span> <span class="st">"Count"</span></span>
+<span id="cb35-19"><a href="#cb35-19" aria-hidden="true" tabindex="-1"></a>  ) <span class="op">+</span></span>
+<span id="cb35-20"><a href="#cb35-20" aria-hidden="true" tabindex="-1"></a>  theme_minimal() <span class="op">+</span></span>
+<span id="cb35-21"><a href="#cb35-21" aria-hidden="true" tabindex="-1"></a>  theme(axis.text <span class="op">=</span> element_text(size <span class="op">=</span> <span class="dv">12</span>))</span>
+<span id="cb35-22"><a href="#cb35-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-23"><a href="#cb35-23" aria-hidden="true" tabindex="-1"></a>gg <span class="op">+</span> ggtitle(<span class="st">"Confusion Matrix for 2021-22 NCAA Villanova MBB Shot Data"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img src="naive_bayes_files/figure-html/cell-16-output-1.png" class="img-fluid"></p>
+<p><img src="naive_bayes_files/figure-html/cell-26-output-1.png" class="img-fluid"></p>
 </div>
 </div>
 <p>I tried applying Naive Bayes to my time series data. Since it is time series data, the procedures for classifications models like Naive Bayes are not suitable for a scenario like this.</p>
 </section>
 <section id="naive-bayes-with-labeled-text-data" class="level1">
 <h1>Naive Bayes with Labeled Text Data</h1>
+<div class="cell" data-execution_count="107">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>test_data.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="107">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Sentiment Label</th>
+<th data-quarto-table-cell-role="th">cleaned_text</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">83</td>
+<td>neutral</td>
+<td>cbs sport network weekly coverage season keep ...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">53</td>
+<td>neutral</td>
+<td>nfl week odds includes division matchup sunday...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">70</td>
+<td>neutral</td>
+<td>removed</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">45</td>
+<td>positive</td>
+<td>real madrid look continue winning way keep per...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">44</td>
+<td>positive</td>
+<td>florida gator hope end road game loss streak w...</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="101">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>X_test <span class="op">=</span> test_data[<span class="st">'cleaned_text'</span>]</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>y_test <span class="op">=</span> test_data[<span class="st">'Sentiment Label'</span>]</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(X_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>83    cbs sport network weekly coverage season keep ...
+53    nfl week odds includes division matchup sunday...
+70                                              removed
+45    real madrid look continue winning way keep per...
+44    florida gator hope end road game loss streak w...
+39    u team led bile take world title combined scor...
+22    mohammed kudu last minute strike snatched draw...
+80    kansa city double digit home favorite thursday...
+10    royce lewis broke minnesota twin game playoff ...
+0     jack catterall hope add win resume redeem loss...
+18    bulldog wildcat put undefeated record line ton...
+30    chelsea v brentford today fan wondering watch ...
+73    justin field dj moore went wild fedex field be...
+33    final qualification round uefa woman champion ...
+90    fulham move quarter final league cup first tim...
+4               two nfl potent offense clash cincinnati
+76    liz loza daniel dopp talk top betting storylin...
+77    giant qb daniel jones miss third straight game...
+12    dramatic game loss arizona diamondback bounced...
+31    ridder becoming poster child home field advant...
+Name: cleaned_text, dtype: object</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="106">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Assuming you have a DataFrame named 'X_test' and you want to create a new column 'win_count'</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>X_test_win <span class="op">=</span> X_test.<span class="bu">str</span>.lower().<span class="bu">str</span>.count(<span class="st">'win'</span>)</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>X_test_win.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="106">
+<pre><code>83    0.0
+53    0.0
+70    0.0
+45    1.0
+44    0.0
+Name: cleaned_text, dtype: float64</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="109">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define a dictionary to map labels to numeric values</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>label_mapping <span class="op">=</span> {<span class="st">'neutral'</span>: <span class="dv">0</span>, <span class="st">'negative'</span>: <span class="op">-</span><span class="dv">1</span>, <span class="st">'positive'</span>: <span class="dv">1</span>}</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Assuming you have a DataFrame 'df' and a column 'Sentiment Label' that you want to map</span></span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>y_test <span class="op">=</span> test_data[<span class="st">'Sentiment Label'</span>].<span class="bu">map</span>(label_mapping)</span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>y_test.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="109">
+<pre><code>83    0
+53    0
+70    0
+45    1
+44    1
+Name: Sentiment Label, dtype: category
+Categories (3, int64): [-1, 0, 1]</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="115">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.naive_bayes <span class="im">import</span> CategoricalNB</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> accuracy_score</span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert features to a DataFrame</span></span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>news_training_x <span class="op">=</span> pd.Series(x_opt, name<span class="op">=</span><span class="st">'x'</span>)</span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>news_training_y <span class="op">=</span> y_train</span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a>news_test_x <span class="op">=</span> pd.Series(X_test_win, name<span class="op">=</span><span class="st">'x'</span>)</span>
+<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a>news_test_y <span class="op">=</span> y_test</span>
+<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-11"><a href="#cb43-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a training DataFrame</span></span>
+<span id="cb43-12"><a href="#cb43-12" aria-hidden="true" tabindex="-1"></a>training_df <span class="op">=</span> pd.DataFrame({<span class="st">'x'</span>: news_training_x, <span class="st">'y'</span>: news_training_y})</span>
+<span id="cb43-13"><a href="#cb43-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-14"><a href="#cb43-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a test DataFrame</span></span>
+<span id="cb43-15"><a href="#cb43-15" aria-hidden="true" tabindex="-1"></a>test_df <span class="op">=</span> pd.DataFrame({<span class="st">'x'</span>: news_test_x, <span class="st">'y'</span>: news_test_y})</span>
+<span id="cb43-16"><a href="#cb43-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-17"><a href="#cb43-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a Naive Bayes model</span></span>
+<span id="cb43-18"><a href="#cb43-18" aria-hidden="true" tabindex="-1"></a>nb_model <span class="op">=</span> CategoricalNB()</span>
+<span id="cb43-19"><a href="#cb43-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-20"><a href="#cb43-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove rows with NaN values</span></span>
+<span id="cb43-21"><a href="#cb43-21" aria-hidden="true" tabindex="-1"></a>training_df.dropna(subset<span class="op">=</span>[<span class="st">'x'</span>], inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb43-22"><a href="#cb43-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-23"><a href="#cb43-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove rows with NaN values in the target variable 'y'</span></span>
+<span id="cb43-24"><a href="#cb43-24" aria-hidden="true" tabindex="-1"></a>training_df.dropna(subset<span class="op">=</span>[<span class="st">'y'</span>], inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb43-25"><a href="#cb43-25" aria-hidden="true" tabindex="-1"></a>test_df.dropna(subset<span class="op">=</span>[<span class="st">'y'</span>], inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb43-26"><a href="#cb43-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-27"><a href="#cb43-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Now, you can fit your model</span></span>
+<span id="cb43-28"><a href="#cb43-28" aria-hidden="true" tabindex="-1"></a>nb_model.fit(training_df[[<span class="st">'x'</span>]], training_df[<span class="st">'y'</span>])</span>
+<span id="cb43-29"><a href="#cb43-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-30"><a href="#cb43-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove rows with NaN values</span></span>
+<span id="cb43-31"><a href="#cb43-31" aria-hidden="true" tabindex="-1"></a>test_df.dropna(subset<span class="op">=</span>[<span class="st">'x'</span>], inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb43-32"><a href="#cb43-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-33"><a href="#cb43-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Make predictions on the validation set</span></span>
+<span id="cb43-34"><a href="#cb43-34" aria-hidden="true" tabindex="-1"></a>validation_predictions <span class="op">=</span> nb_model.predict(test_df[[<span class="st">'x'</span>]])</span>
+<span id="cb43-35"><a href="#cb43-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-36"><a href="#cb43-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Assess the accuracy of the model</span></span>
+<span id="cb43-37"><a href="#cb43-37" aria-hidden="true" tabindex="-1"></a>accuracy <span class="op">=</span> accuracy_score(test_df[<span class="st">'y'</span>], validation_predictions)</span>
+<span id="cb43-38"><a href="#cb43-38" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Accuracy of the Naive Bayes model:"</span>, accuracy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Accuracy of the Naive Bayes model: 0.5</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="118">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> confusion_matrix</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a confusion matrix</span></span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>conf_matrix <span class="op">=</span> confusion_matrix(validation_predictions, test_df[<span class="st">'y'</span>])</span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the confusion matrix</span></span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Confusion Matrix:"</span>)</span>
+<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(conf_matrix)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Confusion Matrix:
+[[ 0  0  0]
+ [ 0  0  0]
+ [ 5  5 10]]</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="120">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Assuming 'conf_matrix' is the confusion matrix obtained previously</span></span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a Seaborn heatmap</span></span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a>sns.heatmap(conf_matrix, annot<span class="op">=</span><span class="va">True</span>, fmt<span class="op">=</span><span class="st">'d'</span>, cmap<span class="op">=</span><span class="st">'Blues'</span>, linewidths<span class="op">=</span><span class="fl">0.5</span>, cbar<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb47-9"><a href="#cb47-9" aria-hidden="true" tabindex="-1"></a>            xticklabels<span class="op">=</span>[<span class="st">'Negative'</span>, <span class="st">'Neutral'</span>, <span class="st">'Positive'</span>], yticklabels<span class="op">=</span>[<span class="st">'Negative'</span>, <span class="st">'Neutral'</span>, <span class="st">'Positive'</span>])</span>
+<span id="cb47-10"><a href="#cb47-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-11"><a href="#cb47-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Add labels and title</span></span>
+<span id="cb47-12"><a href="#cb47-12" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Predicted'</span>)</span>
+<span id="cb47-13"><a href="#cb47-13" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Actual'</span>)</span>
+<span id="cb47-14"><a href="#cb47-14" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Confusion Matrix'</span>)</span>
+<span id="cb47-15"><a href="#cb47-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-16"><a href="#cb47-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the heatmap</span></span>
+<span id="cb47-17"><a href="#cb47-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="naive_bayes_files/figure-html/cell-33-output-1.png" class="img-fluid"></p>
+</div>
+</div>
 </section>
-<section id="extra-joke" class="level1">
-<h1>Extra Joke</h1>
-<p>Are monsters good at math? Not unless you Count Dracula.</p>
-<p>What’s the official animal of Pi day? The Pi-thon!</p>
-<p>What do you call a number that can’t sit still? A roamin’ numeral!</p>
+<section id="extra-joke-x2" class="level1">
+<h1>Extra Joke (x2)</h1>
+<p>Are monsters good at math? Not unless you Count Dracula. <br><br> <img src="./images/dracula.png" class="img-fluid" alt="Figure 1"> <br><br> What’s the official animal of Pi day? The Pi-thon! <br><br> <img src="./images/snake.png" class="img-fluid" alt="Figure 2"></p>
 
 
 </section>
