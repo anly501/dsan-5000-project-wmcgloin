@@ -1,6 +1,0 @@
----
-title: "Dimensionality Reduction"
-format: html
----
-
-more files!
