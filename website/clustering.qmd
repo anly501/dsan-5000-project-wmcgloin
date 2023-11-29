@@ -110,6 +110,12 @@ pca_result = pd.read_csv('./data/modified_data/nova_pca.csv')
 
 import plotly.express as px
 
+kmeans = KMeans(n_clusters=3, random_state=0)
+kmeans.fit(df)
+
+# Get cluster labels
+labels = kmeans.labels_
+
 # Assuming pca_result has columns '0', '1', and '2'
 fig = px.scatter_3d(pca_result, x='0', y='1', z='2', color=labels, symbol=labels, opacity=0.7,
                     size_max=10, title='3D Scatter Plot of PC1, PC2, and PC3 with Cluster Labels',
