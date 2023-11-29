@@ -28,7 +28,7 @@ website:
           text: Naïve Bayes  
         - href: clustering.ipynb
           text: Clustering
-        - href: dimensionality-reduction.ipynb
+        - href: dimensionality-reduction.qmd
           text: Dimensionality Reduction
         - href: decision-trees.qmd
           text: Decision Trees
