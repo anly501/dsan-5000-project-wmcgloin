@@ -202,23 +202,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
-  <li><a href="#theory" id="toc-theory" class="nav-link" data-scroll-target="#theory">Theory</a>
-  <ul class="collapse">
-  <li><a href="#k-means" id="toc-k-means" class="nav-link" data-scroll-target="#k-means">K-MEANS</a></li>
-  <li><a href="#dbscan" id="toc-dbscan" class="nav-link" data-scroll-target="#dbscan">DBSCAN</a></li>
-  <li><a href="#hierarchical-clustering" id="toc-hierarchical-clustering" class="nav-link" data-scroll-target="#hierarchical-clustering">Hierarchical Clustering</a></li>
-  </ul></li>
-  <li><a href="#methods" id="toc-methods" class="nav-link" data-scroll-target="#methods">Methods</a>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a>
   <ul class="collapse">
   <li><a href="#import-libraries-and-load-the-dataset" id="toc-import-libraries-and-load-the-dataset" class="nav-link" data-scroll-target="#import-libraries-and-load-the-dataset">Import libraries and load the dataset</a></li>
   </ul></li>
-  <li><a href="#kmeans" id="toc-kmeans" class="nav-link" data-scroll-target="#kmeans">KMeans</a></li>
-  <li><a href="#dbscan-1" id="toc-dbscan-1" class="nav-link" data-scroll-target="#dbscan-1">DBSCAN</a></li>
-  <li><a href="#hierarchical-clustering-agglomerative-clustering" id="toc-hierarchical-clustering-agglomerative-clustering" class="nav-link" data-scroll-target="#hierarchical-clustering-agglomerative-clustering">Hierarchical Clustering (Agglomerative Clustering)</a></li>
-  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">Results</a></li>
+  <li><a href="#kmeans" id="toc-kmeans" class="nav-link" data-scroll-target="#kmeans">KMeans</a>
+  <ul class="collapse">
+  <li><a href="#theory" id="toc-theory" class="nav-link" data-scroll-target="#theory">Theory</a></li>
+  <li><a href="#implementation" id="toc-implementation" class="nav-link" data-scroll-target="#implementation">Implementation</a></li>
+  </ul></li>
+  <li><a href="#dbscan" id="toc-dbscan" class="nav-link" data-scroll-target="#dbscan">DBSCAN</a>
+  <ul class="collapse">
+  <li><a href="#theory-1" id="toc-theory-1" class="nav-link" data-scroll-target="#theory-1">Theory</a></li>
+  <li><a href="#implementation-1" id="toc-implementation-1" class="nav-link" data-scroll-target="#implementation-1">Implementation</a></li>
+  </ul></li>
+  <li><a href="#hierarchical-clustering-agglomerative-clustering" id="toc-hierarchical-clustering-agglomerative-clustering" class="nav-link" data-scroll-target="#hierarchical-clustering-agglomerative-clustering">Hierarchical Clustering (Agglomerative Clustering)</a>
+  <ul class="collapse">
+  <li><a href="#theory-2" id="toc-theory-2" class="nav-link" data-scroll-target="#theory-2">Theory</a></li>
+  <li><a href="#implementation-2" id="toc-implementation-2" class="nav-link" data-scroll-target="#implementation-2">Implementation</a></li>
+  </ul></li>
   <li><a href="#conclusions" id="toc-conclusions" class="nav-link" data-scroll-target="#conclusions">Conclusions</a></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   <li><a href="#extra-joke" id="toc-extra-joke" class="nav-link" data-scroll-target="#extra-joke">Extra Joke</a></li>
   </ul>
 </nav>
@@ -245,50 +248,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="introduction" class="level1">
 <h1>Introduction</h1>
-<p>provide a brief summary (1-2 paragraphs) about your feature data X and what you are trying to achieve with your clustering</p>
-</section>
-<section id="theory" class="level1">
-<h1>Theory</h1>
-<p>brief technical write up about how each clustering method works (KMEAN, DBSCAN, hierarchical clustering). Also include details on model selection methods that you use (elbow, silhouette, gap, etc.). Around 2-4 paragraphs per method is fine - focusing on how it works and what it is supposed to do</p>
-<section id="k-means" class="level3">
-<h3 class="anchored" data-anchor-id="k-means">K-MEANS</h3>
-
-<!-- K-Means clustering, a widely acclaimed algorithm, stands out for its simplicity and effectiveness, making it a favorite among beginners. The user's role is pivotal; they decide on 'k,' the number of clusters that will shape the data. The algorithm initiates by assigning data points to k clusters, with centroids acting as their center. Distances, typically calculated using Euclidean distance, guide this process. Iteratively, points shuffle between clusters, and new centroids emerge, a process termed Lloyd's algorithm, until no better cluster assignments are possible.
-
-The essence of K-Means lies in optimizing the sum of squared distances between data points and their assigned cluster mean. The user's decision on 'k' determines the number of centroids, representing cluster centers. The algorithm strategically redistributes points to minimize in-cluster sum of squares. Its simplicity and popularity make it a staple in unsupervised machine learning, exemplifying its capacity to unravel inherent patterns in data.
-
-In the grander scheme, K-Means clustering emerges as a technique to group data points based on their similarity to an average grouping. Distance metrics, like Euclidean or Manhattan distance, play a vital role, and normalization of input data becomes crucial for robust performance. Centroids, the algorithm's starting point, evolve through successive iterations, refining cluster assignments and centroids' positions. While 'k' is user-specified, the algorithm's convergence unveils meaningful clusters, transforming data chaos into structured insights. Implementation through sklearn's KMeans algorithm adds efficiency, and feature selection empowers users to tailor the clustering process to their data's nuances.
-
-
-
-Imagine you're given a room filled with a diverse collection of items – each unique and unsorted. Your task is to categorize them into distinct groups based on their similarities. This is where K-Means clustering comes into play, acting like a smart organizer that automatically groups similar items together.
-
-At the beginning of the process, you decide how many groups (clusters) you want. Think of these clusters as piles you aim to create in the room. You randomly place markers (cluster centers) equal to the number of desired clusters. The algorithm then starts assigning each item to the nearest marker, forming initial clusters. It's like sorting the room into rough piles.
-
-The magic happens during the adjustment phase. The algorithm repositions each marker to the center of its cluster and recalculates assignments. This process repeats until the piles become stable, meaning items are consistently assigned to the nearest cluster. The result is an organized room with distinct groups – a reflection of inherent patterns within the data.
-
-K-Means clustering is not just about sorting data; it's a powerful tool for revealing natural structures within complex information. In a business context, it could mean identifying customer segments with similar preferences, enabling personalized marketing strategies or targeted product recommendations. Essentially, K-Means turns chaotic data into meaningful insights, making it a valuable asset for informed decision-making. -->
-</section>
-<section id="dbscan" class="level3">
-<h3 class="anchored" data-anchor-id="dbscan">DBSCAN</h3>
-</section>
-<section id="hierarchical-clustering" class="level3">
-<h3 class="anchored" data-anchor-id="hierarchical-clustering">Hierarchical Clustering</h3>
-</section>
-</section>
-<section id="methods" class="level1">
-<h1>Methods</h1>
-<ul>
-<li>make sure to use cold folding</li>
-<li>describe your coding workflow</li>
-<li>data selection</li>
-<li>feature selection (optional)</li>
-<li>hyper-parameter tuning</li>
-<li>final results</li>
-</ul>
+<p>On this page, I’ll employ three clustering techniques to analyze Villanova’s 2021-22 NCAA shot data (the same data from the dimensionality-reduction tab), considering all six features: lag1 (previous shot), shot_value, field_goal_percentage, game_num, home_crowd, and score_diff. The primary objective is to uncover patterns within the dataset through k-means, DBSCAN, and hierarchical clustering. Each step of the process will be explained in a straightfowrad manner with interpretations of the results.</p>
 <section id="import-libraries-and-load-the-dataset" class="level3">
 <h3 class="anchored" data-anchor-id="import-libraries-and-load-the-dataset">Import libraries and load the dataset</h3>
-<div class="cell" data-execution_count="8">
+<div class="cell" data-execution_count="29">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># import the necessary packages...</span></span>
@@ -306,7 +269,13 @@ K-Means clustering is not just about sorting data; it's a powerful tool for reve
 </section>
 <section id="kmeans" class="level1">
 <h1>KMeans</h1>
-<div class="cell" data-execution_count="9">
+<section id="theory" class="level3">
+<h3 class="anchored" data-anchor-id="theory">Theory</h3>
+<p>K-Means clustering, a widely recognized algorithm, is valued for its simplicity and effectiveness, making it particularly appealing in various applications. This technique involves grouping data points into ‘k’ clusters, where ‘k’ is a user-specified parameter. The algorithm starts by assigning random points to these clusters, with centroids acting as their centers. Distances, usually calculated using Euclidean distance, guide the process. Iteratively, points shift between clusters, and new centroids emerge through Lloyd’s algorithm until no better cluster assignments are feasible. <br><br> K-Means’ core lies in optimizing the sum of squared distances between data points and their assigned cluster mean. The choice of ‘k’ dictates the number of centroids, which represent cluster centers. The algorithm strategically redistributes points to minimize the in-cluster sum of squares. Its simplicity and widespread usage make it a fundamental tool in unsupervised machine learning, showcasing its ability to uncover inherent patterns in data. <br><br> In a broader context, K-Means clustering serves as a technique to group data points based on their similarity to an average grouping. Distance metrics, such as Euclidean or Manhattan distance, play a pivotal role, and normalizing input data becomes crucial for robust performance. Centroids, serving as the algorithm’s starting point, evolve through successive iterations, refining cluster assignments and centroids’ positions. The algorithm’s convergence reveals meaningful clusters, transforming data chaos into structured insights. Implementation through sklearn’s KMeans algorithm enhances efficiency, and feature selection enables practitioners to customize the clustering process to their data’s nuances.</p>
+</section>
+<section id="implementation" class="level3">
+<h3 class="anchored" data-anchor-id="implementation">Implementation</h3>
+<div class="cell" data-execution_count="30">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># import relevent libraries for clustering. we will use KMeans, AgglomerativeClustering, MeanShift, Birch, and DBSCAN</span></span>
@@ -316,53 +285,70 @@ K-Means clustering is not just about sorting data; it's a powerful tool for reve
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div class="cell" data-execution_count="10">
+<p>The below code performs K-Means clustering for different numbers of clusters (ranging from 2 to 10). For each cluster number, it calculates and stores the distortion, which measures the average Euclidean distance between each data point and its assigned cluster center. Inertia is also computed and stored, representing the sum of squared distances of data points to their closest cluster center. Additionally, the silhouette score is determined and recorded, offering insights into how well-defined and separated the clusters are. The results, encompassing these crucial metrics—distortion, inertia, and silhouette score—are then organized into a DataFrame for detailed analysis and printed. This is in an attempt to identify the optimal number of clusters based on a comprehensive evaluation of these key clustering indicators.</p>
+<div class="cell" data-execution_count="31">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># for k means clustering we will use the elbow method to find the optimal number of clusters. we will use the inertia_ attribute to find the sum of squared distances of samples to their closest cluster center. we will use the range of 1 to 10 clusters. plot the inertia_ values for each number of clusters. make sure to save it in a dataframe and plot it using matplotlib.</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create empty lists to store the results</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>clus <span class="op">=</span> []</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>distortions <span class="op">=</span> []</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>inertias <span class="op">=</span> []</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>silhouette_scores <span class="op">=</span> []</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Loop through the range of clusters</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2</span>, <span class="dv">11</span>):  <span class="co"># Silhouette score is not defined for a single cluster</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    kmeans <span class="op">=</span> KMeans(n_clusters<span class="op">=</span>i, random_state<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    kmeans.fit(df)  </span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    clus.append(i)</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    centers <span class="op">=</span> kmeans.cluster_centers_</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    distortions.append(<span class="bu">sum</span>(np.<span class="bu">min</span>(pairwise_distances(df, centers, metric<span class="op">=</span><span class="st">'euclidean'</span>), axis<span class="op">=</span><span class="dv">1</span>)) <span class="op">/</span> df.shape[<span class="dv">0</span>])</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    inertias.append(kmeans.inertia_)</span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Calculate silhouette score</span></span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    silhouette_scores.append(silhouette_score(df, kmeans.labels_))</span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a DataFrame from the lists</span></span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> pd.DataFrame({<span class="st">'Cluster'</span>: clus, <span class="st">'Distortion'</span>: distortions, <span class="st">'Inertia'</span>: inertias, <span class="st">'Silhouette Score'</span>: silhouette_scores})</span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(results)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create empty lists to store the results</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>clus <span class="op">=</span> []</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>distortions <span class="op">=</span> []</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>inertias <span class="op">=</span> []</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>silhouette_scores <span class="op">=</span> []</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Loop through the range of clusters</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2</span>, <span class="dv">11</span>):  <span class="co"># Silhouette score is not defined for a single cluster</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    kmeans <span class="op">=</span> KMeans(n_clusters<span class="op">=</span>i, random_state<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    kmeans.fit(df)  </span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    clus.append(i)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    centers <span class="op">=</span> kmeans.cluster_centers_</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    distortions.append(<span class="bu">sum</span>(np.<span class="bu">min</span>(pairwise_distances(df, centers, metric<span class="op">=</span><span class="st">'euclidean'</span>), axis<span class="op">=</span><span class="dv">1</span>)) <span class="op">/</span> df.shape[<span class="dv">0</span>])</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    inertias.append(kmeans.inertia_)</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Calculate silhouette score</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    silhouette_scores.append(silhouette_score(df, kmeans.labels_))</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a DataFrame from the lists</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> pd.DataFrame({<span class="st">'Cluster'</span>: clus, <span class="st">'Distortion'</span>: distortions, <span class="st">'Inertia'</span>: inertias, <span class="st">'Silhouette Score'</span>: silhouette_scores})</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(results)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stderr">
-<pre><code>/Users/williammcgloin/anaconda3/lib/python3.10/site-packages/sklearn/cluster/_kmeans.py:870: FutureWarning: The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
-  warnings.warn(
-/Users/williammcgloin/anaconda3/lib/python3.10/site-packages/sklearn/cluster/_kmeans.py:870: FutureWarning: The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
-  warnings.warn(
-/Users/williammcgloin/anaconda3/lib/python3.10/site-packages/sklearn/cluster/_kmeans.py:870: FutureWarning: The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
-  warnings.warn(
-/Users/williammcgloin/anaconda3/lib/python3.10/site-packages/sklearn/cluster/_kmeans.py:870: FutureWarning: The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
-  warnings.warn(
-/Users/williammcgloin/anaconda3/lib/python3.10/site-packages/sklearn/cluster/_kmeans.py:870: FutureWarning: The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
-  warnings.warn(
-/Users/williammcgloin/anaconda3/lib/python3.10/site-packages/sklearn/cluster/_kmeans.py:870: FutureWarning: The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
-  warnings.warn(
-/Users/williammcgloin/anaconda3/lib/python3.10/site-packages/sklearn/cluster/_kmeans.py:870: FutureWarning: The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
-  warnings.warn(
-/Users/williammcgloin/anaconda3/lib/python3.10/site-packages/sklearn/cluster/_kmeans.py:870: FutureWarning: The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
-  warnings.warn(
-/Users/williammcgloin/anaconda3/lib/python3.10/site-packages/sklearn/cluster/_kmeans.py:870: FutureWarning: The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
-  warnings.warn(</code></pre>
+<pre><code>/Users/williammcgloin/anaconda3/lib/python3.10/site-packages/sklearn/cluster/_kmeans.py:870: FutureWarning:
+
+The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
+
+/Users/williammcgloin/anaconda3/lib/python3.10/site-packages/sklearn/cluster/_kmeans.py:870: FutureWarning:
+
+The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
+
+/Users/williammcgloin/anaconda3/lib/python3.10/site-packages/sklearn/cluster/_kmeans.py:870: FutureWarning:
+
+The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
+
+/Users/williammcgloin/anaconda3/lib/python3.10/site-packages/sklearn/cluster/_kmeans.py:870: FutureWarning:
+
+The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
+
+/Users/williammcgloin/anaconda3/lib/python3.10/site-packages/sklearn/cluster/_kmeans.py:870: FutureWarning:
+
+The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
+
+/Users/williammcgloin/anaconda3/lib/python3.10/site-packages/sklearn/cluster/_kmeans.py:870: FutureWarning:
+
+The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
+
+/Users/williammcgloin/anaconda3/lib/python3.10/site-packages/sklearn/cluster/_kmeans.py:870: FutureWarning:
+
+The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
+
+/Users/williammcgloin/anaconda3/lib/python3.10/site-packages/sklearn/cluster/_kmeans.py:870: FutureWarning:
+
+The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
+
+/Users/williammcgloin/anaconda3/lib/python3.10/site-packages/sklearn/cluster/_kmeans.py:870: FutureWarning:
+
+The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
+</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Cluster  Distortion        Inertia  Silhouette Score
@@ -377,77 +363,104 @@ K-Means clustering is not just about sorting data; it's a powerful tool for reve
 8       10    4.698719   75156.752577          0.386414</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="11">
+<p>Among the tested cluster counts (2 to 10), the silhouette score, a measure of cluster quality, is highest when there are three clusters. A silhouette score close to 1 indicates well-separated clusters. In this case, the silhouette score peaks at three clusters, suggesting that the data is most naturally organized into this number of distinct groups. This finding signifies a meaningful and clear grouping in the data, enabling better understanding and interpretation of underlying patterns. <br><br> The subsequent block of code generates three plots: one for distortion, one for inertia, and one for the silhouette score. Each plot has the number of clusters on the x-axis and the corresponding metric on the y-axis. These visualizations help interpret the results, allowing for the identification of trends and patterns.</p>
+<div class="cell" data-execution_count="39">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot distortion and inertia for kmeans, you can either plot them seperately or use fig, ax = plt.subplots(1, 2) to plot them in the same figure. Suggest the optimal number of clusters based on the plot.</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Create subplots with 1 row and 3 columns</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">3</span>, figsize<span class="op">=</span>(<span class="dv">18</span>, <span class="dv">4</span>))</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot Distortion</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].plot(results[<span class="st">'Cluster'</span>], results[<span class="st">'Distortion'</span>], marker<span class="op">=</span><span class="st">'o'</span>)</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_title(<span class="st">'Distortion'</span>)</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_xlabel(<span class="st">'Cluster'</span>)</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_ylabel(<span class="st">'Distortion'</span>)</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot Inertia</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].plot(results[<span class="st">'Cluster'</span>], results[<span class="st">'Inertia'</span>], marker<span class="op">=</span><span class="st">'o'</span>)</span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].set_title(<span class="st">'Inertia'</span>)</span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].set_xlabel(<span class="st">'Cluster'</span>)</span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].set_ylabel(<span class="st">'Inertia'</span>)</span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot Silhouette Score</span></span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">2</span>].plot(results[<span class="st">'Cluster'</span>], results[<span class="st">'Silhouette Score'</span>], marker<span class="op">=</span><span class="st">'o'</span>)</span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">2</span>].set_title(<span class="st">'Silhouette Score'</span>)</span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">2</span>].set_xlabel(<span class="st">'Cluster'</span>)</span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">2</span>].set_ylabel(<span class="st">'Silhouette Score'</span>)</span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the side-by-side plots</span></span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create subplots with 1 row and 3 columns</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">3</span>, figsize<span class="op">=</span>(<span class="dv">18</span>, <span class="dv">4</span>))</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot Distortion</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].plot(results[<span class="st">'Cluster'</span>], results[<span class="st">'Distortion'</span>], marker<span class="op">=</span><span class="st">'o'</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_title(<span class="st">'Distortion'</span>)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_xlabel(<span class="st">'Cluster'</span>)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_ylabel(<span class="st">'Distortion'</span>)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot Inertia</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].plot(results[<span class="st">'Cluster'</span>], results[<span class="st">'Inertia'</span>], marker<span class="op">=</span><span class="st">'o'</span>)</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].set_title(<span class="st">'Inertia'</span>)</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].set_xlabel(<span class="st">'Cluster'</span>)</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].set_ylabel(<span class="st">'Inertia'</span>)</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot Silhouette Score</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">2</span>].plot(results[<span class="st">'Cluster'</span>], results[<span class="st">'Silhouette Score'</span>], marker<span class="op">=</span><span class="st">'o'</span>)</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">2</span>].set_title(<span class="st">'Silhouette Score'</span>)</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">2</span>].set_xlabel(<span class="st">'Cluster'</span>)</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">2</span>].set_ylabel(<span class="st">'Silhouette Score'</span>)</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the side-by-side plots</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <p><img src="clustering_files/figure-html/cell-5-output-1.png" class="img-fluid"></p>
 </div>
 </div>
-<p>jorge: add 3 is good empirically using elbow method and silhouette score method also says that so seems constant.</p>
-</section>
-<section id="dbscan-1" class="level1">
-<h1>DBSCAN</h1>
-<div class="cell" data-execution_count="12">
+<p>The analysis of the graphs and results indicates that opting for 3 clusters is appropriate. The elbow and silhouette score methods suggest that this choice effectively captures meaningful patterns within the data. Having 3 clusters strikes a balance between simplicity and preserving relevant information. The subsequent 3D scatter plot visually represents the clustered data points in a three-dimensional space, offering a comprehensive view of the results.</p>
+<div class="cell" data-execution_count="34">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># perform DBSCAN clustering. use the eps and min_samples parameters to find the optimal number of clusters. plot the number of clusters vs the silhouette score. Suggest the optimal number of clusters based on the plot.</span></span>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>pca_result <span class="op">=</span> pd.read_csv(<span class="st">'./data/modified_data/nova_pca.csv'</span>)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>best_scores <span class="op">=</span> []</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>eps <span class="op">=</span> []</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>clus <span class="op">=</span> []</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>z1 <span class="op">=</span> [i <span class="op">/</span> <span class="dv">10</span> <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">5</span>, <span class="dv">20</span>)]</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>z2 <span class="op">=</span> <span class="bu">range</span>(<span class="dv">2</span>, <span class="dv">10</span>) <span class="co"># explain why 2 to 10 or just do 1 to 10 but then u have to fix smth in the code if i dont remember wrong. i suggest explaining is a common assumption to do here</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> z1:</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    max_score <span class="op">=</span> <span class="op">-</span><span class="dv">1</span></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    best_cluster <span class="op">=</span> <span class="op">-</span><span class="dv">1</span></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    best_eps <span class="op">=</span> <span class="op">-</span><span class="dv">1</span></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> j <span class="kw">in</span> z2:</span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>        model <span class="op">=</span> DBSCAN(eps<span class="op">=</span>i, min_samples<span class="op">=</span>j)</span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>        predics <span class="op">=</span> model.fit_predict(df)</span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>        num_clusters <span class="op">=</span> <span class="bu">len</span>(pd.Series(predics).unique())</span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> num_clusters <span class="op">&gt;</span> <span class="dv">1</span>:</span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>            score <span class="op">=</span> silhouette_score(df, predics)</span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> score <span class="op">&gt;</span> max_score:</span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>                max_score <span class="op">=</span> score</span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>                best_cluster <span class="op">=</span> num_clusters</span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>                best_eps <span class="op">=</span> i</span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>    best_scores.append(max_score)</span>
-<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>    clus.append(best_cluster)</span>
-<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>    eps.append(best_eps)</span>
-<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>df1 <span class="op">=</span> pd.DataFrame({<span class="st">'Epsilons'</span>: eps, <span class="st">'Best_Clusters'</span>: clus, <span class="st">'Best_Silhouette'</span>: best_scores})</span>
-<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df1.sort_values(by<span class="op">=</span><span class="st">"Best_Silhouette"</span>, ascending<span class="op">=</span><span class="va">False</span>))</span>
-<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>sns.lineplot(data<span class="op">=</span>df1, x<span class="op">=</span><span class="st">'Best_Clusters'</span>,y<span class="op">=</span><span class="st">'Best_Silhouette'</span>)</span>
-<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Assuming pca_result has columns '0', '1', and '2'</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> px.scatter_3d(pca_result, x<span class="op">=</span><span class="st">'0'</span>, y<span class="op">=</span><span class="st">'1'</span>, z<span class="op">=</span><span class="st">'2'</span>, color<span class="op">=</span>labels, symbol<span class="op">=</span>labels, opacity<span class="op">=</span><span class="fl">0.7</span>,</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>                    size_max<span class="op">=</span><span class="dv">10</span>, title<span class="op">=</span><span class="st">'3D Scatter Plot of PC1, PC2, and PC3 with Cluster Labels'</span>,</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>                    labels<span class="op">=</span>{<span class="st">'0'</span>: <span class="st">'Principal Component 1 (PC1)'</span>,</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>                            <span class="st">'1'</span>: <span class="st">'Principal Component 2 (PC2)'</span>,</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>                            <span class="st">'2'</span>: <span class="st">'Principal Component 3 (PC3)'</span>,</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>                            <span class="st">'color'</span>: <span class="st">'Cluster'</span>},</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>                    )</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>fig.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<pre><code>Unable to display output for mime type(s): application/vnd.plotly.v1+json</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="dbscan" class="level1">
+<h1>DBSCAN</h1>
+<section id="theory-1" class="level3">
+<h3 class="anchored" data-anchor-id="theory-1">Theory</h3>
+<p>DBSCAN, or Density-Based Spatial Clustering of Applications with Noise, is a robust clustering algorithm that distinguishes clusters based on the density of data points, incorporating both distance metrics and a minimum number of points. Unlike K-Means, DBSCAN doesn’t require users to specify the number of clusters (‘k’) in advance; instead, it dynamically identifies clusters by expanding neighborhoods around data points. <br><br> The algorithm starts by randomly selecting and expanding a neighborhood around a data point. If the density within this neighborhood is sufficient, a cluster is formed, and the process iterates until no more data points can be added. Outliers are identified as points in low-density regions. DBSCAN’s strength lies in its ability to uncover clusters of arbitrary shapes and sizes, making it particularly valuable for datasets where the number of clusters is unknown. <br><br> DBSCAN requires two key parameters: epsilon (ε) and minimum samples. Epsilon defines the maximum distance between two points for them to be considered in the same cluster, while minimum samples specify the minimum number of points required in each cluster. Experimentation is often needed to find optimal parameters, as the algorithm’s outcome is sensitive to these choices. <br><br> In summary, DBSCAN offers a unique approach to clustering, emphasizing data density over distances to centroids. Its flexibility in identifying clusters of varying shapes and the ability to mark outliers enhances its effectiveness in exploring complex datasets. Implementation through sklearn’s DBSCAN module provides a practical means to apply this algorithm to diverse datasets.</p>
+</section>
+<section id="implementation-1" class="level3">
+<h3 class="anchored" data-anchor-id="implementation-1">Implementation</h3>
+<p>The below code performs an exhaustive search for optimal parameters (epsilon and minimum samples) for the DBSCAN algorithm. It calculates silhouette scores for different combinations of epsilon values (z1) and minimum sample sizes (z2), aiming to identify the best configuration that yields the highest silhouette score and the corresponding number of clusters. The resulting dataframe, df1, is then printed and visualized with a line plot.</p>
+<div class="cell" data-execution_count="35">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>best_scores <span class="op">=</span> []</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>eps <span class="op">=</span> []</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>clus <span class="op">=</span> []</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>z1 <span class="op">=</span> [i <span class="op">/</span> <span class="dv">10</span> <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">5</span>, <span class="dv">20</span>)]</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>z2 <span class="op">=</span> <span class="bu">range</span>(<span class="dv">2</span>, <span class="dv">10</span>) <span class="co"># explain why 2 to 10 or just do 1 to 10 but then u have to fix smth in the code if i dont remember wrong. i suggest explaining is a common assumption to do here</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> z1:</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    max_score <span class="op">=</span> <span class="op">-</span><span class="dv">1</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    best_cluster <span class="op">=</span> <span class="op">-</span><span class="dv">1</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    best_eps <span class="op">=</span> <span class="op">-</span><span class="dv">1</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> j <span class="kw">in</span> z2:</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>        model <span class="op">=</span> DBSCAN(eps<span class="op">=</span>i, min_samples<span class="op">=</span>j)</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>        predics <span class="op">=</span> model.fit_predict(df)</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>        num_clusters <span class="op">=</span> <span class="bu">len</span>(pd.Series(predics).unique())</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> num_clusters <span class="op">&gt;</span> <span class="dv">1</span>:</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>            score <span class="op">=</span> silhouette_score(df, predics)</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> score <span class="op">&gt;</span> max_score:</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>                max_score <span class="op">=</span> score</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>                best_cluster <span class="op">=</span> num_clusters</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>                best_eps <span class="op">=</span> i</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>    best_scores.append(max_score)</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>    clus.append(best_cluster)</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>    eps.append(best_eps)</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>df1 <span class="op">=</span> pd.DataFrame({<span class="st">'Epsilons'</span>: eps, <span class="st">'Best_Clusters'</span>: clus, <span class="st">'Best_Silhouette'</span>: best_scores})</span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df1.sort_values(by<span class="op">=</span><span class="st">"Best_Silhouette"</span>, ascending<span class="op">=</span><span class="va">False</span>))</span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>sns.lineplot(data<span class="op">=</span>df1, x<span class="op">=</span><span class="st">'Best_Clusters'</span>,y<span class="op">=</span><span class="st">'Best_Silhouette'</span>)</span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>    Epsilons  Best_Clusters  Best_Silhouette
@@ -468,123 +481,126 @@ K-Means clustering is not just about sorting data; it's a powerful tool for reve
 14       1.9             22        -0.117656</code></pre>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="clustering_files/figure-html/cell-6-output-2.png" class="img-fluid"></p>
+<p><img src="clustering_files/figure-html/cell-7-output-2.png" class="img-fluid"></p>
 </div>
 </div>
-<p>from this i can infer that there are no clear clusters as the best silhouette score have over 500 clusters.</p>
-<p>jorge: Say that maybe is due to that this clustering method is not suitable for this type of data and that u will confirm with hierarchical and plots with t-sne</p>
+<p>The results suggest that varying epsilon values from 0.5 to 0.9 consistently yield a high number of clusters (595) with a low silhouette score (0.065783). This pattern persists, indicating that DBSCAN struggles to identify distinct clusters, possibly due to the nature of the data. The diminishing silhouette scores as epsilon increases, coupled with the large number of clusters, may imply that this clustering method is not well-suited for the dataset. To validate this observation, hierarchical clustering and visualization through T-SNE plots will be explored for further confirmation.</p>
+</section>
 </section>
 <section id="hierarchical-clustering-agglomerative-clustering" class="level1">
 <h1>Hierarchical Clustering (Agglomerative Clustering)</h1>
-<div class="cell" data-execution_count="14">
+<section id="theory-2" class="level3">
+<h3 class="anchored" data-anchor-id="theory-2">Theory</h3>
+<p>Hierarchical Clustering, also known as Agglomerative Clustering, is a versatile algorithm that builds a hierarchy of clusters without the need to predefine the number of clusters. It treats each data point individually and progressively merges the closest clusters until forming a single cluster, using methods like Ward’s method to calculate distances. The resulting linkage matrix constructs a dendrogram, enabling visualization of clustering hierarchy and facilitating the choice of cluster count. Normalizing input data is crucial for meaningful results, and the choice of linkage method, such as ward linkage, influences cluster formation. <br><br> Hierarchical Clustering focuses on finding clusters based on distance, repeatedly finding the two closest points and forming clusters until all points are assigned. The algorithm is sensitive to distance, requiring multiple runs with different distance values, and scaling the dataset to mitigate outlier effects. This method’s adaptability and visualization through a dendrogram make it valuable for exploring data structures.</p>
+</section>
+<section id="implementation-2" class="level3">
+<h3 class="anchored" data-anchor-id="implementation-2">Implementation</h3>
+<div class="cell" data-execution_count="36">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.cluster.hierarchy <span class="im">import</span> dendrogram, linkage</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> AgglomerativeClustering</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>hierarchical_cluster <span class="op">=</span> AgglomerativeClustering(n_clusters<span class="op">=</span><span class="dv">3</span>, affinity<span class="op">=</span><span class="st">'euclidean'</span>, linkage<span class="op">=</span><span class="st">'ward'</span>) <span class="co">#chose 3 as that is the number of species. We could have changed it.</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>labels <span class="op">=</span> hierarchical_cluster.fit_predict(df)</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Cluster Labels total:"</span>)</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">list</span>(<span class="bu">set</span>(labels)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.cluster.hierarchy <span class="im">import</span> dendrogram, linkage</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> AgglomerativeClustering</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>hierarchical_cluster <span class="op">=</span> AgglomerativeClustering(n_clusters<span class="op">=</span><span class="dv">3</span>, affinity<span class="op">=</span><span class="st">'euclidean'</span>, linkage<span class="op">=</span><span class="st">'ward'</span>) <span class="co">#chose 3 as that is the number of species. We could have changed it.</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>labels <span class="op">=</span> hierarchical_cluster.fit_predict(df)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Cluster Labels total:"</span>)</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">list</span>(<span class="bu">set</span>(labels)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Cluster Labels total:
 [0, 1, 2]</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>/Users/williammcgloin/anaconda3/lib/python3.10/site-packages/sklearn/cluster/_agglomerative.py:983: FutureWarning: Attribute `affinity` was deprecated in version 1.2 and will be removed in 1.4. Use `metric` instead
-  warnings.warn(</code></pre>
+<pre><code>/Users/williammcgloin/anaconda3/lib/python3.10/site-packages/sklearn/cluster/_agglomerative.py:983: FutureWarning:
+
+Attribute `affinity` was deprecated in version 1.2 and will be removed in 1.4. Use `metric` instead
+</code></pre>
 </div>
 </div>
-<p>Plot the clusters for Agglomerative Clustering</p>
-<div class="cell" data-execution_count="15">
+<p>Let’s generates a dendrogram for Agglomerative Clustering, visualizing the hierarchical linkage between data points.</p>
+<div class="cell" data-execution_count="37">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create linkage for agglomerative clustering, and the dendrogram for the linkage. Suggest the optimal number of clusters based on the dendrogram.</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>linkage_matrix <span class="op">=</span> linkage(df, method<span class="op">=</span><span class="st">'ward'</span>)</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">5</span>))</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>dendrogram(linkage_matrix, orientation<span class="op">=</span><span class="st">'top'</span>, labels<span class="op">=</span>labels, distance_sort<span class="op">=</span><span class="st">'ascending'</span>, show_leaf_counts<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create linkage for agglomerative clustering, and the dendrogram for the linkage. Suggest the optimal number of clusters based on the dendrogram.</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>linkage_matrix <span class="op">=</span> linkage(df, method<span class="op">=</span><span class="st">'ward'</span>)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">5</span>))</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>dendrogram(linkage_matrix, orientation<span class="op">=</span><span class="st">'top'</span>, labels<span class="op">=</span>labels, distance_sort<span class="op">=</span><span class="st">'ascending'</span>, show_leaf_counts<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<p><img src="clustering_files/figure-html/cell-8-output-1.png" class="img-fluid"></p>
+<p><img src="clustering_files/figure-html/cell-9-output-1.png" class="img-fluid"></p>
 </div>
 </div>
-<div class="cell" data-execution_count="17">
+<p>The below code defines a function that performs hierarchical clustering on input data, varying the number of clusters. It calculates silhouette scores for each clustering iteration and outputs the optimal number of clusters that maximizes the silhouette score, in addition to plotting a graph showing how the silhouette score changes with different cluster numbers. The last lines of code apply this function to the data.</p>
+<div class="cell" data-execution_count="38">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> AgglomerativeClustering</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> silhouette_score</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sklearn.cluster</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> maximize_silhouette(X, algo<span class="op">=</span><span class="st">"ag"</span>, nmax<span class="op">=</span><span class="va">None</span>, i_plot<span class="op">=</span><span class="va">False</span>):</span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># PARAM</span></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    i_print <span class="op">=</span> <span class="va">False</span></span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># FORCE CONTIGUOUS</span></span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>    X <span class="op">=</span> np.ascontiguousarray(X)</span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># LOOP OVER HYPER-PARAM</span></span>
-<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>    params <span class="op">=</span> []</span>
-<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>    sil_scores <span class="op">=</span> []</span>
-<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>    sil_max <span class="op">=</span> <span class="op">-</span><span class="dv">10</span></span>
-<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> param <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2</span>, nmax <span class="op">+</span> <span class="dv">1</span>):</span>
-<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> algo <span class="op">==</span> <span class="st">"ag"</span>:</span>
-<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>            model <span class="op">=</span> AgglomerativeClustering(n_clusters<span class="op">=</span>param).fit(X)</span>
-<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>            labels <span class="op">=</span> model.labels_</span>
-<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>            </span>
-<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>            <span class="cf">try</span>:</span>
-<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>                sil_scores.append(silhouette_score(X, labels))</span>
-<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>                params.append(param)</span>
-<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>            <span class="cf">except</span> <span class="pp">ValueError</span>:</span>
-<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>                <span class="cf">continue</span></span>
-<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> i_print:</span>
-<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a>                <span class="bu">print</span>(param, sil_scores[<span class="op">-</span><span class="dv">1</span>])</span>
-<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> sil_scores[<span class="op">-</span><span class="dv">1</span>] <span class="op">&gt;</span> sil_max:</span>
-<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a>                opt_param <span class="op">=</span> param</span>
-<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a>                sil_max <span class="op">=</span> sil_scores[<span class="op">-</span><span class="dv">1</span>]</span>
-<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a>                opt_labels <span class="op">=</span> labels</span>
-<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Maximum Silhouette score ="</span>, sil_max)</span>
-<span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"OPTIMAL CLUSTERS (btwn 2-10) ="</span>, opt_param)</span>
-<span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-41"><a href="#cb13-41" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> i_plot:</span>
-<span id="cb13-42"><a href="#cb13-42" aria-hidden="true" tabindex="-1"></a>        fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb13-43"><a href="#cb13-43" aria-hidden="true" tabindex="-1"></a>        ax.plot(params, sil_scores, <span class="st">"-o"</span>)</span>
-<span id="cb13-44"><a href="#cb13-44" aria-hidden="true" tabindex="-1"></a>        ax.<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">'Hyper-parameter'</span>, ylabel<span class="op">=</span><span class="st">'Silhouette'</span>)</span>
-<span id="cb13-45"><a href="#cb13-45" aria-hidden="true" tabindex="-1"></a>        plt.show()</span>
-<span id="cb13-46"><a href="#cb13-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-47"><a href="#cb13-47" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> opt_labels</span>
-<span id="cb13-48"><a href="#cb13-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-49"><a href="#cb13-49" aria-hidden="true" tabindex="-1"></a><span class="co"># Example usage:</span></span>
-<span id="cb13-50"><a href="#cb13-50" aria-hidden="true" tabindex="-1"></a>opt_labels <span class="op">=</span> maximize_silhouette(df, algo<span class="op">=</span><span class="st">"ag"</span>, nmax<span class="op">=</span><span class="dv">10</span>, i_plot<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> AgglomerativeClustering</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> silhouette_score</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sklearn.cluster</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> maximize_silhouette(X, algo<span class="op">=</span><span class="st">"ag"</span>, nmax<span class="op">=</span><span class="va">None</span>, i_plot<span class="op">=</span><span class="va">False</span>):</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># PARAM</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    i_print <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># FORCE CONTIGUOUS</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>    X <span class="op">=</span> np.ascontiguousarray(X)</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># LOOP OVER HYPER-PARAM</span></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>    params <span class="op">=</span> []</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>    sil_scores <span class="op">=</span> []</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>    sil_max <span class="op">=</span> <span class="op">-</span><span class="dv">10</span></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> param <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2</span>, nmax <span class="op">+</span> <span class="dv">1</span>):</span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> algo <span class="op">==</span> <span class="st">"ag"</span>:</span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>            model <span class="op">=</span> AgglomerativeClustering(n_clusters<span class="op">=</span>param).fit(X)</span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>            labels <span class="op">=</span> model.labels_</span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>            <span class="cf">try</span>:</span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>                sil_scores.append(silhouette_score(X, labels))</span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>                params.append(param)</span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a>            <span class="cf">except</span> <span class="pp">ValueError</span>:</span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a>                <span class="cf">continue</span></span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> i_print:</span>
+<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a>                <span class="bu">print</span>(param, sil_scores[<span class="op">-</span><span class="dv">1</span>])</span>
+<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> sil_scores[<span class="op">-</span><span class="dv">1</span>] <span class="op">&gt;</span> sil_max:</span>
+<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a>                opt_param <span class="op">=</span> param</span>
+<span id="cb15-35"><a href="#cb15-35" aria-hidden="true" tabindex="-1"></a>                sil_max <span class="op">=</span> sil_scores[<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb15-36"><a href="#cb15-36" aria-hidden="true" tabindex="-1"></a>                opt_labels <span class="op">=</span> labels</span>
+<span id="cb15-37"><a href="#cb15-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-38"><a href="#cb15-38" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Maximum Silhouette score ="</span>, sil_max)</span>
+<span id="cb15-39"><a href="#cb15-39" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"OPTIMAL CLUSTERS (btwn 2-10) ="</span>, opt_param)</span>
+<span id="cb15-40"><a href="#cb15-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-41"><a href="#cb15-41" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> i_plot:</span>
+<span id="cb15-42"><a href="#cb15-42" aria-hidden="true" tabindex="-1"></a>        fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb15-43"><a href="#cb15-43" aria-hidden="true" tabindex="-1"></a>        ax.plot(params, sil_scores, <span class="st">"-o"</span>)</span>
+<span id="cb15-44"><a href="#cb15-44" aria-hidden="true" tabindex="-1"></a>        ax.<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">'Hyper-parameter'</span>, ylabel<span class="op">=</span><span class="st">'Silhouette'</span>)</span>
+<span id="cb15-45"><a href="#cb15-45" aria-hidden="true" tabindex="-1"></a>        plt.show()</span>
+<span id="cb15-46"><a href="#cb15-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-47"><a href="#cb15-47" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> opt_labels</span>
+<span id="cb15-48"><a href="#cb15-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-49"><a href="#cb15-49" aria-hidden="true" tabindex="-1"></a><span class="co"># Example usage:</span></span>
+<span id="cb15-50"><a href="#cb15-50" aria-hidden="true" tabindex="-1"></a>opt_labels <span class="op">=</span> maximize_silhouette(df, algo<span class="op">=</span><span class="st">"ag"</span>, nmax<span class="op">=</span><span class="dv">10</span>, i_plot<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Maximum Silhouette score = 0.3971383731982046
 OPTIMAL CLUSTERS (btwn 2-10) = 3</code></pre>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="clustering_files/figure-html/cell-9-output-2.png" class="img-fluid"></p>
+<p><img src="clustering_files/figure-html/cell-10-output-2.png" class="img-fluid"></p>
 </div>
 </div>
+<p>The results from the code suggest that, within the considered range of 2 to 10 clusters, the maximum silhouette score for agglomerative clustering is achieved at 3 clusters, indicating it as the optimal number of clusters. This aligns with the observed trend in K-Means clustering, where both methods highlight 3 clusters as optimal based on the silhouette score.</p>
 </section>
-<section id="results" class="level1">
-<h1>Results</h1>
-<p>discuss, illustrate, and compare the results of your various clustering analysis methods. Additionally, answer questions on hw page</p>
 </section>
 <section id="conclusions" class="level1">
 <h1>Conclusions</h1>
-<p>summarize and wrap up the report. This is non-technical and should focus on key and important findings and how these findings affect real-life and real people.</p>
-</section>
-<section id="references" class="level1">
-<h1>References</h1>
-<p>ideally use .bibtex to provide in-line citations</p>
+<p>The analysis using K-Means and hierarchical clustering both implied the presence of three clusters within the dataset, providing a consistent pattern. However, DBSCAN did not seem well-suited for this dataset, suggesting varying performance across clustering methods. This indicates the potential for meaningful clustering, and further exploration in the Dimensionality Reduction tab may unveil clearer insights into the distinctive patterns within the data.</p>
 </section>
 <section id="extra-joke" class="level1">
 <h1>Extra Joke</h1>
