@@ -30,14 +30,8 @@ website:
           text: Clustering
         - href: dimensionality-reduction.qmd
           text: Dimensionality Reduction
-        - href: decision-trees.qmd
+        - href: decision-trees.ipynb
           text: Decision Trees
-        - href: classification.qmd
-          text: Classification
-        - href: regression.qmd
-          text: Regression
-        - href: arm.qmd
-          text: ARM
         - href: conclusions.qmd
           text: Conclusions
 

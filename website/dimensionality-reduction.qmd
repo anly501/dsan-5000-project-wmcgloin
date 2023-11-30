@@ -86,8 +86,15 @@ nova_features = nova[feature_columns].copy()
 target_column = ['shot_outcome_numeric']
 nova_target = nova[target_column].copy()
 
+all_columns = ['shot_value', 'field_goal_percentage', 'lag1', 'home_crowd', 'score_diff', 'game_num', 'shot_outcome_numeric']
+nova_final = nova[all_columns].copy()
+
 # save feature_columns to csv for clustering
 nova_features.to_csv('./data/modified_data/nova_features.csv', index=False)
+
+# save nova_final to csv for decision trees
+nova_final.to_csv('./data/modified_data/nova_final.csv', index=False)
+
 
 nova_features.info()
 ```
