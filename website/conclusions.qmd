@@ -5,7 +5,7 @@ format: html
 
 # Introduction to the Hot Hand Phenomenon:
 
-In the dynamic realm of sports, the concepts of a "hot hand" or being "in the zone" have become ubiquitous, often used to describe a player's extraordinary performance streak. Originating in basketball, the term suggests that a player on a successful streak is more likely to continue their success. This belief, rooted in the increased confidence of the player, extends beyond basketball, finding resonance in baseball and other fields. Despite its prevalence, statistical evidence supporting the existence of the hot hand is scarce, with numerous studies suggesting it as a fallacy. This project embarks on an exploration within the sports domain to scrutinize the mystery of streaks.
+In the dynamic realm of sports, the concepts of a "hot hand" or being "in the zone" have become ubiquitous, often used to describe a player's extraordinary performance streak. Originating in basketball, the term suggests that a player on a successful streak is more likely to continue their success. This belief, rooted in the increased confidence of the player, extends beyond basketball, finding resonance in baseball and other fields. Despite its prevalence, statistical evidence supporting the existence of the hot hand is scarce, with numerous studies suggesting it is a fallacy. This project embarks on an exploration within the sports domain to scrutinize the mystery of streaks.
 
 # Diverse Dataset Exploration:
 
