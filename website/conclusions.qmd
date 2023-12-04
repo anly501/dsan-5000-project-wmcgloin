@@ -1,6 +1,16 @@
 ---
-title: "Conclusions"
+title: "Conclusion"
 format: html
 ---
+
+# The Hot Hand: A Fallacy
+
+Throughout the semester, my exploration of the hot hand phenomenon aimed to uncover whether past success could serve as a predictor for future success. Employing diverse datasets—NCAA basketball data in R, news text data in Python, and baseball data from an R package and FanGraphs—I navigated through distinct scales of sports data, from play-by-play to game-by-game. The cleaning processes varied, providing a foundation for Exploratory Data Analysis (EDA) to refine our hypotheses and delineate our investigative path.
+
+Despite promising signals in the EDA phase suggesting the existence of the hot hand phenomenon, our Naive Bayes model, designed to predict made or missed shots using a lag variable, performed on par with random guessing. For both the clustering analysis and dimensionality reduction, the NCAA shot data required the addition of numerous numerical columns such as shot value, score differential, and game number. Although successful in reducing dimensions while preserving information, this approach did not yield a conclusive answer regarding the existence of data clusters.
+
+Transitioning to decision trees and random forests, the models displayed improved accuracy in predicting shot outcomes, predominantly relying on variables such as shot value (previous shots were not an indicitave factor). No evidence found substantiated the existence of the hot hand. As I look forward, I plan to revisit this project with additional datasets, including Major League Baseball at-bat data with launch speed and angle, which may offer more robust indicators of success. Once armed with a deeper understanding of time-series data and various machine learning algorithms, I am eager to revisit the topic, acknowledging the limitations of predominantly NCAA shot data in confirming the hot hand fallacy. My findings align with previous research, reinforcing the notion that the hot hand remains a fallacy.
+
+# Extra Joke
 
 Why did the conclusion take a break? Because it needed some time to 'sum up' its thoughts!

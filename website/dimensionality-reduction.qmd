@@ -13,12 +13,10 @@ This study delves into Villanova's 2021-22 season NCAA shot data, spotlighting s
 
 # Dimensionality Reduction with PCA
 
-Principal Component Analysis (PCA) is a valuable machine learning technique used to simplify large datasets by reducing their dimensionality. The primary goal is to decrease the number of variables while retaining crucial information.
-<br></br>
-Five Key Steps in PCA:
+Principal Component Analysis (PCA) is a valuable machine learning technique used to simplify large datasets by reducing their dimensionality. The primary goal is to decrease the number of variables while retaining crucial information. Explore the PCA process as I walk you through my code and showcase the corresponding output below.
 <br></br>
 
-### Step 0. Load in relevant libraries and data
+### Load in relevant libraries and data
 
 ```{python}
 import pandas as pd
@@ -99,7 +97,7 @@ nova_final.to_csv('./data/modified_data/nova_final.csv', index=False)
 nova_features.info()
 ```
 
-### Step 1. Standardization
+### Standardization
 
 Normalize data to have a mean of 0 and a standard deviation of 1.
 
@@ -109,7 +107,7 @@ scaler = StandardScaler()
 nova_features_standardized = scaler.fit_transform(nova_features)
 ```
 
-### Step 2. Covariance Matrix Computation
+### Covariance Matrix Computation
 
 Calculate the covariance matrix to understand variable relationships.
 
@@ -119,7 +117,7 @@ co_ma = np.cov(nova_features_standardized, rowvar=False)
 print(co_ma)
 ```
 
-### Step 3. Computing Eigenvectors and Eigenvalues
+### Computing Eigenvectors and Eigenvalues
 
 Identify principal components using eigenvectors and eigenvalues.
 
@@ -132,7 +130,7 @@ print("\nEigenvectors\n","----------------------")
 print(eigenvectors)
 ```
 
-### Step 4. Feature Vectors
+### Feature Vectors
 
 Select eigenvectors as new feature vectors.
 
@@ -144,7 +142,7 @@ sorted_index = np.argsort(eigenvalues)[::-1]
 sorted_eigenvalue = eigenvalues[sorted_index]
 ```
 
-### Step 5. Recasting Data Among Principal Component Axis
+### Recasting Data Among Principal Component Axis
 
 Transform data using chosen principal components.
 

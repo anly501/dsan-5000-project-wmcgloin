@@ -48,6 +48,9 @@ import random
 The below code performs K-Means clustering for different numbers of clusters (ranging from 2 to 10). For each cluster number, it calculates and stores the distortion, which measures the average Euclidean distance between each data point and its assigned cluster center. Inertia is also computed and stored, representing the sum of squared distances of data points to their closest cluster center. Additionally, the silhouette score is determined and recorded, offering insights into how well-defined and separated the clusters are. The results, encompassing these crucial metrics—distortion, inertia, and silhouette score—are then organized into a DataFrame for detailed analysis and printed. This is in an attempt to identify the optimal number of clusters based on a comprehensive evaluation of these key clustering indicators.
 
 ```{python}
+import warnings
+warnings.filterwarnings('ignore')
+
 # Create empty lists to store the results
 clus = []
 distortions = []

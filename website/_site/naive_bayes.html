@@ -138,7 +138,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="dropdown-text">Code</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./data.html" rel="" target="">
+    <a class="dropdown-item" href="https://github.com/anly501/dsan-5000-project-wmcgloin/tree/main/website/data" rel="" target="_blank">
  <span class="dropdown-text">Data</span></a>
   </li>  
         <li>
@@ -172,18 +172,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li>
     <a class="dropdown-item" href="./decision-trees.html" rel="" target="">
  <span class="dropdown-text">Decision Trees</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./classification.html" rel="" target="">
- <span class="dropdown-text">Classification</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./regression.html" rel="" target="">
- <span class="dropdown-text">Regression</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./arm.html" rel="" target="">
- <span class="dropdown-text">ARM</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./conclusions.html" rel="" target="">
@@ -244,7 +232,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<p><b>*Disclaimer - this section is a work in progress</b> <br><br> Please be aware that this page contains both Python and R code, thus you should avoid running the source code all at once.</p>
+<p>Please be aware that this page contains both Python and R code, thus you should avoid running the source code all at once.</p>
 <section id="introduction-to-naive-bayes" class="level1">
 <h1>Introduction to Naive Bayes</h1>
 <p>Naive Bayes, a widely acclaimed machine learning algorithm, harnesses Bayes’ Theorem to categorize data into predefined classes or categories. Praised for its simplicity, swift training capabilities, and robust performance, it stands as a foundational tool in data science. At its core, Bayes’ Theorem calculates the probability of event A given the occurrence of event B, expressed as: <span class="math display">\[P(A|B) = \frac{P(B|A) \cdot P(A)}{P(B)}\]</span> Naive Bayes accomplishes classifications by leveraging feature vectors and the principles of Bayes’ Theorem to assess values. The ‘naive’ label in its name stems from its assumption of independence among predictors, simplifying computational tasks. This algorithm excels in contexts featuring text and categorical data, such as in applications like spam email identification, sentiment analysis, and document categorization. Despite its seemingly ‘naive’ premise, Naive Bayes consistently delivers impressive real-world performance, making it a crucial tool for various data science classification tasks. <br><br> Common varients of Naive Bayes include Multinomial, Guassian, and Bernoulli Naive Bayes. Multinomial Naive Bayes is the most common variant and is often used for text classification. Gaussian Naive Bayes is appropriate for continuous numerical data, while Bernoulli Naive Bayes is a derivation of Multinomial Naive Bayes that is appropriate for binary or boolean data. <br><br> The purpose of this page is to implement Naïve Bayes classification on a variety of datasets, some of which may be more for suitable than others for this method. This work is a component of my DSAN 5000 class project.</p>
@@ -255,18 +243,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="ncaa-data" class="level3">
 <h3 class="anchored" data-anchor-id="ncaa-data">NCAA Data</h3>
 <div class="cell" data-execution_count="9">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#here we are using R</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#let's read in the dataset</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>nova2122 <span class="op">&lt;-</span> read.csv(<span class="st">'./data/modified_data/nova2122_updated.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <div class="cell" data-execution_count="10">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load relevant libraries</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>library(tidyverse)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>library(caret)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <div class="cell" data-execution_count="11">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#let's take another look at the dataset</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">str</span>(nova2122)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>'data.frame':   5399 obs. of  15 variables:
  $ game_id             : int  401365747 401365747 401365747 401365747 401365747 401365747 401365747 401365747 401365747 401365747 ...
@@ -287,6 +284,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div class="cell" data-execution_count="12">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># changing columns to become a factor</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>nova2122$lag1 <span class="op">&lt;-</span> <span class="im">as</span>.factor(nova2122$lag1)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>nova2122$lag2 <span class="op">&lt;-</span> <span class="im">as</span>.factor(nova2122$lag2)</span>
@@ -295,10 +294,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>nova2122$lag5 <span class="op">&lt;-</span> <span class="im">as</span>.factor(nova2122$lag5)</span>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>nova2122$lag6 <span class="op">&lt;-</span> <span class="im">as</span>.factor(nova2122$lag6)</span>
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>nova2122$shot_outcome_numeric <span class="op">&lt;-</span> <span class="im">as</span>.factor(nova2122$shot_outcome_numeric)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <div class="cell" data-execution_count="13">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#looking at how this changed the dataset</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="bu">str</span>(nova2122)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>'data.frame':   5399 obs. of  15 variables:
  $ game_id             : int  401365747 401365747 401365747 401365747 401365747 401365747 401365747 401365747 401365747 401365747 ...
@@ -319,6 +322,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div class="cell" data-execution_count="14">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set a seed for reproducibility</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="bu">set</span>.seed(<span class="dv">137</span>)</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -332,11 +337,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="co">#save these for later use</span></span>
 <span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>write.csv(training_data, <span class="bu">file</span> <span class="op">=</span> <span class="st">"./data/modified_data/nova2122_training.csv"</span>, row.names <span class="op">=</span> FALSE)</span>
 <span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>write.csv(validation_data, <span class="bu">file</span> <span class="op">=</span> <span class="st">"./data/modified_data/nova2122_validation.csv"</span>, row.names <span class="op">=</span> FALSE)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 </section>
 <section id="news-data" class="level3">
 <h3 class="anchored" data-anchor-id="news-data">News Data</h3>
 <div class="cell" data-execution_count="7">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># now we are using python</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">#load in relevant libraries and the cleaned data</span></span>
@@ -345,10 +353,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
 <span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>newsapi <span class="op">=</span> pd.read_csv(<span class="st">'./data/modified_data/news_api_naive.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <div class="cell" data-execution_count="8">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># let's take another look at the data</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>newsapi.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display" data-execution_count="8">
 <div>
 
@@ -406,6 +418,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div class="cell" data-execution_count="16">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make "Sentiment Label" a categorical variable</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>newsapi[<span class="st">'Sentiment Label'</span>] <span class="op">=</span> newsapi[<span class="st">'Sentiment Label'</span>].astype(<span class="st">'category'</span>)</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -420,6 +434,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>train_data, val_data <span class="op">=</span> train_test_split(train_data, test_size<span class="op">=</span><span class="fl">0.1</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
 <span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>train_data.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display" data-execution_count="16">
 <div>
 
@@ -469,6 +484,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="feature-selection" class="level1">
 <h1>Feature Selection</h1>
 <div class="cell" data-execution_count="1">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#load in relevant libraries</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np </span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
@@ -478,8 +495,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sklearn </span>
 <span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> itertools</span>
 <span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> spearmanr</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <div class="cell" data-execution_count="61">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This function computers the figure of merit given a subset of features</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co"># it works for both the Pearson and Spearman correlation matrix</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -519,10 +539,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a>                max_merit <span class="op">=</span> subset_merit</span>
 <span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a>                optimal_subset <span class="op">=</span> <span class="bu">list</span>(subset)</span>
 <span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> optimal_subset  <span class="co"># Return the indices of selected features</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <section id="ncaa-data-1" class="level3">
 <h3 class="anchored" data-anchor-id="ncaa-data-1">NCAA Data</h3>
 <div class="cell" data-execution_count="52">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>training <span class="op">=</span> pd.read_csv(<span class="st">'./data/modified_data/nova2122_training.csv'</span>)</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>validation <span class="op">=</span> pd.read_csv(<span class="st">'./data/modified_data/nova2122_validation.csv'</span>)</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -533,15 +556,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>selected_indices <span class="op">=</span> maximize_CFS(x, y)</span>
 <span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(selected_indices)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[0]</code></pre>
 </div>
 </div>
 <div class="cell" data-execution_count="4">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>z <span class="op">=</span> training[<span class="st">'lag1'</span>].values</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>z <span class="op">=</span> np.nan_to_num(x, nan<span class="op">=</span><span class="dv">0</span>)</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>merit(z,y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display" data-execution_count="4">
 <pre><code>0.3818269784940867</code></pre>
 </div>
@@ -553,14 +580,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="news-data-1" class="level3">
 <h3 class="anchored" data-anchor-id="news-data-1">News Data</h3>
 <div class="cell" data-execution_count="30">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.feature_extraction.text <span class="im">import</span> CountVectorizer</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Define features and target variable </span></span>
 <span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>X_train <span class="op">=</span> train_data[<span class="st">'cleaned_text'</span>].tolist()</span>
 <span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>y_train <span class="op">=</span> train_data[<span class="st">'Sentiment Label'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <div class="cell" data-execution_count="59">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># our target variable needs to be labeled numerically (without strings)</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co"># lets fix that now</span></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -571,6 +603,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>y_train <span class="op">=</span> y_train.<span class="bu">map</span>(label_mapping)</span>
 <span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>y_train.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display" data-execution_count="59">
 <pre><code>69    0
 85   -1
@@ -582,6 +615,8 @@ Categories (3, int64): [-1, 0, 1]</code></pre>
 </div>
 </div>
 <div class="cell" data-execution_count="96">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.feature_extraction.text <span class="im">import</span> CountVectorizer</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.naive_bayes <span class="im">import</span> MultinomialNB</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> accuracy_score</span>
@@ -601,6 +636,7 @@ Categories (3, int64): [-1, 0, 1]</code></pre>
 <span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a><span class="co">#let's look at the new dataframe that will be used for training the naive bayes model</span></span>
 <span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>df.describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display" data-execution_count="96">
 <div>
 
@@ -833,7 +869,10 @@ Categories (3, int64): [-1, 0, 1]</code></pre>
 </div>
 </div>
 <div class="cell" data-execution_count="86">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display" data-execution_count="86">
 <div>
 
@@ -994,6 +1033,8 @@ Categories (3, int64): [-1, 0, 1]</code></pre>
 </div>
 </div>
 <div class="cell" data-execution_count="87">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># it would take way to long to iterate every possible combination of subsets for x features, so let's reduce the number of features</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="co"># we can do this by taking out words that do not appear often</span></span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1007,6 +1048,7 @@ Categories (3, int64): [-1, 0, 1]</code></pre>
 <span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.drop(columns<span class="op">=</span>columns_to_remove)</span>
 <span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display" data-execution_count="87">
 <div>
 
@@ -1154,6 +1196,8 @@ Categories (3, int64): [-1, 0, 1]</code></pre>
 </div>
 </div>
 <div class="cell" data-execution_count="88">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># the above df is much smaller and more managable than what we had before</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="co">#convert both to arrays</span></span>
@@ -1165,6 +1209,7 @@ Categories (3, int64): [-1, 0, 1]</code></pre>
 <span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Select the optimal subset of features for training and validation data</span></span>
 <span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(optimal_subset_indices)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>0.05
 0.1
@@ -1190,8 +1235,11 @@ Categories (3, int64): [-1, 0, 1]</code></pre>
 </div>
 <p>The numbers above [17] served as a progress indicator, representing the completion percentage of the maximize_CFS function. The earlier simplification was necessary to prevent the function from running indefinitely. <br><br> Much like the NCAA output mentioned earlier, the [17] index signifies the optimal subset as determined by the correlation-based feature selection algorithm. In this case, that index corresponds to the word “win,” as evident in the code below. This observation implies that, based on the given criteria, the presence of the word “win” offers the most significant information for accurately classifying the sentiment label variable.</p>
 <div class="cell" data-execution_count="95">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>x_opt <span class="op">=</span> df.iloc[:, <span class="dv">17</span>]</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>x_opt.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display" data-execution_count="95">
 <pre><code>0    0
 1    0
@@ -1202,6 +1250,8 @@ Name: 610, dtype: int64</code></pre>
 </div>
 </div>
 <div class="cell" data-execution_count="99">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>word_index <span class="op">=</span> <span class="dv">610</span> <span class="co"># The column index I want to look up</span></span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the vocabulary (word to column index mapping)</span></span>
@@ -1211,6 +1261,7 @@ Name: 610, dtype: int64</code></pre>
 <span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>word <span class="op">=</span> <span class="bu">next</span>(word <span class="cf">for</span> word, index <span class="kw">in</span> vocabulary.items() <span class="cf">if</span> index <span class="op">==</span> word_index)</span>
 <span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Word at column 610:"</span>, word)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Word at column 610: win</code></pre>
 </div>
@@ -1220,6 +1271,8 @@ Name: 610, dtype: int64</code></pre>
 <section id="naive-bayes-with-labeled-record-data" class="level1">
 <h1>Naive Bayes with Labeled Record Data</h1>
 <div class="cell" data-execution_count="17">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the e1071 package</span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>library(e1071)</span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1242,16 +1295,20 @@ Name: 610, dtype: int64</code></pre>
 <span id="cb30-20"><a href="#cb30-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Assess the accuracy of the model</span></span>
 <span id="cb30-21"><a href="#cb30-21" aria-hidden="true" tabindex="-1"></a>accuracy <span class="op">&lt;-</span> mean(validation_predictions <span class="op">==</span> nova2122_validation$shot_outcome_numeric)</span>
 <span id="cb30-22"><a href="#cb30-22" aria-hidden="true" tabindex="-1"></a>cat(<span class="st">"Accuracy of the Naive Bayes model:"</span>, accuracy, <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Accuracy of the Naive Bayes model: 0.5463535 </code></pre>
 </div>
 </div>
 <div class="cell" data-execution_count="18">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a confusion matrix</span></span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>conf_matrix <span class="op">&lt;-</span> confusionMatrix(data <span class="op">=</span> validation_predictions, reference <span class="op">=</span> nova2122_validation$shot_outcome_numeric)</span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the confusion matrix</span></span>
 <span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(conf_matrix)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Confusion Matrix and Statistics
 
@@ -1284,6 +1341,8 @@ Prediction  -1   1
 </div>
 <p>The accuracy of the above model, 0.5464, indicates that the model is accurate 54.64% of the time. The model has a precision of 0.5499, inicating that 54.99% of the model’s positive predictions are correct. The recall of the above model, 0.5877, indicates that the model correctly predicted 58.77% of the made shots. Finally, the F1-score (combines precision and recall of a classifier by taking their harmonic mean) of the model is 0.5681 which can be used to compare performance to other classifiers.</p>
 <div class="cell" data-execution_count="28">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co">#using ggplot</span></span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the confusion matrix data</span></span>
@@ -1307,6 +1366,7 @@ Prediction  -1   1
 <span id="cb34-21"><a href="#cb34-21" aria-hidden="true" tabindex="-1"></a>  theme(axis.text <span class="op">=</span> element_text(size <span class="op">=</span> <span class="dv">12</span>))</span>
 <span id="cb34-22"><a href="#cb34-22" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb34-23"><a href="#cb34-23" aria-hidden="true" tabindex="-1"></a>gg <span class="op">+</span> ggtitle(<span class="st">"Confusion Matrix for 2021-22 NCAA Villanova MBB Shot Data"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display">
 <p><img src="naive_bayes_files/figure-html/cell-25-output-1.png" class="img-fluid"></p>
 </div>
@@ -1316,8 +1376,11 @@ Prediction  -1   1
 <section id="naive-bayes-with-labeled-text-data" class="level1">
 <h1>Naive Bayes with Labeled Text Data</h1>
 <div class="cell" data-execution_count="107">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># what does the test data look like? </span></span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>test_data.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display" data-execution_count="107">
 <div>
 
@@ -1363,10 +1426,13 @@ Prediction  -1   1
 </div>
 </div>
 <div class="cell" data-execution_count="122">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># let's separate our feature(s) from our target variable</span></span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>X_test <span class="op">=</span> test_data[<span class="st">'cleaned_text'</span>]</span>
 <span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>y_test <span class="op">=</span> test_data[<span class="st">'Sentiment Label'</span>]</span>
 <span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>X_test.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display" data-execution_count="122">
 <pre><code>83    cbs sport network weekly coverage season keep ...
 53    nfl week odds includes division matchup sunday...
@@ -1377,9 +1443,12 @@ Name: cleaned_text, dtype: object</code></pre>
 </div>
 </div>
 <div class="cell" data-execution_count="106">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># since we know the feature column only includes the occurances of the word "win", let's create a new column 'win_count'</span></span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>X_test_win <span class="op">=</span> X_test.<span class="bu">str</span>.lower().<span class="bu">str</span>.count(<span class="st">'win'</span>)</span>
 <span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>X_test_win.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display" data-execution_count="106">
 <pre><code>83    0.0
 53    0.0
@@ -1390,6 +1459,8 @@ Name: cleaned_text, dtype: float64</code></pre>
 </div>
 </div>
 <div class="cell" data-execution_count="109">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># once again, we must convert our target variable to numeric labels </span></span>
 <span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Define a dictionary to map labels to numeric values</span></span>
@@ -1397,6 +1468,7 @@ Name: cleaned_text, dtype: float64</code></pre>
 <span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>y_test <span class="op">=</span> test_data[<span class="st">'Sentiment Label'</span>].<span class="bu">map</span>(label_mapping)</span>
 <span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>y_test.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display" data-execution_count="109">
 <pre><code>83    0
 53    0
@@ -1408,6 +1480,8 @@ Categories (3, int64): [-1, 0, 1]</code></pre>
 </div>
 </div>
 <div class="cell" data-execution_count="115">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.naive_bayes <span class="im">import</span> CategoricalNB</span>
 <span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> accuracy_score</span>
@@ -1444,11 +1518,14 @@ Categories (3, int64): [-1, 0, 1]</code></pre>
 <span id="cb42-34"><a href="#cb42-34" aria-hidden="true" tabindex="-1"></a><span class="co"># and we can finally assess the accuracy of the model</span></span>
 <span id="cb42-35"><a href="#cb42-35" aria-hidden="true" tabindex="-1"></a>accuracy <span class="op">=</span> accuracy_score(test_df[<span class="st">'y'</span>], validation_predictions)</span>
 <span id="cb42-36"><a href="#cb42-36" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Accuracy of the Naive Bayes model:"</span>, accuracy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Accuracy of the Naive Bayes model: 0.5</code></pre>
 </div>
 </div>
 <div class="cell" data-execution_count="118">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> confusion_matrix</span>
 <span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a confusion matrix</span></span>
@@ -1457,6 +1534,7 @@ Categories (3, int64): [-1, 0, 1]</code></pre>
 <span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the confusion matrix</span></span>
 <span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Confusion Matrix:"</span>)</span>
 <span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(conf_matrix)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Confusion Matrix:
 [[ 0  0  0]
@@ -1465,6 +1543,8 @@ Categories (3, int64): [-1, 0, 1]</code></pre>
 </div>
 </div>
 <div class="cell" data-execution_count="124">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co">#calculate the various metrics</span></span>
 <span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>accuracy <span class="op">=</span> <span class="dv">10</span><span class="op">/</span><span class="dv">20</span></span>
 <span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>precision <span class="op">=</span> <span class="dv">10</span><span class="op">/</span><span class="dv">20</span></span>
@@ -1481,6 +1561,7 @@ Categories (3, int64): [-1, 0, 1]</code></pre>
 <span id="cb46-14"><a href="#cb46-14" aria-hidden="true" tabindex="-1"></a>metrics_df <span class="op">=</span> pd.DataFrame(metrics)</span>
 <span id="cb46-15"><a href="#cb46-15" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb46-16"><a href="#cb46-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(metrics_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>      Metric     Value
 0   Accuracy  0.500000
@@ -1491,6 +1572,8 @@ Categories (3, int64): [-1, 0, 1]</code></pre>
 </div>
 <p>The accuracy of the above model, 0.5, indicates that the model is accurate 50% of the time. The model has a precision of 0.5, inicating that 50% of the model’s positive predictions are correct. The recall of the above model, 1, indicates that the model correctly predicted 100% of the made shots. Finally, the F1-score (combines precision and recall of a classifier by taking their harmonic mean) of the model is 0.67 which can be used to compare performance to other classifiers.</p>
 <div class="cell" data-execution_count="123">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
 <span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1508,11 +1591,12 @@ Categories (3, int64): [-1, 0, 1]</code></pre>
 <span id="cb48-15"><a href="#cb48-15" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb48-16"><a href="#cb48-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the heatmap</span></span>
 <span id="cb48-17"><a href="#cb48-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display">
 <p><img src="naive_bayes_files/figure-html/cell-33-output-1.png" class="img-fluid"></p>
 </div>
 </div>
-<p>As demonstrated by the initial matrix, the subsequent table, and the confusion matrix crafted with Seaborn, the performance of the Naive Bayes model appears to be notably poor. The model’s accuracy reached 50%, but it’s vital to recognize a significant issue: it consistently predicted positive label values, indicating a significant underfitting of the data. This outcome tells us that the naive bayes classifier used was too simplistic to accurately predict the sentiment of the news articles.</p>
+<p>Upon reviewing the initial matrix, subsequent table, and the Seaborn-generated confusion matrix, it becomes apparent that the Naive Bayes model’s performance is notably subpar. Despite achieving a 50% accuracy, a significant challenge emerges: the consistent prediction of positive label values points to a considerable underfitting problem. This result indicates that the employed Naive Bayes classifier was overly simplistic, resulting in inaccurate sentiment predictions for the news articles.</p>
 </section>
 <section id="extra-joke-x2" class="level1">
 <h1>Extra Joke (x2)</h1>

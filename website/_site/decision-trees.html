@@ -133,7 +133,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="dropdown-text">Code</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./data.html" rel="" target="">
+    <a class="dropdown-item" href="https://github.com/anly501/dsan-5000-project-wmcgloin/tree/main/website/data" rel="" target="_blank">
  <span class="dropdown-text">Data</span></a>
   </li>  
         <li>
@@ -204,6 +204,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#theory-1" id="toc-theory-1" class="nav-link" data-scroll-target="#theory-1">Theory</a></li>
   <li><a href="#implementation-1" id="toc-implementation-1" class="nav-link" data-scroll-target="#implementation-1">Implementation</a></li>
+  <li><a href="#hyper-parameter-tuning-1" id="toc-hyper-parameter-tuning-1" class="nav-link" data-scroll-target="#hyper-parameter-tuning-1">Hyper-Parameter Tuning</a></li>
+  <li><a href="#training-optimal-model-1" id="toc-training-optimal-model-1" class="nav-link" data-scroll-target="#training-optimal-model-1">Training Optimal Model</a></li>
+  <li><a href="#conclusion-1" id="toc-conclusion-1" class="nav-link" data-scroll-target="#conclusion-1">Conclusion</a></li>
   </ul></li>
   <li><a href="#extra-joke" id="toc-extra-joke" class="nav-link" data-scroll-target="#extra-joke">Extra Joke</a></li>
   </ul>
@@ -232,7 +235,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="introduction" class="level1">
 <h1>Introduction</h1>
 <p>On this page, our attention turns to the implementation of Decision Trees and Random Forest using the same NCAA shot data from the 2021-22 Villanova season that was utilized in the clustering and dimensionality reduction tabs. We’ll start by loading relevant libraries and reading in the data.</p>
-<div class="cell" data-execution_count="117">
+<div class="cell" data-execution_count="2">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># import relevant libraries</span></span>
@@ -266,7 +269,7 @@ memory usage: 151.3 KB</code></pre>
 <section id="baseline-comparisons" class="level1">
 <h1>Baseline Comparisons</h1>
 <p>Let’s start by examining the distribution of class labels, specifically distinguishing between made and missed shots:</p>
-<div class="cell" data-execution_count="118">
+<div class="cell" data-execution_count="3">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute the distribution of class labels</span></span>
@@ -283,7 +286,7 @@ memory usage: 151.3 KB</code></pre>
 Name: shot_outcome_numeric, dtype: int64</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="119">
+<div class="cell" data-execution_count="4">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the class distribution</span></span>
@@ -298,8 +301,8 @@ Name: shot_outcome_numeric, dtype: int64</code></pre>
 <p><img src="decision-trees_files/figure-html/cell-4-output-1.png" class="img-fluid"></p>
 </div>
 </div>
-<p>There is a slight imbalance in class distribution for the shot_outcome_numeric target variable (class label). There are 1448 instances of ‘made shot’ (Class Label ‘1’) and 1316 instances of ‘missed shot’ (Class Label ‘0’). This class imbalance can influence the performance of the classification model. It’s essential to consider metrics beyond accuracy, such as precision and recall, to gain a comprehensive understanding. Additionally, it’s worth noting that a model predicting ‘1’ for every instance would achieve 52.4% accuracy, so any model with an accuracy below this threshold does not provide meaningful predictions. Below is code that runs a random classifier on the data to see if it can beat the 52.4% accuracy threshold.</p>
-<div class="cell" data-execution_count="120">
+<p>There is a slight imbalance in class distribution for the shot_outcome_numeric target variable (class label). There are 1448 instances of ‘made shot’ (Class Label ‘1’) and 1316 instances of ‘missed shot’ (Class Label ‘0’). This class imbalance can influence the performance of the classification model. It’s essential to consider metrics beyond accuracy, such as precision and recall of the data, to gain a comprehensive understanding. Additionally, it’s worth noting that a model predicting ‘1’ for every instance would achieve 52.4% accuracy, so any model with an accuracy below this threshold does not provide meaningful predictions. Below is code that runs a random classifier on the data to see if it can beat the 52.4% accuracy threshold.</p>
+<div class="cell" data-execution_count="5">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> collections <span class="im">import</span> Counter</span>
@@ -329,26 +332,26 @@ Name: shot_outcome_numeric, dtype: int64</code></pre>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>-----RANDOM CLASSIFIER-----
-Count of Predictions: dict_values([1390, 1374])
-Probability of Predictions: [0.50289436 0.49710564]
-Accuracy: 0.4840810419681621
-Precision (Class 0, Class 1): [0.46043165 0.50800582]
-Recall (Class 0, Class 1): [0.48632219 0.4820442 ]
-F1-score (Class 0, Class 1): [0.47302291 0.49468462]</code></pre>
+Count of Predictions: dict_values([1357, 1407])
+Probability of Predictions: [0.49095514 0.50904486]
+Accuracy: 0.5032561505065123
+Precision (Class 0, Class 1): [0.47974414 0.52763449]
+Recall (Class 0, Class 1): [0.51291793 0.49447514]
+F1-score (Class 0, Class 1): [0.49577672 0.51051693]</code></pre>
 </div>
 </div>
-<p>The random classifier acts as a rudimentary model that makes predictions through random guessing. Its primary role is to provide a fundamental benchmark for assessing the efficacy of more sophisticated models. Specifically applied to predicting basketball shot outcomes, this classifier yields an accuracy of approximately 51%, falling short of consistently predicting ‘1’ (as established earlier). When evaluating advanced models, the goal is for them to surpass this random guessing baseline (and the 52.4% baseline from always guessing the most common class), demonstrating their ability to discern meaningful patterns within the data.</p>
+<p>The random classifier acts as a rudimentary model that makes predictions through random guessing. Its primary role is to provide a fundamental benchmark for assessing the efficacy of more sophisticated models. Specifically applied to predicting basketball shot outcomes, this classifier yields an accuracy of approximately 50%, falling short of consistently predicting ‘1’ (as established earlier). When evaluating advanced models, the goal is for them to surpass this random guessing baseline (and the 52.4% baseline from always guessing the most common class), demonstrating their ability to discern meaningful patterns within the data.</p>
 </section>
 <section id="decision-tree" class="level1">
 <h1>Decision Tree</h1>
 <section id="theory" class="level3">
 <h3 class="anchored" data-anchor-id="theory">Theory</h3>
-<p>Decision Trees are powerful machine learning algorithms used for classification and regression tasks, providing a hierarchical structure where nodes represent decisions based on specific features. The dataset is recursively split at decision nodes using criteria like Gini impurity for classification. Each leaf node corresponds to a class label in classification or a numerical value in regression, making the final predictions. <br><br> The simplicity and interpretability of Decision Trees make them widely applicable, but their susceptibility to overfitting necessitates techniques like pruning. Pruning involves removing non-contributive parts of the tree. Decision Trees offer insights into feature importance, with features near the top contributing more to predictive power. <br><br> Applying Decision Trees to real-world scenarios involves defining rules for classification based on the dataset’s features. These rules provide a transparent decision-making process, making Decision Trees particularly useful for explaining predictions to non-experts. In the context of the basketball data I have been using, Decision Trees could form rules like “if the shot value is less than 2, classify it as a made shot.” Feature selection and hyperparameter tuning further refine these trees to better fit the data, exemplifying their adaptability to various applications. The Gini Index is a common measure used in Decision Trees to determine optimal splits, minimizing impurity and enhancing predictive accuracy. Despite their advantages, Decision Trees’ potential overfitting is mitigated by minimizing the number of layers or employing advanced techniques.</p>
+<p>Decision Trees are powerful machine learning algorithms used for classification and regression tasks, providing a hierarchical structure whereby nodes represent decisions based on specific features. The dataset is recursively split at decision nodes using criteria like Gini impurity for classification. Each leaf node corresponds to a class label in classification or a numerical value in regression, making the final predictions. <br><br> The simplicity and interpretability of Decision Trees make them widely applicable, but their susceptibility to overfitting necessitates techniques like pruning. Pruning involves removing non-contributive parts of the tree. Decision Trees offer insights into feature importance, with features near the top of the tree contributing more to predictive power. <br><br> Applying Decision Trees to real-world scenarios involves defining rules for classification based on the dataset’s features. These rules provide a transparent decision-making process, making Decision Trees particularly useful for explaining predictions to non-experts. In the context of the basketball data I have been using, Decision Trees could form rules like “if the shot value is less than 2, classify it as a made shot.” Feature selection and hyperparameter tuning further refine these trees to better fit the data, exemplifying their adaptability to various applications. The Gini Index is a common measure used in Decision Trees to determine optimal splits, minimizing impurity and enhancing predictive accuracy. Despite their advantages, Decision Trees’ potential overfitting is mitigated by minimizing the number of layers or employing advanced techniques.</p>
 </section>
 <section id="implementation" class="level3">
 <h3 class="anchored" data-anchor-id="implementation">Implementation</h3>
 <p>In the following code, we begin by importing the necessary libraries. Subsequently, we partition the data into subsets, distinguishing features and the target variable. Further, we perform another split on the data into training and test sets, allowing us to train a Decision Tree model on the training data and assess its performance using the test data. We then print the accuracy value of this model on the test data.</p>
-<div class="cell" data-execution_count="121">
+<div class="cell" data-execution_count="6">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># laod in relevant libraries</span></span>
@@ -380,11 +383,11 @@ F1-score (Class 0, Class 1): [0.47302291 0.49468462]</code></pre>
 <span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Accuracy:"</span>,metrics.accuracy_score(Y_test, Y_pred))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>Accuracy: 0.5626506024096386</code></pre>
+<pre><code>Accuracy: 0.5590361445783133</code></pre>
 </div>
 </div>
-<p>This decision tree did better than both baseline comparisons (both the random classifier and always guessing the most common class label). However, it is still not a great model; the accuracy only slightly imporved to 56.27%. Let’s visualize the model below.</p>
-<div class="cell" data-execution_count="122">
+<p>This decision tree did better than both baseline comparisons (both the random classifier and always guessing the most common class label). However, it is still not a great model; the accuracy only slightly improved to 56%. Let’s visualize the model below.</p>
+<div class="cell" data-execution_count="7">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.tree <span class="im">import</span> plot_tree</span>
@@ -405,7 +408,7 @@ F1-score (Class 0, Class 1): [0.47302291 0.49468462]</code></pre>
 <section id="hyper-parameter-tuning" class="level3">
 <h3 class="anchored" data-anchor-id="hyper-parameter-tuning">Hyper-Parameter Tuning</h3>
 <p>The provided code iterates through different values for the hyperparameter (number of layers) and generates three plots to visualize the model’s performance. The plots show the accuracy and recall for both training and test datasets, with varying numbers of layers in the Decision Tree (controlled by the max_depth hyperparameter). The blue lines represent training results, while the red lines depict test results.</p>
-<div class="cell" data-execution_count="123">
+<div class="cell" data-execution_count="8">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> accuracy_score, recall_score</span>
@@ -474,7 +477,7 @@ F1-score (Class 0, Class 1): [0.47302291 0.49468462]</code></pre>
 <section id="training-optimal-model" class="level3">
 <h3 class="anchored" data-anchor-id="training-optimal-model">Training Optimal Model</h3>
 <p>Based on the graphs, it appears that an optimal model would have three layers (a depth of 3). Consequently, we will re-train the decision tree using this optimal hyperparameter obtained from the plot above in the code below. Additionally, in the code chunk we will define and use a function that generates a confusion matrix plot, display metrics, and decision tree.</p>
-<div class="cell" data-execution_count="148">
+<div class="cell" data-execution_count="9">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn <span class="im">import</span> tree</span>
@@ -511,13 +514,13 @@ F1-score (Class 0, Class 1): [0.47302291 0.49468462]</code></pre>
 <span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a>custom_plot_tree(model,X,Y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>ACCURACY: 0.6292947558770343
-NEGATIVE RECALL (Y=0): 0.7183673469387755
-NEGATIVE PRECISION (Y=0): 0.5641025641025641
-POSITIVE RECALL (Y=1): 0.5584415584415584
-POSITIVE PRECISION (Y=1): 0.7136929460580913
-[[176  69]
- [136 172]]</code></pre>
+<pre><code>ACCURACY: 0.655421686746988
+NEGATIVE RECALL (Y=0): 0.7300771208226221
+NEGATIVE PRECISION (Y=0): 0.610752688172043
+POSITIVE RECALL (Y=1): 0.5895691609977324
+POSITIVE PRECISION (Y=1): 0.7123287671232876
+[[284 105]
+ [181 260]]</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <p><img src="decision-trees_files/figure-html/cell-9-output-2.png" class="img-fluid"></p>
@@ -526,7 +529,7 @@ POSITIVE PRECISION (Y=1): 0.7136929460580913
 <p><img src="decision-trees_files/figure-html/cell-9-output-3.png" class="img-fluid"></p>
 </div>
 </div>
-<div class="cell" data-execution_count="149">
+<div class="cell" data-execution_count="10">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>tree_summary <span class="op">=</span> tree.export_text(model, feature_names<span class="op">=</span>X_train.columns.tolist())</span>
@@ -534,15 +537,15 @@ POSITIVE PRECISION (Y=1): 0.7136929460580913
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>|--- shot_value &lt;= 1.50
-|   |--- score_diff &lt;= 1.50
-|   |   |--- field_goal_percentage &lt;= 0.48
+|   |--- score_diff &lt;= 10.50
+|   |   |--- game_num &lt;= 11.50
 |   |   |   |--- class: 1
-|   |   |--- field_goal_percentage &gt;  0.48
+|   |   |--- game_num &gt;  11.50
 |   |   |   |--- class: 1
-|   |--- score_diff &gt;  1.50
-|   |   |--- game_num &lt;= 4.00
-|   |   |   |--- class: 0
-|   |   |--- game_num &gt;  4.00
+|   |--- score_diff &gt;  10.50
+|   |   |--- game_num &lt;= 17.50
+|   |   |   |--- class: 1
+|   |   |--- game_num &gt;  17.50
 |   |   |   |--- class: 1
 |--- shot_value &gt;  1.50
 |   |--- shot_value &lt;= 2.50
@@ -551,9 +554,9 @@ POSITIVE PRECISION (Y=1): 0.7136929460580913
 |   |   |--- field_goal_percentage &gt;  0.54
 |   |   |   |--- class: 1
 |   |--- shot_value &gt;  2.50
-|   |   |--- field_goal_percentage &lt;= 0.32
+|   |   |--- score_diff &lt;= 8.50
 |   |   |   |--- class: 0
-|   |   |--- field_goal_percentage &gt;  0.32
+|   |   |--- score_diff &gt;  8.50
 |   |   |   |--- class: 0
 </code></pre>
 </div>
@@ -561,14 +564,13 @@ POSITIVE PRECISION (Y=1): 0.7136929460580913
 </section>
 <section id="conclusion" class="level3">
 <h3 class="anchored" data-anchor-id="conclusion">Conclusion</h3>
-<p>After tuning the hyperparameter, the model’s accuracy improved to 62%, marking a notable 10% enhancement compared to the baseline and a 6% improvement over the untuned version. Delving into the confusion matrix, it becomes evident that the model accurately predicted made shots (class 1) in 67.4% of cases, while achieving a 57.1% accuracy in identifying missed shots (class 0). This nuanced evaluation provides insights into the model’s strengths and areas for potential refinement. Notably, the absence of the ‘lag’ variable in the decision tree suggests its limited influence on the model, aligning with the initial hypothesis of its lower predictive power.</p>
+<p>After tuning the hyperparameter, the model’s accuracy improved to 65.5%, marking a notable 13% enhancement compared to the baseline and a 9.5% improvement over the untuned version. Delving into the confusion matrix, it becomes evident that the model accurately predicted made shots (class 1) in 71.2% of cases, while achieving a 61.1% accuracy in identifying missed shots (class 0). This nuanced evaluation provides insights into the model’s strengths and areas for potential refinement. Notably, the absence of the ‘lag’ variable in the decision tree suggests its limited influence on the model, aligning with the initial hypothesis of its lower predictive power.</p>
 <p>In summary, the hyperparameter-tuned decision tree exhibits improved accuracy and provides valuable insights into feature importance. The visualization underscores the significance of ‘shot_value’ and ‘field_goal_percentage’ in predicting shot outcomes, while the negligible role of the ‘lag’ variable aligns with expectations, emphasizing the model’s capacity to discern key predictors in the dataset.</p>
-<p><strong><em>add decision trees using dtreeviz for final report</em></strong></p>
 </section>
 </section>
 <section id="random-forest" class="level1">
 <h1>Random Forest</h1>
-<p><i><b>Disclaimer:</b></i> Although the preceding code and analysis successfully meet the assignment requirements, I also wanted to explore the application of random forests. This section will be more concise but includes the necessary code and some analysis for random forests.</p>
+<p><i><b>Disclaimer:</b></i> Although the preceding code and analysis successfully meet the assignment requirements, I also wanted to explore the application of random forests. This section will be more concise, but includes the necessary code and some analysis for random forests.</p>
 <section id="theory-1" class="level3">
 <h3 class="anchored" data-anchor-id="theory-1">Theory</h3>
 <p>A random forest differs from a single decision tree in that it is an ensemble or a collection of decision trees. Instead of relying on the prediction of a single tree, a random forest aggregates the predictions of multiple trees to make a more robust and accurate prediction. Every tree in the ‘random forest’ is trained on a random subset of the data and features, introducing diversity in the models. During predictions, the random forest averages or takes a vote of the individual tree predictions, reducing the risk of overfitting and improving generalization performance. This ensemble approach makes random forests particularly effective in handling complex datasets and enhancing the stability and reliability of the overall model.</p>
@@ -576,7 +578,7 @@ POSITIVE PRECISION (Y=1): 0.7136929460580913
 <section id="implementation-1" class="level3">
 <h3 class="anchored" data-anchor-id="implementation-1">Implementation</h3>
 <p>The following code imports necessary libraries, splits the data into training and test sets, creates a Random Forest Classifier model, trains it on the training data, predicts outcomes on the test data, and then prints the accuracy of the model’s predictions.</p>
-<div class="cell" data-execution_count="144">
+<div class="cell" data-execution_count="32">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load relevant libraries</span></span>
@@ -600,15 +602,15 @@ POSITIVE PRECISION (Y=1): 0.7136929460580913
 <span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Accuracy:"</span>, accuracy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>Accuracy: 0.6184448462929476</code></pre>
+<pre><code>Accuracy: 0.6365280289330922</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>/var/folders/lb/dk54cbx965z7nj61zps2fzr00000gn/T/ipykernel_39397/4200927063.py:14: DataConversionWarning: A column-vector y was passed when a 1d array was expected. Please change the shape of y to (n_samples,), for example using ravel().
+<pre><code>/var/folders/lb/dk54cbx965z7nj61zps2fzr00000gn/T/ipykernel_50519/4200927063.py:14: DataConversionWarning: A column-vector y was passed when a 1d array was expected. Please change the shape of y to (n_samples,), for example using ravel().
   model.fit(X_train, Y_train)</code></pre>
 </div>
 </div>
 <p>We can see that without any tuning, the random forest almost matches the accuracy of the hyperparameter-tuned decision tree. Let’s visualize the first three trees in the random forest below.</p>
-<div class="cell" data-execution_count="128">
+<div class="cell" data-execution_count="33">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Export the first three decision trees from the forest</span></span>
@@ -631,8 +633,11 @@ POSITIVE PRECISION (Y=1): 0.7136929460580913
 <p><img src="decision-trees_files/figure-html/cell-12-output-3.png" class="img-fluid"></p>
 </div>
 </div>
+</section>
+<section id="hyper-parameter-tuning-1" class="level3">
+<h3 class="anchored" data-anchor-id="hyper-parameter-tuning-1">Hyper-Parameter Tuning</h3>
 <p>Next, we will utilize a random search with cross-validation to find the best hyperparameters within a specified range. The best model is then stored, and the optimal hyperparameters are printed.</p>
-<div class="cell" data-execution_count="129">
+<div class="cell" data-execution_count="34">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>param_dist <span class="op">=</span> {<span class="st">'n_estimators'</span>: randint(<span class="dv">50</span>,<span class="dv">500</span>),</span>
@@ -657,48 +662,58 @@ POSITIVE PRECISION (Y=1): 0.7136929460580913
 <span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Best hyperparameters:'</span>, rand_search.best_params_)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>Best hyperparameters: {'max_depth': 6, 'n_estimators': 469}</code></pre>
+<pre><code>Best hyperparameters: {'max_depth': 4, 'n_estimators': 417}</code></pre>
 </div>
 </div>
-<p>Using the above hyperparameters, let’s see how the random forest performs on the test data.</p>
-<div class="cell" data-execution_count="150">
+</section>
+<section id="training-optimal-model-1" class="level3">
+<h3 class="anchored" data-anchor-id="training-optimal-model-1">Training Optimal Model</h3>
+<p>Using the above hyperparameters, let’s train the optimal random forest model.</p>
+<div class="cell" data-execution_count="35">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Predictions on the test set</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>yp_test <span class="op">=</span> best_rf.predict(X_test)</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>confusion_plot(Y_test, yp_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>yp_test <span class="op">=</span> best_rf.predict(X_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-stdout">
-<pre><code>ACCURACY: 0.6925858951175407
-NEGATIVE RECALL (Y=0): 0.8040816326530612
-NEGATIVE PRECISION (Y=0): 0.6175548589341693
-POSITIVE RECALL (Y=1): 0.6038961038961039
-POSITIVE PRECISION (Y=1): 0.7948717948717948
-[[197  48]
- [122 186]]</code></pre>
 </div>
-<div class="cell-output cell-output-display">
-<p><img src="decision-trees_files/figure-html/cell-14-output-2.png" class="img-fluid"></p>
-</div>
-</div>
-<p>The tuned Random Forest model exhibits improved accuracy compared to the tuned Decision Tree, achieving an accuracy of 69.3%. Notably, the Random Forest model demonstrates higher negative recall (Y=0) and precision, indicating enhanced performance in correctly identifying instances of missed shots. Conversely, the Decision Tree had slightly better positive recall (Y=1) and precision, capturing a higher percentage of made shots.</p>
-<div class="cell" data-execution_count="152">
+<div class="cell" data-execution_count="36">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a series containing feature importances from the model and feature names from the training data</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>feature_importances <span class="op">=</span> pd.Series(best_rf.feature_importances_, index<span class="op">=</span>X_train.columns).sort_values(ascending<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="co"># bar chart</span></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>feature_importances.plot.bar()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>confusion_plot(Y_test, yp_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="152">
-<pre><code>&lt;Axes: &gt;</code></pre>
+<div class="cell-output cell-output-stdout">
+<pre><code>ACCURACY: 0.6672694394213382
+NEGATIVE RECALL (Y=0): 0.861003861003861
+NEGATIVE PRECISION (Y=0): 0.601078167115903
+POSITIVE RECALL (Y=1): 0.4965986394557823
+POSITIVE PRECISION (Y=1): 0.8021978021978022
+[[223  36]
+ [148 146]]</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <p><img src="decision-trees_files/figure-html/cell-15-output-2.png" class="img-fluid"></p>
 </div>
 </div>
+<div class="cell" data-execution_count="37">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a series containing feature importances from the model and feature names from the training data</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>feature_importances <span class="op">=</span> pd.Series(best_rf.feature_importances_, index<span class="op">=</span>X_train.columns).sort_values(ascending<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="co"># bar chart</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>feature_importances.plot.bar()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="37">
+<pre><code>&lt;Axes: &gt;</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="decision-trees_files/figure-html/cell-16-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+</section>
+<section id="conclusion-1" class="level3">
+<h3 class="anchored" data-anchor-id="conclusion-1">Conclusion</h3>
+<p>The tuned Random Forest model exhibits improved accuracy compared to the tuned Decision Tree, achieving an accuracy of 66.7%. Notably, the Random Forest model demonstrates higher positive recall (Y=1) and precision, indicating enhanced performance in correctly identifying instances of made shots.</p>
 <p>The above code calculates the feature importance from the tuned Random Forest model and creates a bar chart to visualize the importance of each feature in predicting shot outcomes. The resulting chart helps identify which features have the most significant impact on the model’s decision-making process. The bar chart reveals, expectedly, that shot value has the most significant impact by a large margin. At the same time, lag1 exhibits a meager impact, aligning with similar results from the tuned decision tree.</p>
 </section>
 </section>

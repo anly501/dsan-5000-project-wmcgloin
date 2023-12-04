@@ -136,7 +136,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="dropdown-text">Code</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./data.html" rel="" target="">
+    <a class="dropdown-item" href="https://github.com/anly501/dsan-5000-project-wmcgloin/tree/main/website/data" rel="" target="_blank">
  <span class="dropdown-text">Data</span></a>
   </li>  
         <li>
@@ -170,18 +170,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li>
     <a class="dropdown-item" href="./decision-trees.html" rel="" target="">
  <span class="dropdown-text">Decision Trees</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./classification.html" rel="" target="">
- <span class="dropdown-text">Classification</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./regression.html" rel="" target="">
- <span class="dropdown-text">Regression</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./arm.html" rel="" target="">
- <span class="dropdown-text">ARM</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./conclusions.html" rel="" target="">
@@ -239,7 +227,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<p><b>*Disclaimer - this section is a work in progress</b> <br><br> Please be aware that this page contains both Python and R code, thus you should avoid running the source code all at once.</p>
+<p>Please be aware that this page contains both Python and R code, thus you should avoid running the source code all at once.</p>
 <section id="brief-introduction-to-eda" class="level1">
 <h1>Brief Introduction to EDA</h1>
 <p>Exploratory Data Analysis (EDA) is a fundamental starting point in data analysis, helping us grasp the data’s characteristics, patterns, and possible outliers. It provides essential insights for making informed modeling decisions.</p>
@@ -250,10 +238,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="season" class="level3">
 <h3 class="anchored" data-anchor-id="season">2021-22 season</h3>
 <div class="cell" data-execution_count="1">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># let's read in the data and load in relevant libraries</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>nova2122 <span class="op">&lt;-</span> read.csv(<span class="st">'./data/modified_data/nova2122.csv'</span>)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>library(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stderr">
 <pre><code>-- Attaching core tidyverse packages ------------------------ tidyverse 2.0.0 --
 v dplyr     1.1.2     v readr     2.1.4
@@ -268,6 +259,8 @@ i Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all
 </div>
 </div>
 <div class="cell" data-execution_count="2">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a ggplot for shot outcome distribution by villanova players</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>nova_players <span class="op">&lt;-</span> nova2122 <span class="op">%&gt;%</span> <span class="bu">filter</span>(shooter_team <span class="op">==</span> <span class="st">"Villanova"</span>)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -288,6 +281,7 @@ i Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all
 <span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  arrange(<span class="op">-</span>shots) </span>
 <span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>mean_and_count_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display">
 <table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true">
 <caption>A tibble: 12 x 3</caption>
@@ -373,6 +367,8 @@ i Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all
 </div>
 <p>The table displayed above, arranged in descending order based on the number of shots attempted, presents the field goal percentages of Villanova Men’s Basketball (MBB) players for the 2021-22 season. The accompanying ggplot-generated graph visually represents the count of both missed and successful shots for each player. This visualization emphasizes the significant variation in the number of shots taken by different players, which could offer richer data and potential insights for subsequent modeling.</p>
 <div class="cell" data-execution_count="4">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create lag variables within each shooter and game_id group</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>nova2122 <span class="op">&lt;-</span> nova2122 <span class="op">%&gt;%</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  arrange(shooter, game_id, play_id) <span class="op">%&gt;%</span>  <span class="co"># Arrange the data by shooter, game_id, and play_id</span></span>
@@ -391,6 +387,7 @@ i Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all
 <span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="co"># View the updated data with lag variables</span></span>
 <span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>head(nova2122)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display">
 <table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true">
 <caption>A tibble: 6 x 15</caption>
@@ -538,6 +535,8 @@ i Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all
 </div>
 </div>
 <div class="cell" data-execution_count="15">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the correlation matrix</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>cor_matrix <span class="op">&lt;-</span> cor(nova2122[, c(<span class="st">"shot_outcome_numeric"</span>, <span class="st">"lag1"</span>, <span class="st">"lag2"</span>, <span class="st">"lag3"</span>, <span class="st">"lag4"</span>, <span class="st">"lag5"</span>, <span class="st">"lag6"</span>)], use <span class="op">=</span> <span class="st">"pairwise.complete.obs"</span>)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -550,6 +549,7 @@ i Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all
 <span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  labs(title <span class="op">=</span> <span class="st">"Correlation Heatmap"</span>, x <span class="op">=</span> <span class="st">""</span>, y <span class="op">=</span> <span class="st">""</span>) <span class="op">+</span></span>
 <span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  theme_minimal() <span class="op">+</span></span>
 <span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  theme(axis.text.x <span class="op">=</span> element_text(angle <span class="op">=</span> <span class="dv">45</span>, hjust <span class="op">=</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display">
 <p><img src="data-exploration_files/figure-html/cell-5-output-1.png" class="img-fluid"></p>
 </div>
@@ -560,10 +560,15 @@ i Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all
 <h3 class="anchored" data-anchor-id="season-1">2019-20 season</h3>
 <p>To assess potential disparities, let’s replicate the same analysis for the 2019-20 season and compare the resulting graphs and tables with those generated earlier. This comparative approach will help us identify any noticeable differences and potential insights.</p>
 <div class="cell" data-execution_count="2">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#let's read in the data</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>nova1920 <span class="op">&lt;-</span> read.csv(<span class="st">'./data/modified_data/nova1920.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <div class="cell" data-execution_count="3">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a ggplot for shot outcome distribution by villanova players</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>nova_players <span class="op">&lt;-</span> nova1920 <span class="op">%&gt;%</span> <span class="bu">filter</span>(shooter_team <span class="op">==</span> <span class="st">"Villanova"</span>)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -584,6 +589,7 @@ i Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all
 <span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>  arrange(<span class="op">-</span>shots) </span>
 <span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>mean_and_count_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display">
 <table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true">
 <caption>A tibble: 10 x 3</caption>
@@ -658,6 +664,8 @@ i Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all
 </div>
 </div>
 <div class="cell" data-execution_count="6">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create lag variables within each shooter and game_id group</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>nova1920 <span class="op">&lt;-</span> nova1920 <span class="op">%&gt;%</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  arrange(shooter, game_id, play_id) <span class="op">%&gt;%</span>  <span class="co"># Arrange the data by shooter, game_id, and play_id</span></span>
@@ -674,6 +682,7 @@ i Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all
 <span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="co"># View the updated data with lag variables</span></span>
 <span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>head(nova1920)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display">
 <table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true">
 <caption>A tibble: 6 x 15</caption>
@@ -821,6 +830,8 @@ i Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all
 </div>
 </div>
 <div class="cell" data-execution_count="7">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the correlation matrix</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>cor_matrix <span class="op">&lt;-</span> cor(nova1920[, c(<span class="st">"shot_outcome_numeric"</span>, <span class="st">"lag1"</span>, <span class="st">"lag2"</span>, <span class="st">"lag3"</span>, <span class="st">"lag4"</span>, <span class="st">"lag5"</span>, <span class="st">"lag6"</span>)], use <span class="op">=</span> <span class="st">"pairwise.complete.obs"</span>)</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -833,6 +844,7 @@ i Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all
 <span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  labs(title <span class="op">=</span> <span class="st">"Correlation Heatmap"</span>, x <span class="op">=</span> <span class="st">""</span>, y <span class="op">=</span> <span class="st">""</span>) <span class="op">+</span></span>
 <span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  theme_minimal() <span class="op">+</span></span>
 <span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  theme(axis.text.x <span class="op">=</span> element_text(angle <span class="op">=</span> <span class="dv">45</span>, hjust <span class="op">=</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stderr">
 <pre><code>
 Attaching package: 'reshape2'
@@ -854,16 +866,22 @@ The following object is masked from 'package:tidyr':
 <section id="news-api" class="level1">
 <h1>News API</h1>
 <div class="cell" data-execution_count="1">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#import necessary libraries</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
 <span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>news_api <span class="op">=</span> pd.read_csv(<span class="st">'./data/modified_data/sentiment_scores_with_titles.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <div class="cell" data-execution_count="2">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#what does this data look like?</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>news_api.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display" data-execution_count="2">
 <div>
 
@@ -915,6 +933,8 @@ The following object is masked from 'package:tidyr':
 </div>
 </div>
 <div class="cell" data-execution_count="6">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> nltk</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>nltk.download(<span class="st">'stopwords'</span>)</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>nltk.download(<span class="st">'wordnet'</span>)</span>
@@ -942,6 +962,7 @@ The following object is masked from 'package:tidyr':
 <span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply preprocessing to the 'text' column</span></span>
 <span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>news_api[<span class="st">'cleaned_text'</span>] <span class="op">=</span> news_api[<span class="st">'Description'</span>].<span class="bu">apply</span>(preprocess_text)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stderr">
 <pre><code>[nltk_data] Downloading package stopwords to
 [nltk_data]     /Users/williammcgloin/nltk_data...
@@ -955,10 +976,13 @@ The following object is masked from 'package:tidyr':
 </div>
 </div>
 <div class="cell" data-execution_count="10">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>news_api.to_csv(<span class="st">'./data/modified_data/news_api_naive.csv'</span>, index<span class="op">=</span><span class="va">False</span>)</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co">#what does the new column of data look like?</span></span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>news_api.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display" data-execution_count="10">
 <div>
 
@@ -1016,6 +1040,8 @@ The following object is masked from 'package:tidyr':
 </div>
 </div>
 <div class="cell" data-execution_count="8">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import more necessary libraries</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> wordcloud <span class="im">import</span> WordCloud, STOPWORDS</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -1047,6 +1073,7 @@ The following object is masked from 'package:tidyr':
 <span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a><span class="co"># let's pass the 'cleaned_text' column to the function</span></span>
 <span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a>generate_word_cloud(<span class="st">' '</span>.join(news_api[<span class="st">'cleaned_text'</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display">
 <p><img src="data-exploration_files/figure-html/cell-14-output-1.png" class="img-fluid"></p>
 </div>
@@ -1056,18 +1083,27 @@ The following object is masked from 'package:tidyr':
 <section id="individual-player-data" class="level1">
 <h1>Individual Player Data</h1>
 <div class="cell" data-execution_count="13">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">#let's import some libraries </span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
 <span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <div class="cell" data-execution_count="12">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>aaronjudge <span class="op">=</span> pd.read_csv(<span class="st">'./data/modified_data/aaronjudge.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <div class="cell" data-execution_count="3">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">#let's learn about the data</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>aaronjudge.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
 RangeIndex: 100 entries, 0 to 99
@@ -1115,6 +1151,8 @@ memory usage: 28.2+ KB</code></pre>
 </div>
 </div>
 <div class="cell" data-execution_count="4">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a pivot table to count the observations</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>pivot_table <span class="op">=</span> aaronjudge.pivot_table(index<span class="op">=</span><span class="st">'hard_hits'</span>, columns<span class="op">=</span><span class="st">'H'</span>, aggfunc<span class="op">=</span><span class="st">'size'</span>, fill_value<span class="op">=</span><span class="dv">0</span>)</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1131,12 +1169,15 @@ memory usage: 28.2+ KB</code></pre>
 <span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"hard_hits"</span>)</span>
 <span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display">
 <p><img src="data-exploration_files/figure-html/cell-18-output-1.png" class="img-fluid"></p>
 </div>
 </div>
 <p>In this heatmap, hits are represented on the x-axis, while hard hits are depicted on the y-axis. The unit of observation corresponds to a player’s at-bats within a game. Notably, there are instances, such as nine games for the specific player Aaron Judge, where he had two hard-hit balls but only managed to secure one hit. While the seaborn-generated graph above indeed suggests a positive correlation between these variables, there are discernible distinctions between them. It prompts the consideration that using hard hit percentage as a target variable to measure success may offer a more robust approach, as it mitigates factors beyond the batter’s control. For example, a batter might make solid contact (barrel the ball) but hit it directly to a fielder, categorizing it as a hard hit ball without resulting in a hit. Hence, hard hit percentage emerges as a more suitable target variable for assessment.</p>
 <div class="cell" data-execution_count="16">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sort the DataFrame by Date in ascending order</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>aaronjudge <span class="op">=</span> aaronjudge.sort_values(by<span class="op">=</span><span class="st">'Date'</span>)</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1176,6 +1217,7 @@ memory usage: 28.2+ KB</code></pre>
 <span id="cb22-37"><a href="#cb22-37" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-38"><a href="#cb22-38" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the combined figure</span></span>
 <span id="cb22-39"><a href="#cb22-39" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display">
 <p><img src="data-exploration_files/figure-html/cell-19-output-1.png" class="img-fluid"></p>
 </div>

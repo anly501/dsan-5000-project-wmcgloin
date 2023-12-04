@@ -1,13 +1,11 @@
 ---
-title: "Introduction"
+title: "Introduction to the Hot Hand"
 format: html
 toc: true
 bibliography: references.bib
 ---
 
-<b>*Disclaimer - this section is a work in progress</b>
-
-# Introduction to the Hot Hand
+# Introduction
 
 Within the world of sports, the terms “hot hand” or being “in the zone” are frequently used to describe a streak of exceptional performance by a player. The “hot hand” term originated in the sport of basketball, suggesting that a player who has made numerous successive shots is more likely to make their next basket, as opposed to the same person who had missed their last few shots. For example, a basketball player may make an exceptional number of shots in a short period of time, such as Klay Thompson scoring 37 points in a quarter. Another example is Joe DiMaggio’s 56 game hitting streak in 1941, one of the most incredible hitting runs in baseball history. Ordinarily, these types of “runs” or “streaks” are rare. There is “a belief that the performance of a player during this particular period is significantly better than expected on the basis of the player’s overall record” [^1]. Often, this heightened performance can be attributed to increased confidence by the player. 
 <br></br>
@@ -20,7 +18,7 @@ While the term “hot hand” may be most commonly associated with the world of 
 
 [^2]: @bar2006twenty
 
-## Prior Research
+# Prior Research
 
 The initial investigation into this topic @gilovich1985hot was published in 1985. It analyzed assorted data, including professional basketball field goal data from the 1980-1981 season, professional basketball free-throw data from the 1980-1982 seasons, and a controlled shooting experiment. While the study found that over 91% of fans agreed that a player has a better chance of making a shot after having just made his last two or three shots than he does after having just missed his last two or three shots, none of their data showed any evidence of this phenomenon. Instead, @gilovich1985hot argued that there is a wide-spread misperception of random sequences:
 
@@ -34,11 +32,11 @@ In the end, this study found that the question remains unresolved.
 <br></br>
 <b>MORE RESEARCH TO COME</b>
 
-## The Debate
+# The Debate
 
 <b>MORE TO BE ADDED</b>
 
-## 10 Questions
+# 10 Questions
 
 1. What data is available for my topic? 
 2. What does current literature on the topic argue?
@@ -51,7 +49,7 @@ In the end, this study found that the question remains unresolved.
 9. Does the hot hand impact strategy of a game? Should it impact strategy? 
 10. If the hot hand does exist, in what sport (or area outside of sports) is there the most evidence in support of the phenomenon? 
 
-## Goals and Hypothesis
+# Goals and Hypothesis
 
 1. I would love to find some evidence that the hot hand exists
 2. 

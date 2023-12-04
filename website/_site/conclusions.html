@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Billy’s Blog - Conclusions</title>
+<title>Billy’s Blog - Conclusion</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -99,7 +99,7 @@ ul.task-list li input[type="checkbox"] {
  <span class="dropdown-text">Code</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./data.html" rel="" target="">
+    <a class="dropdown-item" href="https://github.com/anly501/dsan-5000-project-wmcgloin/tree/main/website/data" rel="" target="_blank">
  <span class="dropdown-text">Data</span></a>
   </li>  
         <li>
@@ -135,18 +135,6 @@ ul.task-list li input[type="checkbox"] {
  <span class="dropdown-text">Decision Trees</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./classification.html" rel="" target="">
- <span class="dropdown-text">Classification</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./regression.html" rel="" target="">
- <span class="dropdown-text">Regression</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./arm.html" rel="" target="">
- <span class="dropdown-text">ARM</span></a>
-  </li>  
-        <li>
     <a class="dropdown-item" href="./conclusions.html" rel="" target="">
  <span class="dropdown-text">Conclusions</span></a>
   </li>  
@@ -164,14 +152,21 @@ ul.task-list li input[type="checkbox"] {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#the-hot-hand-a-fallacy" id="toc-the-hot-hand-a-fallacy" class="nav-link active" data-scroll-target="#the-hot-hand-a-fallacy">The Hot Hand: A Fallacy</a></li>
+  <li><a href="#extra-joke" id="toc-extra-joke" class="nav-link" data-scroll-target="#extra-joke">Extra Joke</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Conclusions</h1>
+<h1 class="title">Conclusion</h1>
 </div>
 
 
@@ -186,9 +181,18 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
+<section id="the-hot-hand-a-fallacy" class="level1">
+<h1>The Hot Hand: A Fallacy</h1>
+<p>Throughout the semester, my exploration of the hot hand phenomenon aimed to uncover whether past success could serve as a predictor for future success. Employing diverse datasets—NCAA basketball data in R, news text data in Python, and baseball data from an R package and FanGraphs—I navigated through distinct scales of sports data, from play-by-play to game-by-game. The cleaning processes varied, providing a foundation for Exploratory Data Analysis (EDA) to refine our hypotheses and delineate our investigative path.</p>
+<p>Despite promising signals in the EDA phase suggesting the existence of the hot hand phenomenon, our Naive Bayes model, designed to predict made or missed shots using a lag variable, performed on par with random guessing. For both the clustering analysis and dimensionality reduction, the NCAA shot data required the addition of numerous numerical columns such as shot value, score differential, and game number. Although successful in reducing dimensions while preserving information, this approach did not yield a conclusive answer regarding the existence of data clusters.</p>
+<p>Transitioning to decision trees and random forests, the models displayed improved accuracy in predicting shot outcomes, predominantly relying on variables such as shot value (previous shots were not an indicitave factor). No evidence found substantiated the existence of the hot hand. As I look forward, I plan to revisit this project with additional datasets, including Major League Baseball at-bat data with launch speed and angle, which may offer more robust indicators of success. Once armed with a deeper understanding of time-series data and various machine learning algorithms, I am eager to revisit the topic, acknowledging the limitations of predominantly NCAA shot data in confirming the hot hand fallacy. My findings align with previous research, reinforcing the notion that the hot hand remains a fallacy.</p>
+</section>
+<section id="extra-joke" class="level1">
+<h1>Extra Joke</h1>
 <p>Why did the conclusion take a break? Because it needed some time to ‘sum up’ its thoughts!</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

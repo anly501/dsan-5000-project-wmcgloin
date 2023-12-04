@@ -14,7 +14,8 @@ website:
         - href: https://github.com/anly501/dsan-5000-project-wmcgloin
           target: _blank
           text: Code
-        - href: data.qmd
+        - href: https://github.com/anly501/dsan-5000-project-wmcgloin/tree/main/website/data
+          target: _blank
           text: Data
         - href: introduction.qmd
           text: Introduction
