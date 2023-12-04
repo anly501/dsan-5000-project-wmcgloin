@@ -29,14 +29,12 @@ The initial investigation into this topic @gilovich1985hot was published in 1985
 > Demonstrations of hot hands per se are rare and often weak, due to various reasons: using and unrealistic model and questionable data, setting questionable definitions for hot and cold players, relating streakiness to difficulty of task, combining and analyzing data of all players a as a group, and other constraints related to the kind of sport studied.
 
 In the end, this study found that the question remains unresolved. 
-<br></br>
-<b>MORE RESEARCH TO COME</b>
 
 # The Debate
 
-<b>MORE TO BE ADDED</b>
+The debate surrounding the "hot hand" is multifaceted, encompassing methodological concerns, statistical intricacies, and divergent interpretations of empirical findings. Addressing the limitations of prior research and exploring alternative definitions of success are pivotal to unraveling this enduring mystery.
 
-# 10 Questions
+# 10 Questions to be Answered
 
 1. What data is available for my topic? 
 2. What does current literature on the topic argue?
@@ -51,5 +49,4 @@ In the end, this study found that the question remains unresolved.
 
 # Goals and Hypothesis
 
-1. I would love to find some evidence that the hot hand exists
-2. 
+Seeking evidence that the hot hand exists, the null hypothesis posits its non-existence. This exploration aims to contribute nuanced insights, bridging gaps in current understanding and reevaluating the perennial debate surrounding the elusive "hot hand."

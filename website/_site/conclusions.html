@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Billy’s Blog - Conclusion</title>
+<title>Billy’s Blog - The Hot Hand: Unraveling the Myth</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -156,7 +156,11 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#the-hot-hand-a-fallacy" id="toc-the-hot-hand-a-fallacy" class="nav-link active" data-scroll-target="#the-hot-hand-a-fallacy">The Hot Hand: A Fallacy</a></li>
+  <li><a href="#introduction-to-the-hot-hand-phenomenon" id="toc-introduction-to-the-hot-hand-phenomenon" class="nav-link active" data-scroll-target="#introduction-to-the-hot-hand-phenomenon">Introduction to the Hot Hand Phenomenon:</a></li>
+  <li><a href="#diverse-dataset-exploration" id="toc-diverse-dataset-exploration" class="nav-link" data-scroll-target="#diverse-dataset-exploration">Diverse Dataset Exploration:</a></li>
+  <li><a href="#eda-signals-and-insights" id="toc-eda-signals-and-insights" class="nav-link" data-scroll-target="#eda-signals-and-insights">EDA Signals and Insights:</a></li>
+  <li><a href="#model-performance-and-limitations" id="toc-model-performance-and-limitations" class="nav-link" data-scroll-target="#model-performance-and-limitations">Model Performance and Limitations:</a></li>
+  <li><a href="#looking-ahead" id="toc-looking-ahead" class="nav-link" data-scroll-target="#looking-ahead">Looking Ahead:</a></li>
   <li><a href="#extra-joke" id="toc-extra-joke" class="nav-link" data-scroll-target="#extra-joke">Extra Joke</a></li>
   </ul>
 </nav>
@@ -166,7 +170,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Conclusion</h1>
+<h1 class="title">The Hot Hand: Unraveling the Myth</h1>
 </div>
 
 
@@ -181,15 +185,29 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="the-hot-hand-a-fallacy" class="level1">
-<h1>The Hot Hand: A Fallacy</h1>
-<p>Throughout the semester, my exploration of the hot hand phenomenon aimed to uncover whether past success could serve as a predictor for future success. Employing diverse datasets—NCAA basketball data in R, news text data in Python, and baseball data from an R package and FanGraphs—I navigated through distinct scales of sports data, from play-by-play to game-by-game. The cleaning processes varied, providing a foundation for Exploratory Data Analysis (EDA) to refine our hypotheses and delineate our investigative path.</p>
-<p>Despite promising signals in the EDA phase suggesting the existence of the hot hand phenomenon, our Naive Bayes model, designed to predict made or missed shots using a lag variable, performed on par with random guessing. For both the clustering analysis and dimensionality reduction, the NCAA shot data required the addition of numerous numerical columns such as shot value, score differential, and game number. Although successful in reducing dimensions while preserving information, this approach did not yield a conclusive answer regarding the existence of data clusters.</p>
-<p>Transitioning to decision trees and random forests, the models displayed improved accuracy in predicting shot outcomes, predominantly relying on variables such as shot value (previous shots were not an indicitave factor). No evidence found substantiated the existence of the hot hand. As I look forward, I plan to revisit this project with additional datasets, including Major League Baseball at-bat data with launch speed and angle, which may offer more robust indicators of success. Once armed with a deeper understanding of time-series data and various machine learning algorithms, I am eager to revisit the topic, acknowledging the limitations of predominantly NCAA shot data in confirming the hot hand fallacy. My findings align with previous research, reinforcing the notion that the hot hand remains a fallacy.</p>
+<section id="introduction-to-the-hot-hand-phenomenon" class="level1">
+<h1>Introduction to the Hot Hand Phenomenon:</h1>
+<p>In the dynamic realm of sports, the concepts of a “hot hand” or being “in the zone” have become ubiquitous, often used to describe a player’s extraordinary performance streak. Originating in basketball, the term suggests that a player on a successful streak is more likely to continue their success. This belief, rooted in the increased confidence of the player, extends beyond basketball, finding resonance in baseball and other fields. Despite its prevalence, statistical evidence supporting the existence of the hot hand is scarce, with numerous studies suggesting it as a fallacy. This project embarks on an exploration within the sports domain to scrutinize the mystery of streaks.</p>
+</section>
+<section id="diverse-dataset-exploration" class="level1">
+<h1>Diverse Dataset Exploration:</h1>
+<p>Throughout the semester, I undertook a comprehensive exploration of the hot hand phenomenon, employing an array of datasets with varying complexities. The NCAA basketball data, scraped from the Villanova Men’s Basketball team in R, offered insights into shot data. The baseball data, sourced from FanGraphs and scraped in R, included both individual player data and detailed pitch-by-pitch information. Additionally, news text data was gathered using an API in Python. Each dataset’s unique cleaning process laid the foundation for an in-depth Exploratory Data Analysis (EDA), allowing for the refinement of hypotheses and the delineation of the investigative path.</p>
+</section>
+<section id="eda-signals-and-insights" class="level1">
+<h1>EDA Signals and Insights:</h1>
+<p>Promising signals emerged during the EDA phase, particularly in individual player baseball data and the NCAA shot data. The former hinted at leveraging past hard-hit data to predict future performance, showcasing potential autocorrelation or seasonality effects. This finding holds promise for refining future models. The NCAA shot data, while lacking strong correlations individually, exhibited a descending trend in lag variables, suggesting the immediate prior shot’s influence on the current outcome.</p>
+</section>
+<section id="model-performance-and-limitations" class="level1">
+<h1>Model Performance and Limitations:</h1>
+<p>The Naive Bayes model, designed to predict made or missed shots, failed to outperform random guessing, aligning with the null hypothesis that the hot hand does not exist. Further stages of analysis required the addition of numerical feature variables for the NCAA data, including shot value, score differential, and shooter field goal percentage. <br><br> While I was successful in reducing dimensions (4 variables accounted for over 75% of overall variance), the various clustering methods (KMeans, DBSCAN, and Hierarchical Clustering) failed to conclusively establish the presence of discernible data clusters in the shot data. Decision trees and random forests, though outperforming the Naive Bayes classifier, primarily relied on shot value rather than the lag variable, reaffirming its lower predictive power.</p>
+</section>
+<section id="looking-ahead" class="level1">
+<h1>Looking Ahead:</h1>
+<p>I recognize the limitations of predominantly relying on NCAA shot data to confirm the hot hand fallacy. I plan to revisit this topic at a later date, armed with a deeper understanding of time series data and an expanded arsenal of machine learning algorithms. Future analyses may explore this topic using alternative definitions of success, such as launch speeds and angles in baseball. For now, my findings align with prior research, reinforcing the notion that the hot hand is indeed a fallacy.</p>
 </section>
 <section id="extra-joke" class="level1">
 <h1>Extra Joke</h1>
-<p>Why did the conclusion take a break? Because it needed some time to ‘sum up’ its thoughts!</p>
+<p>What do you get when you cross a pirate with a data scientist? <br><br> <img src="./images/pirate.webp" class="img-fluid"> <br><br> Someone who specializes in Rrrr. <br><br> Thank you for taking the time to explore my project, and kudos for enduring all the humor along the way!</p>
 
 
 </section>

@@ -1,16 +1,36 @@
 ---
-title: "Conclusion"
+title: "The Hot Hand: Unraveling the Myth"
 format: html
 ---
 
-# The Hot Hand: A Fallacy
+# Introduction to the Hot Hand Phenomenon:
 
-Throughout the semester, my exploration of the hot hand phenomenon aimed to uncover whether past success could serve as a predictor for future success. Employing diverse datasets—NCAA basketball data in R, news text data in Python, and baseball data from an R package and FanGraphs—I navigated through distinct scales of sports data, from play-by-play to game-by-game. The cleaning processes varied, providing a foundation for Exploratory Data Analysis (EDA) to refine our hypotheses and delineate our investigative path.
+In the dynamic realm of sports, the concepts of a "hot hand" or being "in the zone" have become ubiquitous, often used to describe a player's extraordinary performance streak. Originating in basketball, the term suggests that a player on a successful streak is more likely to continue their success. This belief, rooted in the increased confidence of the player, extends beyond basketball, finding resonance in baseball and other fields. Despite its prevalence, statistical evidence supporting the existence of the hot hand is scarce, with numerous studies suggesting it as a fallacy. This project embarks on an exploration within the sports domain to scrutinize the mystery of streaks.
 
-Despite promising signals in the EDA phase suggesting the existence of the hot hand phenomenon, our Naive Bayes model, designed to predict made or missed shots using a lag variable, performed on par with random guessing. For both the clustering analysis and dimensionality reduction, the NCAA shot data required the addition of numerous numerical columns such as shot value, score differential, and game number. Although successful in reducing dimensions while preserving information, this approach did not yield a conclusive answer regarding the existence of data clusters.
+# Diverse Dataset Exploration:
 
-Transitioning to decision trees and random forests, the models displayed improved accuracy in predicting shot outcomes, predominantly relying on variables such as shot value (previous shots were not an indicitave factor). No evidence found substantiated the existence of the hot hand. As I look forward, I plan to revisit this project with additional datasets, including Major League Baseball at-bat data with launch speed and angle, which may offer more robust indicators of success. Once armed with a deeper understanding of time-series data and various machine learning algorithms, I am eager to revisit the topic, acknowledging the limitations of predominantly NCAA shot data in confirming the hot hand fallacy. My findings align with previous research, reinforcing the notion that the hot hand remains a fallacy.
+Throughout the semester, I undertook a comprehensive exploration of the hot hand phenomenon, employing an array of datasets with varying complexities. The NCAA basketball data, scraped from the Villanova Men's Basketball team in R, offered insights into shot data. The baseball data, sourced from FanGraphs and scraped in R, included both individual player data and detailed pitch-by-pitch information. Additionally, news text data was gathered using an API in Python. Each dataset's unique cleaning process laid the foundation for an in-depth Exploratory Data Analysis (EDA), allowing for the refinement of hypotheses and the delineation of the investigative path.
+
+# EDA Signals and Insights:
+
+Promising signals emerged during the EDA phase, particularly in individual player baseball data and the NCAA shot data. The former hinted at leveraging past hard-hit data to predict future performance, showcasing potential autocorrelation or seasonality effects. This finding holds promise for refining future models. The NCAA shot data, while lacking strong correlations individually, exhibited a descending trend in lag variables, suggesting the immediate prior shot's influence on the current outcome.
+
+# Model Performance and Limitations:
+
+The Naive Bayes model, designed to predict made or missed shots, failed to outperform random guessing, aligning with the null hypothesis that the hot hand does not exist. Further stages of analysis required the addition of numerical feature variables for the NCAA data, including shot value, score differential, and shooter field goal percentage.
+<br></br>
+While I was successful in reducing dimensions (4 variables accounted for over 75% of overall variance), the various clustering methods (KMeans, DBSCAN, and Hierarchical Clustering) failed to conclusively establish the presence of discernible data clusters in the shot data. Decision trees and random forests, though outperforming the Naive Bayes classifier, primarily relied on shot value rather than the lag variable, reaffirming its lower predictive power.
+
+# Looking Ahead:
+
+I recognize the limitations of predominantly relying on NCAA shot data to confirm the hot hand fallacy. I plan to revisit this topic at a later date, armed with a deeper understanding of time series data and an expanded arsenal of machine learning algorithms. Future analyses may explore this topic using alternative definitions of success, such as launch speeds and angles in baseball. For now, my findings align with prior research, reinforcing the notion that the hot hand is indeed a fallacy.
 
 # Extra Joke
 
-Why did the conclusion take a break? Because it needed some time to 'sum up' its thoughts!
+What do you get when you cross a pirate with a data scientist?
+<br></br>
+![](./images/pirate.webp)
+<br></br>
+Someone who specializes in Rrrr.
+<br></br>
+Thank you for taking the time to explore my project, and kudos for enduring all the humor along the way!

@@ -56,10 +56,16 @@ I always like to have a laugh so below are some jokes I hope you'll enjoy!
 * Websites use cookies to improve performance. I do the same.
 * What website has the information on all DJs? The wiki wiki
   
+### Data Science Jokes
+* Why should you take a data scientist with you into the jungle? They can take care of python problems.
+* A SQL query walks into a bar, walks up to two tables, and asks, “Can I join you?“
+* You are so mean that your standard deviation is zero.
+
 ### Assorted Jokes
 
-* What do you call it when a caveman farts? A blast from the past. 
 * Why didn't the bell work at the gym? It was a dumb bell!
+* What do you call it when a caveman farts? A blast from the past. 
+* Who is Bruce Lee’s vegan brother? Broco Lee
 
 # Hoya Saxa!
 
