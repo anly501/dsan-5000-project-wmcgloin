@@ -1,0 +1,6 @@
+---
+title: "Regression"
+format: html
+---
+
+Why did the linear regression model break up with the logistic regression model? Because it wanted a more 'linear' relationship!

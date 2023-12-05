@@ -1,0 +1,49 @@
+project:
+  type: website
+
+website:
+  title: "Billy's Blog"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: about.qmd
+        text: About Me
+      - text: The Hot Hand
+        menu:   
+        - href: https://github.com/anly501/dsan-5000-project-wmcgloin
+          target: _blank
+          text: Code
+        - href: https://github.com/anly501/dsan-5000-project-wmcgloin/tree/main/website/data
+          target: _blank
+          text: Data
+        - href: introduction.qmd
+          text: Introduction
+        - href: data-gathering.ipynb
+          text: Data Gathering
+        - href: data-cleaning.ipynb
+          text: Data Cleaning
+        - href: data-exploration.ipynb
+          text: Data Exploration
+        - href: naive_bayes.ipynb
+          text: Naïve Bayes  
+        - href: clustering.qmd
+          text: Clustering
+        - href: dimensionality-reduction.qmd
+          text: Dimensionality Reduction
+        - href: decision-trees.ipynb
+          text: Decision Trees
+        - href: conclusions.qmd
+          text: Conclusion
+      - href: 5100.ipynb
+        text: "Politics & QoL"
+
+
+format:
+  html:
+    theme: minty
+    css: styles.css
+    toc: true
+
+
+

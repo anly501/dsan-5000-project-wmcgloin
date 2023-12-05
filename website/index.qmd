@@ -1,0 +1,11 @@
+---
+title: "DSAN_website"
+format: 
+  html:
+    include-in-header: snake.css
+    include-after-body: snake.js
+bibliography: references.bib
+
+---
+
+Welcome to my website, where I'll be sharing various projects from my time in the DSAN program at Georgetown University. Expect regular updates as I delve into new and exciting topics - stay tuned for more! While you're here, try the snake game below (code altered from [here](https://gist.github.com/straker/ff00b4b49669ad3dec890306d348adc4#file-snake-html-L52qua))!

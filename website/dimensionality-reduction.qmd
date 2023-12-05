@@ -1,0 +1,268 @@
+---
+title: Dimensionality Reduction
+format: html
+toc: true
+toc_depth: 3
+number sections: true
+code-fold: true
+---
+
+# Introduction
+
+This study delves into Villanova's 2021-22 season NCAA shot data, spotlighting six key features. Using Python and sklearn, we employ Principal Component Analysis (PCA) and t-distributed Stochastic Neighbor Embedding (t-SNE) for dimensionality reduction. This approach trims features while preserving variance, simplifying data for improved model comprehension and visualization.
+
+# Dimensionality Reduction with PCA
+
+Principal Component Analysis (PCA) is a valuable machine learning technique used to simplify large datasets by reducing their dimensionality. The primary goal is to decrease the number of variables while retaining crucial information. Explore the PCA process as I walk you through my code and showcase the corresponding output below.
+<br></br>
+
+### Load in relevant libraries and data
+
+```{python}
+import pandas as pd
+from sklearn.decomposition import PCA
+from sklearn.preprocessing import StandardScaler
+import matplotlib.pyplot as plt
+from sklearn.preprocessing import LabelEncoder
+import numpy as np
+
+nova = pd.read_csv('./data/raw_data/villanova2122.csv')
+```
+
+```{python}
+# only keeping the shot data
+nova = nova.dropna(subset=['shooter'])
+
+# Creating a new column to specify the team of the shooter
+nova['shooter_team'] = np.where(nova['action_team'] == "home", nova['home'], nova['away'])
+
+# only keeping the villanova shots
+nova = nova[nova['shooter_team'] == 'Villanova']
+
+# changing shot outcome to numeric
+nova['shot_outcome_numeric'] = nova['shot_outcome'].apply(lambda x: 1 if x == 'made' else 0)
+```
+
+```{python}
+#creating a new column called shot value
+nova['shot_value'] = 2  # Default value for shots that are not free throws or three-pointers
+nova.loc[nova['free_throw'], 'shot_value'] = 1
+nova.loc[nova['three_pt'], 'shot_value'] = 3
+
+# Calculate the mean of shot_outcome for each player (field goal percentage)
+mean_and_count_data = nova.groupby('shooter').agg(
+    shots=('shot_outcome', 'count'),
+    field_goal_percentage=('shot_outcome_numeric', lambda x: x[x == 1].count() / len(x) if len(x) > 0 else 0)
+).sort_values(by='shots', ascending=False)
+
+# Add the calculated field goal percentage to the original DataFrame
+nova = nova.merge(mean_and_count_data[['field_goal_percentage']], left_on='shooter', right_index=True, how='left').round(4)
+
+# create a lag variable for the previous shot (1 indicates made shot, -1 indicates miss, 0 indicates no previous shot in half
+nova = nova.sort_values(by=['shooter', 'game_id', 'play_id'])  # Arrange the data by shooter, game_id, and play_id
+nova['lag1'] = nova.groupby(['shooter', 'game_id'])['shot_outcome_numeric'].shift(1)
+nova['lag1'] = nova['lag1'].replace({0: -1}).fillna(0)  # Replace initial 0 values with -1, and NaN values with 0
+nova = nova.sort_values(by=['game_id', 'play_id'])
+
+# reset the index
+nova = nova.reset_index(drop=True)
+
+# create a new column for the home crowd
+nova['home_crowd'] = (nova['home'] == 'Villanova').astype(int)
+
+# create a new column for the game number in the season
+nova['game_num'] = nova['game_id'].astype('category').cat.codes + 1
+
+nova.head()
+```
+
+```{python}
+# subsetting my data into feature varaibles and target variable
+feature_columns = ['shot_value', 'field_goal_percentage', 'lag1', 'home_crowd', 'score_diff', 'game_num']
+nova_features = nova[feature_columns].copy()
+
+target_column = ['shot_outcome_numeric']
+nova_target = nova[target_column].copy()
+
+all_columns = ['shot_value', 'field_goal_percentage', 'lag1', 'home_crowd', 'score_diff', 'game_num', 'shot_outcome_numeric']
+nova_final = nova[all_columns].copy()
+
+# save feature_columns to csv for clustering
+nova_features.to_csv('./data/modified_data/nova_features.csv', index=False)
+
+# save nova_final to csv for decision trees
+nova_final.to_csv('./data/modified_data/nova_final.csv', index=False)
+
+
+nova_features.info()
+```
+
+### Standardization
+
+Normalize data to have a mean of 0 and a standard deviation of 1.
+
+```{python}
+# Standardization
+scaler = StandardScaler()
+nova_features_standardized = scaler.fit_transform(nova_features)
+```
+
+### Covariance Matrix Computation
+
+Calculate the covariance matrix to understand variable relationships.
+
+```{python}
+#covariance matrix
+co_ma = np.cov(nova_features_standardized, rowvar=False)
+print(co_ma)
+```
+
+### Computing Eigenvectors and Eigenvalues
+
+Identify principal components using eigenvectors and eigenvalues.
+
+```{python}
+#eigenvalues and eigenvectors
+eigenvalues, eigenvectors = np.linalg.eig(co_ma)
+print("Eigenvalues\n","----------------------")
+print(eigenvalues)
+print("\nEigenvectors\n","----------------------")
+print(eigenvectors)
+```
+
+### Feature Vectors
+
+Select eigenvectors as new feature vectors.
+
+```{python}
+# choosing principal components
+
+# sort the eigenvalues in descending order
+sorted_index = np.argsort(eigenvalues)[::-1]
+sorted_eigenvalue = eigenvalues[sorted_index]
+```
+
+### Recasting Data Among Principal Component Axis
+
+Transform data using chosen principal components.
+
+```{python}
+# PCA with components decided above
+cumulative_explained_variance = np.cumsum(sorted_eigenvalue) / sum(sorted_eigenvalue)
+desired_variance = 0.75 
+num_components = np.argmax(cumulative_explained_variance >= desired_variance) + 1
+
+pca = PCA(n_components=num_components)
+nova_pca = pca.fit_transform(nova_features_standardized)
+```
+
+### Deciding optimal number of components
+To decide the optimal number of components, we can use both a cumulative explained variance plot and a scree plot to visualize explained variance ratio.
+
+```{python}
+# Cumulative Explained Variance Plot
+cumulative_explained_variance = np.cumsum(sorted_eigenvalue) / sum(sorted_eigenvalue)
+plt.subplot(1, 2, 1)  # 1 row, 2 columns, first plot
+plt.plot(range(1, len(cumulative_explained_variance) + 1), cumulative_explained_variance, marker='o', color='#FFB6C1')
+plt.title('Cumulative Explained Variance')
+plt.xlabel('Number of Principal Components')
+plt.ylabel('Cumulative Explained Variance')
+
+# Scree Plot
+plt.subplot(1, 2, 2)  # 1 row, 2 columns, second plot
+explained_variance_ratio = pca.explained_variance_ratio_
+print("Explained Variance Ratio for Each Component:")
+print(explained_variance_ratio)
+plt.bar(range(1, len(explained_variance_ratio) + 1), explained_variance_ratio, color='#FFB6C1')
+plt.title('Scree Plot')
+plt.xlabel('Principal Components')
+plt.ylabel('Explained Variance Ratio')
+
+plt.tight_layout()  # Adjust layout for better spacing
+plt.show()
+
+# find the number of variables it takes to reach a variance of 0.75
+desired_variance = 0.75
+num_components = np.argmax(cumulative_explained_variance >= desired_variance) + 1
+print(f"Number of components to capture {desired_variance * 100}% variance: {num_components}")
+```
+
+As a general guideline, the goal is to retain at least 80% of the variance. However, given the relatively small size of our dataset, we have adjusted the threshold to 75%. Therefore, we will select 4 components, ensuring the cumulative explained variance surpasses 75%.
+
+### Visualizing reduced-dimensional data
+Now, let's visualize the reduced-dimensional data using a scatter plot of the first two principal components.
+
+```{python}
+# pca scatter plot
+plt.scatter(nova_pca[:, 0], nova_pca[:, 1], alpha=0.5, color='#D8BFD8')
+plt.title('PCA Scatter Plot')
+plt.xlabel('Principal Component 1')
+plt.ylabel('Principal Component 2')
+plt.show()
+
+# limit PCA to 4 components
+pca = PCA(n_components=4)
+
+# save nova_pca to csv
+nova_pca_df = pd.DataFrame(nova_pca)
+nova_pca_df.to_csv('./data/modified_data/nova_pca.csv', index=False)
+```
+
+The scree plot guides us in determining that capturing 75% of the variance necessitates employing four principal components. The scatter plot, showcasing the reduced-dimensional data, visually represents patterns within the dataset. You many notice that a seperation occurs where Principal Component 1 equals 0. While PCA excels at identifying linear relationships, it's important to acknowledge that observations with higher variability may be distant from the main cluster. These steps underscore how PCA simplifies dimensionality reduction, fostering a deeper understanding of the dataset. It's worth noting that the sklearn library's PCA function automates these procedures for ease of implementation.
+
+# Dimensionality Reduction with t-SNE
+
+t-SNE, or t-distributed Stochastic Neighbor Embedding, is an unsupervised non-linear dimensionality reduction technique designed to explore and visualize high-dimensional data. It transforms complex datasets into a lower-dimensional space, emphasizing preserving local relationships among data points. By finding similarity measures between pairs of instances in higher and lower dimensional spaces and optimizing these measures, t-SNE enhances our ability to interpret intricate datasets.
+
+Additionally, exploring clustering in this context allows me to identify distinct groups or patterns within the NCAA shot data. By combining t-SNE, a dimensionality reduction technique, with KMeans clustering, I can uncover and visualize natural structures or associations in the dataset. The choice of three clusters is informed by the results obtained on the clustering page. Exploring different perplexity values enhances the flexibility of my analysis, helping me discover nuanced patterns at varying levels of detail.
+
+```{python}
+from sklearn.manifold import TSNE
+from sklearn.cluster import KMeans
+import plotly.express as px
+import pandas as pd
+
+def explore_tsne(perplexity_value):
+    X = nova_features.iloc[:, :]
+
+    # t-SNE for 3 dimensions with different perplexity
+    tsne = TSNE(n_components=3, random_state=1, perplexity=perplexity_value)
+    X_tsne = tsne.fit_transform(X)
+
+    # KMeans clustering
+    kmeans = KMeans(n_clusters=3, random_state=42)
+    clusters = kmeans.fit_predict(X)
+
+    # Create a DataFrame with 3D data
+    tsne_df = pd.DataFrame(data=X_tsne, columns=['Dimension 1', 'Dimension 2', 'Dimension 3'])
+    tsne_df['Cluster'] = clusters
+
+    # Interactive 3D scatter plot with plotly
+    fig = px.scatter_3d(tsne_df, x='Dimension 1', y='Dimension 2', z='Dimension 3',
+                        color='Cluster', symbol='Cluster', opacity=0.7, size_max=10,
+                        title=f't-SNE 3D Visualization (Perplexity={perplexity_value})',
+                        labels={'Cluster': 'Cluster'})
+
+    # Show the plot
+    fig.show()
+
+# Explore t-SNE with different perplexity values
+perplexities = [5, 20, 40]  # Add more values as needed
+for perplexity_value in perplexities:
+    explore_tsne(perplexity_value)
+```
+
+Perplexity in t-SNE determines the balance between capturing local and global relationships in the data's low-dimensional representation. Lower perplexity values focus on local details, higher values emphasize global structures, while moderate values strike a balance. Experimenting with different perplexity values helps find an optimal configuration for visualizing and understanding the dataset. As I explored various perplexity values, I noticed that with larger perplexity values, clusters became more distinct, revealing clearer patterns and structures within the data. This observation underscores the importance of choosing an appropriate perplexity value for the specific characteristics of the dataset, ultimately enhancing the effectiveness of t-SNE in revealing underlying structures.
+
+# Evaluation & Comparison
+
+In summary, PCA efficiently preserves the overall structure, making it well-suited for large datasets with linear relationships. Conversely, t-SNE excels at unveiling local structures and clusters, offering enhanced visualization for smaller datasets. The decision between these techniques hinges on factors like dataset size, structure, and specific analysis goals.
+
+In my analysis, it became evident that certain variables play a crucial role in explaining most of the variance in our dataset. Despite having only six feature variables, retaining four allows us to preserve over 75% of the variance, indicating limited redundancy. The application of t-SNE for cluster visualization proved insightful, revealing subtle overlaps within the clusters. This aligns with previous observations, reinforcing that identifying distinct clusters in this dataset poses challenges.
+
+# Extra Joke
+
+If we were compressed down to a single dimension... what would be the point of it all? 
+<br></br>
+![](./images/star_wars.gif)
+

@@ -1,0 +1,72 @@
+---
+title: "About me"
+format: html
+toc: true
+---
+
+
+# Hello!
+
+Hello and welcome to my website! My name is Billy McGloin and I am a graduate student at Georgetown University. I am currently pursuing a Master's in Data Science and Analytics and will use this website as a place to display my work. I hope you find my work insightful and enjoy your time on my website!
+
+# Growing Up
+
+I am originally from Scotch Plains, New Jersey, where I lived with my family. I am a triplet and have two sisters, Melissa and Jessica. Below is a picture of me with my family and another of our dog Roxie.
+
+<section>
+    <img width="300" src="./images/family.png">
+    <img width="300" src="./images/roxie.jpeg">
+</section>
+
+# Education
+
+I graduated from Villanova University in 2021 with an Honors Degree Double Major in Economics and Business Analytics along with a PPE (Politics, Philosophy, & Economics) Concentration and Political Science minor. I absolutely loved my time at Villanova between the academics, friendships, the school winning the NCAA Championship and more!. As an undergrad, I was involved in a number of student organizations, including the Blue Key Society, where I served as a tour guide for undergraduate admissions. I also organized accepted students days for the university. 
+
+One of the best experiences I had during college was studying abroad. In 2019, I participated in the Institute of Politics and Economics Program at the University of Cambridge where I took a number of economic classes and study international relations and history. Learning how these subject matters interact with analytics truly fascinated me, which is one reason why I am pursuing an advanced degree in data science. I am extremely excited to continue my education and pursue a masters degree in data science!
+
+# Top Shelf Designs, LLC
+
+During my senior year at Villanova, I had the opportunity to start my own business with my sisters! Our business, Top Shelf Designs, LLC, is a retail business that designs, builds, and sells college dorm shelving units to help students maximize their space. Being an entrepreneur has been an incredibly rewarding journey thus far, and I am eager to see where it takes us. Here is a [link](https://www.topshelfdesigns.co) to our website! 
+
+# Hobbies
+
+I am an avid sports fan, and love watching the New York Yankees, Villanova basketball, and NY Giants. Unfortunately, none of my teams have been doing too well lately, but I’m hoping the Giants can turn it around this season! I am fascinated by how analytics is being used to transform the sports landscape, including college sports! While at Villanova, I researched the Houston Astros Cheating Scandal. I would love to go back and take an even deeper dive into the subject one day!
+
+I love music - you can often find me with headphones or earbuds on while doing work or exploring the DC area! Additionally, I find playing instruments to be a great creative outlet after a long day of work. I grew up taking piano lessons and during COVID taught myself how to play the guitar! 
+
+Whenever I have the chance, I try to travel. While abroad, I was lucky enough to travel throughout Europe. My favorite country to visit is Italy - from the history and culture to the food, wine, and sports, I am counting down the days until I can return. 
+
+Finally, I thoroughly enjoy books, movies, video games in addition to fun, in-person experiences. Since moving to DC, I have been enjoying exploring the area! If you have any recommendations, please let me know! I'm always willing to try something new!
+
+# General Info (inc. netID)
+
+|       |      |
+| :--- | :--- |
+| name | Billy McGloin |
+| GU netID  | wtm30  |
+| LinkedIn | [link](www.linkedin.com/in/william-mcgloin)  |
+
+# Jokes
+
+I always like to have a laugh so below are some jokes I hope you'll enjoy! 
+
+### Website Jokes
+
+* What do you call a doctor who fixes websites? A URL-ologist.
+* Websites use cookies to improve performance. I do the same.
+* What website has the information on all DJs? The wiki wiki
+  
+### Data Science Jokes
+* Why should you take a data scientist with you into the jungle? They can take care of python problems.
+* A SQL query walks into a bar, walks up to two tables, and asks, “Can I join you?“
+* You are so mean that your standard deviation is zero.
+
+### Assorted Jokes
+
+* Why didn't the bell work at the gym? It was a dumb bell!
+* What do you call it when a caveman farts? A blast from the past. 
+* Who is Bruce Lee’s vegan brother? Broco Lee
+
+# Hoya Saxa!
+
+![me and a bunch of rocks!](./images/rock_on.jpeg)
