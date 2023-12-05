@@ -7,11 +7,11 @@ toc: true
 
 # Hello!
 
-Hello and welcome to my website! My name is Billy and I am a graduate student at Georgetown University. I am currently pursuing a Master's in Data Science and Analytics and will use this website as a place to display my work. I hope you find my work insightful and enjoy your time on my website!
+Hello and welcome to my website! My name is Billy McGloin and I am a graduate student at Georgetown University. I am currently pursuing a Master's in Data Science and Analytics and will use this website as a place to display my work. I hope you find my work insightful and enjoy your time on my website!
 
 # Growing Up
 
-I grew up in Scotch Plains, New Jersey along with my two sisters, Melissa and Jessica. We are triplets! Below is a picture of me with my family and another of our dog Roxie.
+I am originally from Scotch Plains, New Jersey, where I lived with my family. I am a triplet and have two sisters, Melissa and Jessica. Below is a picture of me with my family and another of our dog Roxie.
 
 <section>
     <img width="300" src="./images/family.png">
@@ -22,7 +22,7 @@ I grew up in Scotch Plains, New Jersey along with my two sisters, Melissa and Je
 
 I graduated from Villanova University in 2021 with an Honors Degree Double Major in Economics and Business Analytics along with a PPE (Politics, Philosophy, & Economics) Concentration and Political Science minor. I absolutely loved my time at Villanova between the academics, friendships, the school winning the NCAA Championship and more!. As an undergrad, I was involved in a number of student organizations, including the Blue Key Society, where I served as a tour guide for undergraduate admissions. I also organized accepted students days for the university. 
 
-One of the best experiences I had during college was studying abroad. In 2019, I participated in the Institute of Politics and Economics Program at the University of Cambridge where I took a number of economic classes and study international relations and history. Seeing how these subject matters interact with analytics truly fascinated me, which is one reason why I am pursuing an advanced degree in data science. I am extremely excited to continue my education and pursue a masters degree in data science!
+One of the best experiences I had during college was studying abroad. In 2019, I participated in the Institute of Politics and Economics Program at the University of Cambridge where I took a number of economic classes and study international relations and history. Learning how these subject matters interact with analytics truly fascinated me, which is one reason why I am pursuing an advanced degree in data science. I am extremely excited to continue my education and pursue a masters degree in data science!
 
 # Top Shelf Designs, LLC
 
@@ -30,13 +30,13 @@ During my senior year at Villanova, I had the opportunity to start my own busine
 
 # Hobbies
 
-I'm an avid sports fan, and love watching the New York Yankees, Villanova basketball, and NY Giants. Unfortunately, none of my teams have been doing too well lately, but I’m hoping the Giants can turn it around this season! I'm fascinated by how analytics is being used to transform the sports landscape - even across college sports! While at Villanova, I researched the Houston Astros Cheating Scandal. I would love to go back and take an even deeper dive into the subject one day!
+I am an avid sports fan, and love watching the New York Yankees, Villanova basketball, and NY Giants. Unfortunately, none of my teams have been doing too well lately, but I’m hoping the Giants can turn it around this season! I am fascinated by how analytics is being used to transform the sports landscape, including college sports! While at Villanova, I researched the Houston Astros Cheating Scandal. I would love to go back and take an even deeper dive into the subject one day!
 
-I love music - you can often find me with headphones or earbuds in while doing work or exploring the DC area! Additionally, I find playing instruments to be a great creative outlet after a long day of work. I grew up taking piano lessons and during COVID started to teach myself how to play the guitar! 
+I love music - you can often find me with headphones or earbuds on while doing work or exploring the DC area! Additionally, I find playing instruments to be a great creative outlet after a long day of work. I grew up taking piano lessons and during COVID taught myself how to play the guitar! 
 
-Whenever I have the chance, I try to travel. Wile abroad, I was lucky enough to travel to a few places in Europe. My favorite spot has to be Italy - from the history and culture to the food, wine, and sports, I am counting down the days until I can go back. 
+Whenever I have the chance, I try to travel. While abroad, I was lucky enough to travel throughout Europe. My favorite country to visit is Italy - from the history and culture to the food, wine, and sports, I am counting down the days until I can return. 
 
-Finally, I thoroughly enjoy books, movies, video games in addition to fun, in-person experiences. Lately, I've been exploring the DC area which I am loving so far! If you have any recommendations - please let me know! I'm alwyas willing to try something new!
+Finally, I thoroughly enjoy books, movies, video games in addition to fun, in-person experiences. Since moving to DC, I have been enjoying exploring the area! If you have any recommendations, please let me know! I'm always willing to try something new!
 
 # General Info (inc. netID)
 

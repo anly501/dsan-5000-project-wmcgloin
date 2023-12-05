@@ -34,7 +34,9 @@ website:
         - href: decision-trees.ipynb
           text: Decision Trees
         - href: conclusions.qmd
-          text: Conclusions
+          text: Conclusion
+      - href: 5100.ipynb
+        text: "Politics & QoL"
 
 
 format:

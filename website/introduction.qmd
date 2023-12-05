@@ -26,7 +26,7 @@ The initial investigation into this topic @gilovich1985hot was published in 1985
 
 @bar2006twenty published a review and critique of 20 years of “hot hand” research in 2006. This paper reviewed the @gilovich1985hot study in addition to subsequent research that used data from various sports including basketball, baseball, golf, darts, tennis, bowling, and more. Baseball and basketball studies dominate the literature on this subject, yet the strongest support for the “hot hand” can be found in more individual sports such as horseshoe pitching and tennis. 
 
-> Demonstrations of hot hands per se are rare and often weak, due to various reasons: using and unrealistic model and questionable data, setting questionable definitions for hot and cold players, relating streakiness to difficulty of task, combining and analyzing data of all players a as a group, and other constraints related to the kind of sport studied.
+> Demonstrations of hot hands per se are rare and often weak, due to various reasons: using and unrealistic model and questionable data, setting questionable definitions for hot and cold players, relating streakiness to difficulty of task, combining and analyzing data of all players as a group, and other constraints related to the kind of sport studied.
 
 In the end, this study found that the question remains unresolved. 
 
